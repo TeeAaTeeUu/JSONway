@@ -51,6 +51,13 @@ describe('path-stringifier', () => {
     assert.deepEqual(JSONway.stringifyPath(input), out)
   })
 
+  it(`["bb", "%[#]%", "ee", "%[]%", "hh", "%[]%", "dd"]`, function () {
+    const input = JSON.parse(this.test.title)
+    const out = `bb[#].ee[].hh[].dd`
+
+    assert.deepEqual(JSONway.stringifyPath(input), out)
+  })
+
   it(`["foo", "bar", 0, "baz", "%[]%", "%[]%", "id"]`, function () {
     const input = JSON.parse(this.test.title)
     const out = `foo.bar[0].baz[][].id`
