@@ -1,4 +1,5 @@
 import { assert } from 'chai'
+import { _getJsonAsync } from './_utils.js'
 
 import JSONway from '../index.js'
 
@@ -665,5 +666,21 @@ describe('setter', () => {
   it(`a[](c!='yy').b`, function () {
     const out = { a: [{ b: 'x' }, { b: 'z' }] }
     assert.deepEqual(JSONway.set({}, this.test.title, ['x', 'z']), out)
+  })
+
+  it(`bb[*].ee[*].hh[*].cc`, async function () {
+    const object = await _getJsonAsync('./fixtures/nested-list-response.json')
+
+    const out = JSON.parse(JSON.stringify(object))
+    out.bb[0].ee[0].hh[0].cc = 'ooo'
+    out.bb[0].ee[0].hh[1].cc = 'ooo'
+    out.bb[0].ee[1].hh[0].cc = 'ooo'
+    out.bb[0].ee[1].hh[1].cc = 'ooo'
+    out.bb[1].ee[0].hh[0].cc = 'ooo'
+    out.bb[1].ee[0].hh[1].cc = 'ooo'
+    out.bb[1].ee[1].hh[0].cc = 'ooo'
+    out.bb[1].ee[1].hh[1].cc = 'ooo'
+
+    assert.deepEqual(JSONway.set(object, this.test.title, 'ooo'), out)
   })
 })
