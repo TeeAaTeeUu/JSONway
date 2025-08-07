@@ -5,7 +5,7 @@
   "scripts": {
     "test": "mocha",
     "lint": "eslint .",
-        "coverage": "c8 pnpm test",
+    "coverage": "c8 pnpm test",
     "mutate-test": "stryker run"
   },
   "author": "TeeAaTeeUu",

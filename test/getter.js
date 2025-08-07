@@ -184,6 +184,19 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), ['x', 'g'])
   })
 
+  it('a[].c.d', function () {
+    let object = {
+      a: [
+        { b: 'z', c: { d: 10 } },
+        { b: 'y', c: null },
+        { b: 'a', c: 6 },
+        { b: 'b', c: [5] },
+        { b: 'b', c: { d: 'x' } },
+      ],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [10, 'x'])
+  })
+
   it('a[]{b,c}', function () {
     const object = {
       a: [
