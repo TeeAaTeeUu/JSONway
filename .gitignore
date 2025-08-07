@@ -4,3 +4,4 @@ coverage/
 reports/
 .DS_Store
 .stryker-tmp
+bench/babel_*.json
