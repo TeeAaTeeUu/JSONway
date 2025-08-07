@@ -258,13 +258,8 @@ describe('setter', () => {
     assert.deepEqual(JSONway.set({}, this.test.title, 'zo'), out)
 
     let existing = { a: [{ b: 'yo' }] }
-    out = { a: [{ b: 'zo' }] }
+    out = { a: [{ b: 'yo' }, { b: 'zo' }] }
     assert.deepEqual(JSONway.set(existing, this.test.title, 'zo'), out)
-
-    // TODO: should [] and [*] in setter change places?
-    // existing = { a: [{ b: 'yo' }, { b: 'yo' }] }
-    // out = { a: [{ b: 'yo' }, { b: 'zo' }] }
-    // assert.deepEqual(JSONway.set(existing, this.test.title, 'zo'), out)
   })
 
   it('a[].b[]', function () {
@@ -301,7 +296,6 @@ describe('setter', () => {
     let out = [{ a: 'z' }]
     assert.deepEqual(JSONway.set([], this.test.title, 'z'), out)
 
-    out = [5, { a: 'z' }]
     assert.deepEqual(JSONway.set([5], this.test.title, 'z'), out)
 
     out = [{ a: 'zo' }, { a: 'za' }]
@@ -311,11 +305,12 @@ describe('setter', () => {
   it('[+]{a,b}', function () {
     let out = [{ a: 'za', b: 'xb' }]
     assert.deepEqual(JSONway.set([], this.test.title, [['za', 'xb']]), out)
-
-    out = [5, { a: 'za', b: 'xb' }]
     assert.deepEqual(JSONway.set([5], this.test.title, [['za', 'xb']]), out)
 
-    out = [3, 5, { a: 'za', b: 'xb' }, { a: 'ya', b: 'gb' }]
+    out = [
+      { a: 'za', b: 'xb' },
+      { a: 'ya', b: 'gb' },
+    ]
     assert.deepEqual(
       JSONway.set([3, 5], this.test.title, [
         ['za', 'xb'],
@@ -659,10 +654,7 @@ describe('setter', () => {
     assert.deepEqual(JSONway.set({}, this.test.title, ['x', 'z']), out)
 
     out = {
-      a: [
-        { b: 'x', c: 'yy' },
-        { b: 'z', c: 'yy' },
-      ],
+      a: [2, 4, 6, { b: 'x', c: 'yy' }, { b: 'z', c: 'yy' }],
     }
     assert.deepEqual(
       JSONway.set({ a: [2, 4, 6] }, this.test.title, ['x', 'z']),

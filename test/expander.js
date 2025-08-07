@@ -61,9 +61,13 @@ describe('expander', () => {
     assert.deepEqual(JSONway.expand(JSON.parse(this.test.title)), out)
   })
 
-  // TODO: this override might not be what we want
   it('{"aa[].bb":"cc","aa[].dd":"ff"}', function () {
-    const out = { aa: [{ dd: 'ff' }] }
+    const out = { aa: [{ bb: 'cc' }, { dd: 'ff' }] }
+    assert.deepEqual(JSONway.expand(JSON.parse(this.test.title)), out)
+  })
+
+  it('{"aa[].bb":"cc","aa[-1].dd":"ff"}', function () {
+    const out = { aa: [{ bb: 'cc', dd: 'ff' }] }
     assert.deepEqual(JSONway.expand(JSON.parse(this.test.title)), out)
   })
 
