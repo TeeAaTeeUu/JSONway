@@ -14,17 +14,17 @@ describe('parser', () => {
   })
 
   it('[]', function () {
-    const out = ['%[]%']
+    const out = [true, '%[]%']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('[+]', function () {
-    const out = ['%[+]%']
+    const out = [true, '%[+]%']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('[*]', function () {
-    const out = ['%[*]%']
+    const out = [true, '%[*]%']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -44,17 +44,17 @@ describe('parser', () => {
   })
 
   it('foo.bar[]', function () {
-    const out = ['foo', 'bar', '%[]%']
+    const out = ['foo', 'bar', true, '%[]%']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[].baz', function () {
-    const out = ['foo', 'bar', '%[]%', 'baz']
+    const out = ['foo', 'bar', true, '%[]%', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`foo['bar'][].baz`, function () {
-    const out = ['foo', 'bar', '%[]%', 'baz']
+    const out = ['foo', 'bar', true, '%[]%', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -64,7 +64,7 @@ describe('parser', () => {
   })
 
   it('foo.bar[baz[gee][]', function () {
-    const out = ['foo', 'bar', 'baz[gee', '%[]%']
+    const out = ['foo', 'bar', 'baz[gee', true, '%[]%']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -109,12 +109,12 @@ describe('parser', () => {
   })
 
   it('foo.bar[0].baz[][].id', function () {
-    const out = ['foo', 'bar', 0, 'baz', '%[]%', '%[]%', 'id']
+    const out = ['foo', 'bar', 0, 'baz', true, '%[]%', true, '%[]%', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[1][].id', function () {
-    const out = ['foo', 1, '%[]%', 'id']
+    const out = ['foo', 1, true, '%[]%', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -207,6 +207,7 @@ describe('parser', () => {
     const out = [
       'foo',
       'bar',
+      true,
       '%[]%',
       {
         multi: [
@@ -221,11 +222,12 @@ describe('parser', () => {
   it('foo[]{id,list[]}', function () {
     const out = [
       'foo',
+      true,
       '%[]%',
       {
         multi: [
           ['id', 'list[]'],
-          [['id'], ['list', '%[]%']],
+          [['id'], ['list', true, '%[]%']],
         ],
       },
     ]
@@ -240,7 +242,7 @@ describe('parser', () => {
           ['bar.id', 'baz[].value.max'],
           [
             ['bar', 'id'],
-            ['baz', '%[]%', 'value', 'max'],
+            ['baz', true, '%[]%', 'value', 'max'],
           ],
         ],
       },
@@ -254,7 +256,12 @@ describe('parser', () => {
       {
         multi: [
           ['id', 'bar.id', 'baz[]', 'qee[].id'],
-          [['id'], ['bar', 'id'], ['baz', '%[]%'], ['qee', '%[]%', 'id']],
+          [
+            ['id'],
+            ['bar', 'id'],
+            ['baz', true, '%[]%'],
+            ['qee', true, '%[]%', 'id'],
+          ],
         ],
       },
     ]
@@ -279,9 +286,9 @@ describe('parser', () => {
       'foo',
       {
         table: [
-          ['bar.bur[0].b', ['bar', 'bur', '%[*]%', 'b'], true],
+          ['bar.bur[0].b', ['bar', 'bur', true, '%[*]%', 'b'], true],
           ['foo', ['foo'], false],
-          ['bar.bur[0].a', ['bar', 'bur', '%[]%', 'a'], false],
+          ['bar.bur[0].a', ['bar', 'bur', true, '%[]%', 'a'], false],
         ],
       },
     ]
@@ -293,9 +300,9 @@ describe('parser', () => {
       'foo',
       {
         table: [
-          ['bar.bur[0].a', ['bar', 'bur', '%[*]%', 'a'], true],
+          ['bar.bur[0].a', ['bar', 'bur', true, '%[*]%', 'a'], true],
           ['bur', ['foo'], false],
-          ['bar[+].b', ['bar', 'bur', '%[]%', 'b'], false],
+          ['bar[+].b', ['bar', 'bur', true, '%[]%', 'b'], false],
         ],
       },
     ]
@@ -307,14 +314,18 @@ describe('parser', () => {
       'foo',
       {
         table: [
-          ['a.b[].g', ['a', 'b', '%[]%', 'g'], false],
+          ['a.b[].g', ['a', 'b', true, '%[]%', 'g'], false],
           [
             'a.b[].c[].e[]',
-            ['a', 'b', '%[]%', 'c', '%[]%', 'e', '%[]%'],
+            ['a', 'b', true, '%[]%', 'c', true, '%[]%', 'e', true, '%[]%'],
             false,
           ],
-          ['a.d[].g', ['a', 'd', '%[]%', 'g'], false],
-          ['a.d[].c[].f', ['a', 'd', '%[]%', 'c', '%[]%', 'f'], false],
+          ['a.d[].g', ['a', 'd', true, '%[]%', 'g'], false],
+          [
+            'a.d[].c[].f',
+            ['a', 'd', true, '%[]%', 'c', true, '%[]%', 'f'],
+            false,
+          ],
         ],
       },
     ]
@@ -325,10 +336,13 @@ describe('parser', () => {
     const out = [
       'sub',
       'ba',
+      true,
       '%[]%',
       1,
+      true,
       '%[]%',
       'ba,z',
+      true,
       '%[]%',
       {
         multi: [
@@ -344,6 +358,7 @@ describe('parser', () => {
     const out = [
       'foo',
       'bar',
+      true,
       '%[+]%',
       {
         multi: [
@@ -356,27 +371,34 @@ describe('parser', () => {
   })
 
   it('bar[+][*].id', function () {
-    const out = ['bar', '%[+]%', '%[*]%', 'id']
+    const out = ['bar', true, '%[+]%', true, '%[*]%', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[#].id', function () {
-    const out = ['bar', '%[#]%', 'id']
+    const out = ['bar', true, '%[#]%', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[:#].id', function () {
-    const out = ['bar', '%[:#]%', 'id']
+    const out = ['bar', true, '%[:#]%', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[#:].id', function () {
-    const out = ['bar', '%[:#]%', 'id']
+    const out = ['bar', true, '%[:#]%', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[][+]{id,,,,}', function () {
-    const out = ['bar', '%[]%', '%[+]%', { multi: [['id'], [['id']]] }]
+    const out = [
+      'bar',
+      true,
+      '%[]%',
+      true,
+      '%[+]%',
+      { multi: [['id'], [['id']]] },
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -466,12 +488,23 @@ describe('parser', () => {
   })
 
   it('foo{:}', function () {
-    const out = ['foo', '%{:}%']
+    const out = ['foo', true, '%{:}%']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bb[#].ee[].hh[].dd', function () {
-    const out = ['bb', '%[#]%', 'ee', '%[]%', 'hh', '%[]%', 'dd']
+    const out = [
+      'bb',
+      true,
+      '%[#]%',
+      'ee',
+      true,
+      '%[]%',
+      'hh',
+      true,
+      '%[]%',
+      'dd',
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -491,58 +524,59 @@ describe('parser', () => {
   })
 
   it(`a[](c='y').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c'], '=', 'y'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['c'], '=', 'y'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](='yy')`, function () {
-    const out = ['a', '%[]%', { rule: ['=', 'yy'] }]
+    const out = ['a', true, '%[]%', { rule: ['=', 'yy'] }]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](cc!='yy').b`, function () {
-    const out = ['a', '%[]%', { rule: [['cc'], '!=', 'yy'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['cc'], '!=', 'yy'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c~='y').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c'], '~=', 'y'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['c'], '~=', 'y'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c>'y').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c'], '>', 'y'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['c'], '>', 'y'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c>='y').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c'], '>=', 'y'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['c'], '>=', 'y'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c<'y').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c'], '<', 'y'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['c'], '<', 'y'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](.[0]='xx')[1]`, function () {
-    const out = ['a', '%[]%', { rule: ['.', 0, '=', 'xx'] }, 1]
+    const out = ['a', true, '%[]%', { rule: ['.', 0, '=', 'xx'] }, 1]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c<='y').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c'], '<=', 'y'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['c'], '<=', 'y'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a[](c?).b', function () {
-    const out = ['a', '%[]%', { rule: [['c'], '?'] }, 'b']
+    const out = ['a', true, '%[]%', { rule: [['c'], '?'] }, 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c='y')(d='b').b`, function () {
     const out = [
       'a',
+      true,
       '%[]%',
       { rule: [['c'], '=', 'y'] },
       { rule: [['d'], '=', 'b'] },
@@ -552,18 +586,25 @@ describe('parser', () => {
   })
 
   it(`a[](c[].d='a2').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c', '%[]%', 'd'], '=', 'a2'] }, 'b']
+    const out = [
+      'a',
+      true,
+      '%[]%',
+      { rule: [['c', true, '%[]%', 'd'], '=', 'a2'] },
+      'b',
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a[0,2].b', function () {
-    const out = ['a', '%[_,]%', [0, 2], 'b']
+    const out = ['a', true, '%[_,]%', [0, 2], 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](cc='yy'&&dd!='x][&x').b`, function () {
     const out = [
       'a',
+      true,
       '%[]%',
       {
         rule: [['cc'], '=', 'yy', '&&', '(', [['dd'], '!=', 'x][&x']],
@@ -576,6 +617,7 @@ describe('parser', () => {
   it(`a[](cc='yy'&&dd!='x')(e='z').b`, function () {
     const out = [
       'a',
+      true,
       '%[]%',
       {
         rule: [['cc'], '=', 'yy', '&&', '(', [['dd'], '!=', 'x']],
@@ -589,13 +631,20 @@ describe('parser', () => {
   })
 
   it.skip(`a[](c[~&d!][>][2]='y').b`, function () {
-    const out = ['a', '%[]%', { rule: [['c', '~&d!', '>'], 2, '=', 'y'] }, 'b']
+    const out = [
+      'a',
+      true,
+      '%[]%',
+      { rule: [['c', '~&d!', '>'], 2, '=', 'y'] },
+      'b',
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a[](cc=yy||dd!=xx).b', function () {
     const out = [
       'a',
+      true,
       '%[]%',
       {
         rule: [['cc'], '=', ['yy'], '||', '(', [['dd'], '!=', ['xx']]],
@@ -608,6 +657,7 @@ describe('parser', () => {
   it(`a[](cc='yy'||dd!='xx'&&ee!='zz').b`, function () {
     const out = [
       'a',
+      true,
       '%[]%',
       {
         rule: [
@@ -644,6 +694,7 @@ describe('parser', () => {
 
     const out = [
       'foo',
+      true,
       '%[]%',
       'bar',
       {
@@ -653,7 +704,7 @@ describe('parser', () => {
         multi: [
           ['aa[*]', 'bb.5'],
           [
-            ['aa', '%[*]%'],
+            ['aa', true, '%[*]%'],
             ['bb', '5'],
           ],
         ],
@@ -666,18 +717,21 @@ describe('parser', () => {
   it(`body[].expression(callee.name='describe').arguments[](type='ArrowFunctionExpression').body.body[](expression.callee.name='it').expression.arguments[0].raw`, function () {
     const out = [
       'body',
+      true,
       '%[]%',
       'expression',
       {
         rule: [['callee', 'name'], '=', 'describe'],
       },
       'arguments',
+      true,
       '%[]%',
       {
         rule: [['type'], '=', 'ArrowFunctionExpression'],
       },
       'body',
       'body',
+      true,
       '%[]%',
       {
         rule: [['expression', 'callee', 'name'], '=', 'it'],

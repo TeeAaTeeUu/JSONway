@@ -768,7 +768,6 @@ describe('getter', () => {
     assert.deepEqual(getter.getArrayIndexes(object, path), out)
   })
 
-  // TODO: have an actual test for ast-getter
   it('testing', async function () {
     const object = babelParse(await _readFile('./setter.js', 'utf8'), {
       sourceType: 'module',
