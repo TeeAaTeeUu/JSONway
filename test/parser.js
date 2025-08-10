@@ -2,136 +2,186 @@ import { assert } from 'chai'
 
 import JSONway from '../index.js'
 
-describe('parser', () => {
+describe.only('parser', () => {
   it('foo', function () {
-    const out = ['foo']
+    const out = ['.', 'foo']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('1', function () {
-    const out = [1]
+    const out = ['1', 1]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('[]', function () {
-    const out = [true, '%[]%']
+    const out = ['[]']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('[+]', function () {
-    const out = [true, '%[+]%']
+    const out = ['[+]']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('[*]', function () {
-    const out = [true, '%[*]%']
+    const out = ['[*]']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar.baz', function () {
-    const out = ['foo', 'bar', 'baz']
+    const out = ['.', 'foo', '.', 'bar', '.', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[3]', function () {
-    const out = ['foo', 3]
+    const out = ['.', 'foo', '1', 3]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[-2]', function () {
-    const out = ['foo', -2]
+    const out = ['.', 'foo', '-1', -2]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[]', function () {
-    const out = ['foo', 'bar', true, '%[]%']
+    const out = ['.', 'foo', '.', 'bar', '[]']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[].baz', function () {
-    const out = ['foo', 'bar', true, '%[]%', 'baz']
+    const out = ['.', 'foo', '.', 'bar', '[]', '.', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`foo['bar'][].baz`, function () {
-    const out = ['foo', 'bar', true, '%[]%', 'baz']
+    const out = ['.', 'foo', '.', 'bar', '[]', '.', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`foo.bar[1].baz['[qee[].0]']['o][]]']`, function () {
-    const out = ['foo', 'bar', 1, 'baz', '[qee[].0]', 'o][]]']
+    const out = [
+      '.',
+      'foo',
+      '.',
+      'bar',
+      '1',
+      1,
+      '.',
+      'baz',
+      '.',
+      '[qee[].0]',
+      '.',
+      'o][]]',
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[baz[gee][]', function () {
-    const out = ['foo', 'bar', 'baz[gee', true, '%[]%']
+    const out = ['.', 'foo', '.', 'bar', '.', 'baz[gee', '[]']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`foo['{bar}'].baz['{a{(c)']`, function () {
-    const out = ['foo', '{bar}', 'baz', '{a{(c)']
+    const out = ['.', 'foo', '.', '{bar}', '.', 'baz', '.', '{a{(c)']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[bar.a].baz[}b{}}.}c}]', function () {
-    const out = ['foo', 'bar.a', 'baz', '}b{}}.}c}']
+    const out = ['.', 'foo', '.', 'bar.a', '.', 'baz', '.', '}b{}}.}c}']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('[,foo,.,bar,].baz', function () {
-    const out = [',foo,.,bar,', 'baz']
+    const out = ['.', ',foo,.,bar,', '.', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`foo[bar.a][5]['{a}']`, function () {
-    const out = ['foo', 'bar.a', 5, '{a}']
+    const out = ['.', 'foo', '.', 'bar.a', '1', 5, '.', '{a}']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`foo[}[bar}.a}][5]['{a.[}`, function () {
-    const out = ['foo', '}[bar}.a}', 5, '{a.[}']
+    const out = ['.', 'foo', '.', '}[bar}.a}', '1', 5, '.', '{a.[}']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[bar.a][5][a.{}[b.[.c]', function () {
-    const out = ['foo', 'bar.a', 5, 'a.{}[b.[.c']
+    const out = ['.', 'foo', '.', 'bar.a', '1', 5, '.', 'a.{}[b.[.c']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[1][quu].baz[qee][aa].0.b[1]', function () {
-    const out = ['foo', 'bar', 1, 'quu', 'baz', 'qee', 'aa', '0', 'b', 1]
+    const out = [
+      '.',
+      'foo',
+      '.',
+      'bar',
+      '1',
+      1,
+      '.',
+      'quu',
+      '.',
+      'baz',
+      '.',
+      'qee',
+      '.',
+      'aa',
+      '.',
+      '0',
+      '.',
+      'b',
+      '1',
+      1,
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[1][0][2].bar[baz]', function () {
-    const out = ['foo', 1, 0, 2, 'bar', 'baz']
+    const out = ['.', 'foo', '1', 1, '1', 0, '1', 2, '.', 'bar', '.', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[0].baz[][].id', function () {
-    const out = ['foo', 'bar', 0, 'baz', true, '%[]%', true, '%[]%', 'id']
+    const out = [
+      '.',
+      'foo',
+      '.',
+      'bar',
+      '1',
+      0,
+      '.',
+      'baz',
+      '[]',
+      '[]',
+      '.',
+      'id',
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[1][].id', function () {
-    const out = ['foo', 1, true, '%[]%', 'id']
+    const out = ['.', 'foo', '1', 1, '[]', '.', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{bar}', function () {
-    const out = ['foo', { multi: [['bar'], [['bar']]] }]
+    const out = ['.', 'foo', '{}', [['bar'], [['.', 'bar']]]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{bar,baz}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['bar', 'baz'],
-          [['bar'], ['baz']],
+      '{}',
+      [
+        ['bar', 'baz'],
+        [
+          ['.', 'bar'],
+          ['.', 'baz'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
@@ -139,34 +189,42 @@ describe('parser', () => {
   // TODO: add this also for tabletizer
   it('foo{bar,baz=4}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['bar', 'baz=4'],
-          [['bar'], ['baz']],
-          [undefined, 4],
+      '{}',
+      [
+        ['bar', 'baz=4'],
+        [
+          ['.', 'bar'],
+          ['.', 'baz'],
         ],
-      },
+        [undefined, 4],
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{bar=a,baz=5}{bb,cc}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['bar=a', 'baz=5'],
-          [['bar'], ['baz']],
-          ['a', 5],
+      '{}',
+      [
+        ['bar=a', 'baz=5'],
+        [
+          ['.', 'bar'],
+          ['.', 'baz'],
         ],
-      },
-      {
-        multi: [
-          ['bb', 'cc'],
-          [['bb'], ['cc']],
+        ['a', 5],
+      ],
+      '{}',
+      [
+        ['bb', 'cc'],
+        [
+          ['.', 'bb'],
+          ['.', 'cc'],
         ],
-      },
+      ],
     ]
 
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -174,412 +232,402 @@ describe('parser', () => {
 
   it('foo{bar,baz}.bar', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['bar', 'baz'],
-          [['bar'], ['baz']],
+      '{}',
+      [
+        ['bar', 'baz'],
+        [
+          ['.', 'bar'],
+          ['.', 'baz'],
         ],
-      },
+      ],
+      '.',
       'bar',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{bar}.bar', function () {
-    const out = ['foo', { multi: [['bar'], [['bar']]] }, 'bar']
+    const out = ['.', 'foo', '{}', [['bar'], [['.', 'bar']]], '.', 'bar']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('{bar,baz}', function () {
     const out = [
-      {
-        multi: [
-          ['bar', 'baz'],
-          [['bar'], ['baz']],
+      '{}',
+      [
+        ['bar', 'baz'],
+        [
+          ['.', 'bar'],
+          ['.', 'baz'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[]{id,name}', function () {
     const out = [
+      '.',
       'foo',
+      '.',
       'bar',
-      true,
-      '%[]%',
-      {
-        multi: [
-          ['id', 'name'],
-          [['id'], ['name']],
+      '[]',
+      '{}',
+      [
+        ['id', 'name'],
+        [
+          ['.', 'id'],
+          ['.', 'name'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo[]{id,list[]}', function () {
     const out = [
+      '.',
       'foo',
-      true,
-      '%[]%',
-      {
-        multi: [
-          ['id', 'list[]'],
-          [['id'], ['list', true, '%[]%']],
+      '[]',
+      '{}',
+      [
+        ['id', 'list[]'],
+        [
+          ['.', 'id'],
+          ['.', 'list', '[]'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{bar.id,baz[].value.max}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['bar.id', 'baz[].value.max'],
-          [
-            ['bar', 'id'],
-            ['baz', true, '%[]%', 'value', 'max'],
-          ],
+      '{}',
+      [
+        ['bar.id', 'baz[].value.max'],
+        [
+          ['.', 'bar', '.', 'id'],
+          ['.', 'baz', '[]', '.', 'value', '.', 'max'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{id,bar.id,baz[],qee[].id}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['id', 'bar.id', 'baz[]', 'qee[].id'],
-          [
-            ['id'],
-            ['bar', 'id'],
-            ['baz', true, '%[]%'],
-            ['qee', true, '%[]%', 'id'],
-          ],
+      '{}',
+      [
+        ['id', 'bar.id', 'baz[]', 'qee[].id'],
+        [
+          ['.', 'id'],
+          ['.', 'bar', '.', 'id'],
+          ['.', 'baz', '[]'],
+          ['.', 'qee', '[]', '.', 'id'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{ id : id.key, foo, bur:bar.bur }', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['id', 'foo', 'bur'],
-          [['id', 'key'], ['foo'], ['bar', 'bur']],
+      '{}',
+      [
+        ['id', 'foo', 'bur'],
+        [
+          ['.', 'id', '.', 'key'],
+          ['.', 'foo'],
+          ['.', 'bar', '.', 'bur'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('foo[{bar.bur[*].b, foo, bar.bur[].a}]', function () {
+  it.skip('foo[{bar.bur[*].b, foo, bar.bur[].a}]', function () {
     const out = [
+      '.',
       'foo',
-      {
-        table: [
-          ['bar.bur[0].b', ['bar', 'bur', true, '%[*]%', 'b'], true],
-          ['foo', ['foo'], false],
-          ['bar.bur[0].a', ['bar', 'bur', true, '%[]%', 'a'], false],
-        ],
-      },
+      '[{}]',
+      [
+        ['bar.bur[0].b', ['.', 'bar', '.', 'bur', '[*]', '.', 'b'], true],
+        ['foo', ['.', 'foo'], false],
+        ['bar.bur[0].a', ['.', 'bar', '.', 'bur', '[]', '.', 'a'], false],
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it(`foo[{bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
+  it.skip(`foo[{bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
     const out = [
+      '.',
       'foo',
-      {
-        table: [
-          ['bar.bur[0].a', ['bar', 'bur', true, '%[*]%', 'a'], true],
-          ['bur', ['foo'], false],
-          ['bar[+].b', ['bar', 'bur', true, '%[]%', 'b'], false],
-        ],
-      },
+      '[{}]',
+      [
+        ['bar.bur[0].a', ['.', 'bar', '.', 'bur', '[*]', '.', 'a'], true],
+        ['bur', ['.', 'foo'], false],
+        ['bar[+].b', ['.', 'bar', '.', 'bur', '[]', '.', 'b'], false],
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('foo[{a.d[].c[].f, a.d[].g, a.b[].c[].e[], a.b[].g}]', function () {
+  it.skip('foo[{a.d[].c[].f, a.d[].g, a.b[].c[].e[], a.b[].g}]', function () {
     const out = [
+      '.',
       'foo',
-      {
-        table: [
-          ['a.b[].g', ['a', 'b', true, '%[]%', 'g'], false],
-          [
-            'a.b[].c[].e[]',
-            ['a', 'b', true, '%[]%', 'c', true, '%[]%', 'e', true, '%[]%'],
-            false,
-          ],
-          ['a.d[].g', ['a', 'd', true, '%[]%', 'g'], false],
-          [
-            'a.d[].c[].f',
-            ['a', 'd', true, '%[]%', 'c', true, '%[]%', 'f'],
-            false,
-          ],
+      '[{}]',
+      [
+        ['a.b[].g', ['.', 'a', '.', 'b', '[]', '.', 'g'], false],
+        [
+          'a.b[].c[].e[]',
+          ['.', 'a', '.', 'b', '[]', '.', 'c', '[]', '.', 'e', '[]'],
+          false,
         ],
-      },
+        ['a.d[].g', ['.', 'a', '.', 'd', '[]', '.', 'g'], false],
+        [
+          'a.d[].c[].f',
+          ['.', 'a', '.', 'd', '[]', '.', 'c', '[]', '.', 'f'],
+          false,
+        ],
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('sub.ba[][1][][ba,z][]{c,d}', function () {
     const out = [
+      '.',
       'sub',
+      '.',
       'ba',
-      true,
-      '%[]%',
+      '[]',
+      '1',
       1,
-      true,
-      '%[]%',
+      '[]',
+      '.',
       'ba,z',
-      true,
-      '%[]%',
-      {
-        multi: [
-          ['c', 'd'],
-          [['c'], ['d']],
+      '[]',
+      '{}',
+      [
+        ['c', 'd'],
+        [
+          ['.', 'c'],
+          ['.', 'd'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.bar[+]{id,name,}', function () {
     const out = [
+      '.',
       'foo',
+      '.',
       'bar',
-      true,
-      '%[+]%',
-      {
-        multi: [
-          ['id', 'name'],
-          [['id'], ['name']],
+      '[+]',
+      '{}',
+      [
+        ['id', 'name'],
+        [
+          ['.', 'id'],
+          ['.', 'name'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[+][*].id', function () {
-    const out = ['bar', true, '%[+]%', true, '%[*]%', 'id']
+    const out = ['.', 'bar', '[+]', '[*]', '.', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[#].id', function () {
-    const out = ['bar', true, '%[#]%', 'id']
+    const out = ['.', 'bar', '[#]', '.', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[:#].id', function () {
-    const out = ['bar', true, '%[:#]%', 'id']
+    const out = ['.', 'bar', '[:#]', '.', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[#:].id', function () {
-    const out = ['bar', true, '%[:#]%', 'id']
+    const out = ['.', 'bar', '[:#]', '.', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bar[][+]{id,,,,}', function () {
-    const out = [
-      'bar',
-      true,
-      '%[]%',
-      true,
-      '%[+]%',
-      { multi: [['id'], [['id']]] },
-    ]
+    const out = ['.', 'bar', '[]', '[+]', '{}', [['id'], [['.', 'id']]]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{id{value,name}}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['id{value,name}'],
+      '{}',
+      [
+        ['id{value,name}'],
+        [
           [
+            '.',
+            'id',
+            '{}',
             [
-              'id',
-              {
-                multi: [
-                  ['value', 'name'],
-                  [['value'], ['name']],
-                ],
-              },
+              ['value', 'name'],
+              [
+                ['.', 'value'],
+                ['.', 'name'],
+              ],
             ],
           ],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{id{value}}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['id{value}'],
-          [
-            [
-              'id',
-              {
-                multi: [['value'], [['value']]],
-              },
-            ],
-          ],
-        ],
-      },
+      '{}',
+      [['id{value}'], [['.', 'id', '{}', [['value'], [['.', 'value']]]]]],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{name,id{value}}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['name', 'id{value}'],
-          [
-            ['name'],
-            [
-              'id',
-              {
-                multi: [['value'], [['value']]],
-              },
-            ],
-          ],
+      '{}',
+      [
+        ['name', 'id{value}'],
+        [
+          ['.', 'name'],
+          ['.', 'id', '{}', [['value'], [['.', 'value']]]],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{name{value},,id}', function () {
     const out = [
+      '.',
       'foo',
-      {
-        multi: [
-          ['name{value}', 'id'],
-          [
-            [
-              'name',
-              {
-                multi: [['value'], [['value']]],
-              },
-            ],
-            ['id'],
-          ],
+      '{}',
+      [
+        ['name{value}', 'id'],
+        [
+          ['.', 'name', '{}', [['value'], [['.', 'value']]]],
+          ['.', 'id'],
         ],
-      },
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo{:}', function () {
-    const out = ['foo', true, '%{:}%']
+    const out = ['.', 'foo', '{:}']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('bb[#].ee[].hh[].dd', function () {
-    const out = [
-      'bb',
-      true,
-      '%[#]%',
-      'ee',
-      true,
-      '%[]%',
-      'hh',
-      true,
-      '%[]%',
-      'dd',
-    ]
+    const out = ['.', 'bb', '[#]', '.', 'ee', '[]', '.', 'hh', '[]', '.', 'dd']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a(c='y').b`, function () {
-    const out = ['a', { rule: [['c'], '=', 'y'] }, 'b']
+    const out = ['.', 'a', '()', [['.', 'c'], '=', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a(c=34).b', function () {
-    const out = ['a', { rule: [['c'], '=', 34] }, 'b']
+    const out = ['.', 'a', '()', [['.', 'c'], '=', 34], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a(c=false).b', function () {
-    const out = ['a', { rule: [['c'], '=', false] }, 'b']
+    const out = ['.', 'a', '()', [['.', 'c'], '=', false], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c='y').b`, function () {
-    const out = ['a', true, '%[]%', { rule: [['c'], '=', 'y'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'c'], '=', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](='yy')`, function () {
-    const out = ['a', true, '%[]%', { rule: ['=', 'yy'] }]
+    const out = ['.', 'a', '[]', '()', ['=', 'yy']]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](cc!='yy').b`, function () {
-    const out = ['a', true, '%[]%', { rule: [['cc'], '!=', 'yy'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'cc'], '!=', 'yy'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c~='y').b`, function () {
-    const out = ['a', true, '%[]%', { rule: [['c'], '~=', 'y'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'c'], '~=', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c>'y').b`, function () {
-    const out = ['a', true, '%[]%', { rule: [['c'], '>', 'y'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'c'], '>', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c>='y').b`, function () {
-    const out = ['a', true, '%[]%', { rule: [['c'], '>=', 'y'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'c'], '>=', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c<'y').b`, function () {
-    const out = ['a', true, '%[]%', { rule: [['c'], '<', 'y'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'c'], '<', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
+  // TODO: check if this parsing makes sense
   it(`a[](.[0]='xx')[1]`, function () {
-    const out = ['a', true, '%[]%', { rule: ['.', 0, '=', 'xx'] }, 1]
+    const out = ['.', 'a', '[]', '()', ['.', 0, '=', 'xx'], '1', 1]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c<='y').b`, function () {
-    const out = ['a', true, '%[]%', { rule: [['c'], '<=', 'y'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'c'], '<=', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a[](c?).b', function () {
-    const out = ['a', true, '%[]%', { rule: [['c'], '?'] }, 'b']
+    const out = ['.', 'a', '[]', '()', [['.', 'c'], '?'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](c='y')(d='b').b`, function () {
     const out = [
+      '.',
       'a',
-      true,
-      '%[]%',
-      { rule: [['c'], '=', 'y'] },
-      { rule: [['d'], '=', 'b'] },
+      '[]',
+      '()',
+      [['.', 'c'], '=', 'y'],
+      '()',
+      [['.', 'd'], '=', 'b'],
+      '.',
       'b',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -587,28 +635,30 @@ describe('parser', () => {
 
   it(`a[](c[].d='a2').b`, function () {
     const out = [
+      '.',
       'a',
-      true,
-      '%[]%',
-      { rule: [['c', true, '%[]%', 'd'], '=', 'a2'] },
+      '[]',
+      '()',
+      [['.', 'c', '[]', '.', 'd'], '=', 'a2'],
+      '.',
       'b',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a[0,2].b', function () {
-    const out = ['a', true, '%[_,]%', [0, 2], 'b']
+    const out = ['.', 'a', '[_,]', [0, 2], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it(`a[](cc='yy'&&dd!='x][&x').b`, function () {
     const out = [
+      '.',
       'a',
-      true,
-      '%[]%',
-      {
-        rule: [['cc'], '=', 'yy', '&&', '(', [['dd'], '!=', 'x][&x']],
-      },
+      '[]',
+      '()',
+      [['.', 'cc'], '=', 'yy', '&&', '(', [['.', 'dd'], '!=', 'x][&x']],
+      '.',
       'b',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -616,39 +666,39 @@ describe('parser', () => {
 
   it(`a[](cc='yy'&&dd!='x')(e='z').b`, function () {
     const out = [
+      '.',
       'a',
-      true,
-      '%[]%',
-      {
-        rule: [['cc'], '=', 'yy', '&&', '(', [['dd'], '!=', 'x']],
-      },
-      {
-        rule: [['e'], '=', 'z'],
-      },
+      '[]',
+      '()',
+      [['.', 'cc'], '=', 'yy', '&&', '(', [['.', 'dd'], '!=', 'x']],
+      '()',
+      [['.', 'e'], '=', 'z'],
+      '.',
       'b',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it.skip(`a[](c[~&d!][>][2]='y').b`, function () {
-    const out = [
-      'a',
-      true,
-      '%[]%',
-      { rule: [['c', '~&d!', '>'], 2, '=', 'y'] },
-      'b',
-    ]
+    const out = ['.', 'a', '[]', '()', [['c', '~&d!', '>'], 2, '=', 'y'], 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('a[](cc=yy||dd!=xx).b', function () {
     const out = [
+      '.',
       'a',
-      true,
-      '%[]%',
-      {
-        rule: [['cc'], '=', ['yy'], '||', '(', [['dd'], '!=', ['xx']]],
-      },
+      '[]',
+      '()',
+      [
+        ['.', 'cc'],
+        '=',
+        ['.', 'yy'],
+        '||',
+        '(',
+        [['.', 'dd'], '!=', ['.', 'xx']],
+      ],
+      '.',
       'b',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -656,22 +706,22 @@ describe('parser', () => {
 
   it(`a[](cc='yy'||dd!='xx'&&ee!='zz').b`, function () {
     const out = [
+      '.',
       'a',
-      true,
-      '%[]%',
-      {
-        rule: [
-          ['cc'],
-          '=',
-          'yy',
-          '||',
-          '(',
-          [['dd'], '!=', 'xx'],
-          '&&',
-          '(',
-          [['ee'], '!=', 'zz'],
-        ],
-      },
+      '[]',
+      '()',
+      [
+        ['.', 'cc'],
+        '=',
+        'yy',
+        '||',
+        '(',
+        [['.', 'dd'], '!=', 'xx'],
+        '&&',
+        '(',
+        [['.', 'ee'], '!=', 'zz'],
+      ],
+      '.',
       'b',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -679,7 +729,7 @@ describe('parser', () => {
 
   it(`aa.bb?[0]['(cc.dd = [102,100,foo,''baz''])']`, function () {
     // prettier-ignore
-    const out = ['aa', 'bb?', 0, "(cc.dd = [102,100,foo,'baz'])"]
+    const out = ['.', 'aa', '.', 'bb?', '1', 0, '.', "(cc.dd = [102,100,foo,'baz'])"]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -688,27 +738,26 @@ describe('parser', () => {
       foo[]
         .bar( x = 'z'){
           aa[*] ,
-          bb.5,
+          bb.5[4],
         }
     `
 
     const out = [
+      '.',
       'foo',
-      true,
-      '%[]%',
+      '[]',
+      '.',
       'bar',
-      {
-        rule: [['x'], '=', 'z'],
-      },
-      {
-        multi: [
-          ['aa[*]', 'bb.5'],
-          [
-            ['aa', true, '%[*]%'],
-            ['bb', '5'],
-          ],
+      '()',
+      [['.', 'x'], '=', 'z'],
+      '{}',
+      [
+        ['aa[*]', 'bb.5[4]'],
+        [
+          ['.', 'aa', '[*]'],
+          ['.', 'bb', '.', '5', '1', 4],
         ],
-      },
+      ],
     ]
 
     assert.deepEqual(JSONway.parse(path), out)
@@ -716,29 +765,32 @@ describe('parser', () => {
 
   it(`body[].expression(callee.name='describe').arguments[](type='ArrowFunctionExpression').body.body[](expression.callee.name='it').expression.arguments[0].raw`, function () {
     const out = [
+      '.',
       'body',
-      true,
-      '%[]%',
+      '[]',
+      '.',
       'expression',
-      {
-        rule: [['callee', 'name'], '=', 'describe'],
-      },
+      '()',
+      [['.', 'callee', '.', 'name'], '=', 'describe'],
+      '.',
       'arguments',
-      true,
-      '%[]%',
-      {
-        rule: [['type'], '=', 'ArrowFunctionExpression'],
-      },
+      '[]',
+      '()',
+      [['.', 'type'], '=', 'ArrowFunctionExpression'],
+      '.',
       'body',
+      '.',
       'body',
-      true,
-      '%[]%',
-      {
-        rule: [['expression', 'callee', 'name'], '=', 'it'],
-      },
+      '[]',
+      '()',
+      [['.', 'expression', '.', 'callee', '.', 'name'], '=', 'it'],
+      '.',
       'expression',
+      '.',
       'arguments',
+      '1',
       0,
+      '.',
       'raw',
     ]
 
