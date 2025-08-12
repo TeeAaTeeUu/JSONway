@@ -4,6 +4,16 @@ import JSONway from '../index.js'
 import { _getJsonAsync } from './_utils.js'
 
 describe('analyzer', () => {
+  it('{}', function () {
+    const out = []
+    assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
+  })
+
+  it('5', function () {
+    const out = []
+    assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
+  })
+
   it('{"a":"b","c":false,"d":5}', function () {
     const out = ['a', 'c', 'd']
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
@@ -14,8 +24,8 @@ describe('analyzer', () => {
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
-  it('{"aa":"bb","c.c":{"dd":55},"e.e":"ff"}', function () {
-    const out = ['aa', '[c.c].dd', '[e.e]']
+  it('{"aa":"bb","c.c":{"dd":55},"e.e":"ff","gg":{}}', function () {
+    const out = ['aa', '[c.c].dd', '[e.e]', 'gg']
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
