@@ -2,7 +2,7 @@ import { assert } from 'chai'
 
 import JSONway from '../index.js'
 
-describe.only('expression-stringifier', () => {
+describe('expression-stringifier', () => {
   it('stringifyExpression does nothing if not path-array', function () {
     const input = '5 > 10'
 

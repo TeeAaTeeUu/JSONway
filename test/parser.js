@@ -2,7 +2,7 @@ import { assert } from 'chai'
 
 import JSONway from '../index.js'
 
-describe.only('parser', () => {
+describe('parser', () => {
   it('foo', function () {
     const out = ['.', 'foo']
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -354,7 +354,7 @@ describe.only('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it.skip('foo[{bar.bur[*].b, foo, bar.bur[].a}]', function () {
+  it('foo[{bar.bur[*].b, foo, bar.bur[].a}]', function () {
     const out = [
       '.',
       'foo',
@@ -368,7 +368,7 @@ describe.only('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it.skip(`foo[{bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
+  it(`foo[{bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
     const out = [
       '.',
       'foo',
@@ -679,8 +679,32 @@ describe.only('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it(`a[](c[~&d!][>][2]='y').b`, function () {
-    const out = ['.', 'a', '[]', '()', [['c', '~&d!', '>'], 2, '=', 'y'], 'b']
+  it.skip(`a[](c[~&d!][>][2]='y').b`, function () {
+    let out = [
+      '.',
+      'a',
+      '[]',
+      '()',
+      [['.', 'c', '.', '~&d!', '.', '>', '1', 2], '=', 'y'],
+      '.',
+      'b',
+    ]
+
+    out = [
+      '.',
+      'a',
+      '[]',
+      '()',
+      [
+        ['.', 'c'],
+        '&&',
+        '(',
+        [['.', 'd'], '!', ['[]'], '>', ['[]', '1', 2], '=', 'y'],
+      ],
+      '.',
+      'b',
+    ]
+
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 

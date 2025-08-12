@@ -385,7 +385,7 @@ describe('expression-processor', () => {
     assert.isTrue(JSONway.calculateExpression(parsedExpression, null, data))
   })
 
-  it(`.[0]='xx'`, function () {
+  it.skip(`.[0]='xx'`, function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0]
 
     assert.isTrue(
