@@ -56,6 +56,11 @@ describe('expression-parser', () => {
     ])
   })
 
+  it('15 % 12', function () {
+    const out = [15, '%', 12]
+    assert.deepEqual(JSONway.parseExpression(this.test.title)[0], out)
+  })
+
   it(`ab.cd~='foo'`, function () {
     const out = [['.', 'ab', '.', 'cd'], '~=', 'foo']
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
@@ -88,8 +93,8 @@ describe('expression-parser', () => {
     ])
   })
 
-  it.skip(`.[0]='xx'`, function () {
-    const out = ['.', 0, '=', 'xx']
+  it(`[0]='xx'`, function () {
+    const out = [['1', 0], '=', 'xx']
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
       out,
       this.test.title.length,

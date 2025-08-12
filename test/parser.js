@@ -667,9 +667,8 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  // TODO: check if this parsing makes sense
-  it(`a[](.[0]='xx')[1]`, function () {
-    const out = ['.', 'a', '[]', '()', ['.', 0, '=', 'xx'], '1', 1]
+  it(`a[]([0]='xx')[1]`, function () {
+    const out = ['.', 'a', '[]', '()', [['1', 0], '=', 'xx'], '1', 1]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 

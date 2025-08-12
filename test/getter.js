@@ -416,8 +416,7 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), 'x')
   })
 
-  // TODO: this kinda works, but possibly through a wrong expression-path
-  it(`a[](.[0]='xx')[1]`, function () {
+  it(`a[]([0]='xx')[1]`, function () {
     let object = {
       a: [
         ['yy', 'aa'],
@@ -444,6 +443,11 @@ describe('getter', () => {
   it(`a[](='xx')`, function () {
     const object = { a: ['yy', 'xx', 'zz', 'xx', 'yy'] }
     assert.deepEqual(JSONway.get(object, this.test.title), ['xx', 'xx'])
+  })
+
+  it(`a[](>15)`, function () {
+    const object = { a: [5, 17, 15, 3, 100] }
+    assert.deepEqual(JSONway.get(object, this.test.title), [17, 100])
   })
 
   it('a[](c?).b', function () {
