@@ -7,7 +7,7 @@ const nestedListResponse = await _getJsonAsync(
   './fixtures/nested-list-response.json',
 )
 
-describe('tabletizer', () => {
+describe.only('tabletizer', () => {
   it('nested-list-response.json flat', () => {
     const object = JSON.parse(JSON.stringify(nestedListResponse))
     const path = `[{
