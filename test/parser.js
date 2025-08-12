@@ -8,8 +8,13 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('1', function () {
-    const out = ['1', 1]
+  it('3', function () {
+    const out = ['1', 3]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('-5', function () {
+    const out = ['-1', -5]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -31,6 +36,12 @@ describe('parser', () => {
   it('foo.bar.baz', function () {
     const out = ['.', 'foo', '.', 'bar', '.', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('foo.__proto__', function () {
+    assert.throws(() => {
+      JSONway.parse(this.test.title)
+    }, 'Attempted prototype pollution disallowed.')
   })
 
   it('foo[3]', function () {
@@ -111,6 +122,26 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
+  it('[foo]', function () {
+    const out = ['.', 'foo']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('.[foo]', function () {
+    const out = ['.', 'foo']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it(`['foo']`, function () {
+    const out = ['.', 'foo']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it(`['[foo ='']']`, function () {
+    const out = ['.', `[foo =']`]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
   it('foo.bar[1][quu].baz[qee][aa].0.b[1]', function () {
     const out = [
       '.',
@@ -163,6 +194,9 @@ describe('parser', () => {
   it('foo[1][].id', function () {
     const out = ['.', 'foo', '1', 1, '[]', '.', 'id']
     assert.deepEqual(JSONway.parse(this.test.title), out)
+
+    const input = 'foo[1][]=}.id'
+    assert.deepEqual(JSONway.parse(input), out)
   })
 
   it('foo{bar}', function () {
@@ -186,25 +220,46 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  // TODO: add this also for tabletizer
-  it('foo{bar,baz=4}', function () {
+  it('foo{bar:gee,baz}', function () {
     const out = [
       '.',
       'foo',
       '{}',
       [
-        ['bar', 'baz=4'],
+        ['bar', 'baz'],
+        [
+          ['.', 'gee'],
+          ['.', 'baz'],
+        ],
+      ],
+    ]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+
+    const input = 'foo { bar: gee, baz }'
+    assert.deepEqual(JSONway.parse(input), out)
+  })
+
+  // TODO: add default values also for tabletizer
+  it(`foo{bar,baz='test' ,gee,yee=345}`, function () {
+    const out = [
+      '.',
+      'foo',
+      '{}',
+      [
+        ['bar', "baz='test'", 'gee', 'yee=345'],
         [
           ['.', 'bar'],
           ['.', 'baz'],
+          ['.', 'gee'],
+          ['.', 'yee'],
         ],
-        [undefined, 4],
+        [undefined, "'test'", undefined, 345],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('foo{bar=a,baz=5}{bb,cc}', function () {
+  it('foo{bar=a,baz=5 }{bb,cc}', function () {
     const out = [
       '.',
       'foo',
@@ -227,6 +282,16 @@ describe('parser', () => {
       ],
     ]
 
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it(`foo{ [' bar= '] = 124 }`, function () {
+    const out = [
+      '.',
+      'foo',
+      '{}',
+      [[`[' bar= '] = 124`], [['.', ' bar= ']], [124]],
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -368,7 +433,7 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it(`foo[{bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
+  it(`foo[ {bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
     const out = [
       '.',
       'foo',
@@ -647,7 +712,24 @@ describe('parser', () => {
   })
 
   it('a[0,2].b', function () {
-    const out = ['.', 'a', '[_,]', [0, 2], '.', 'b']
+    let out = ['.', 'a', '[_,]', [0, 2], '.', 'b']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+
+    let input = 'a[0,2,].b'
+    assert.deepEqual(JSONway.parse(input), out)
+
+    input = 'a[15,2466,1].b'
+    out = ['.', 'a', '[_,]', [15, 2466, 1], '.', 'b']
+    assert.deepEqual(JSONway.parse(input), out)
+  })
+
+  it('a[ 0 , 2 ].b', function () {
+    const out = ['.', 'a', '.', ' 0 , 2 ', '.', 'b']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('a[0,2,a].b', function () {
+    const out = ['.', 'a', '.', '0,2,a', '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
