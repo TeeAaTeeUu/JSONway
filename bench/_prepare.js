@@ -1,11 +1,13 @@
 import { glob, writeFile } from 'node:fs/promises'
 import { parse as babelParse } from '@babel/parser'
-import { _readFile } from '../test/_utils.js'
+import { _readFile, _getJsonAsync } from '../test/_utils.js'
 
 import { analyze } from '../lib/analyzer.js'
 
 async function prepare() {
-  const output = { files: [] }
+  const output = await _getJsonAsync('../package.json')
+
+  output.files = []
 
   for await (const entry of glob('../**/*.js')) {
     const object = babelParse(await _readFile(entry, 'utf8'), {

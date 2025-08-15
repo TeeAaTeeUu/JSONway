@@ -8,6 +8,18 @@ import { JSONPath } from 'jsonpath-plus'
 
 const babelFiles = JSON.parse(await _readFile('../bench/babel_files.json'))
 const paths = JSON.parse(await _readFile('../bench/babel_files_paths.json'))
+
+const jmesPaths = paths.map(path => {
+  if (!path.startsWith('devDependencies') && !path.startsWith('scripts'))
+    return path
+  if (!path.includes('@') && !path.includes('-')) return path
+
+  return (
+    path
+      .replace('devDependencies.', 'devDependencies.["')
+      .replace('scripts.', 'scripts.["') + '"]'
+  )
+})
 const JSONpaths = paths.map(path => '$.' + path.replaceAll('[]', '[*]'))
 
 summary(() => {
@@ -25,8 +37,8 @@ summary(() => {
   bench('@jmespath-community/jmespath', function () {
     let count = 0
 
-    for (let i = 0; i < paths.length; i++) {
-      const value = search(babelFiles, paths[i])
+    for (let i = 0; i < jmesPaths.length; i++) {
+      const value = search(babelFiles, jmesPaths[i])
       count += value.length
     }
 
@@ -36,8 +48,8 @@ summary(() => {
   bench('jmespath', function () {
     let count = 0
 
-    for (let i = 0; i < paths.length; i++) {
-      const value = searchOrig(babelFiles, paths[i])
+    for (let i = 0; i < jmesPaths.length; i++) {
+      const value = searchOrig(babelFiles, jmesPaths[i])
       count += value.length
     }
 
