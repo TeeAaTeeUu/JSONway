@@ -421,7 +421,7 @@ describe.only('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it.skip('foo[{bar.bur[*].b, foo, bar.bur[].a}]', function () {
+  it('foo[{bar.bur[*].b, foo, bar.bur[].a}]', function () {
     const out = [
       '.',
       'foo',
@@ -435,7 +435,7 @@ describe.only('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it.skip(`foo[ {bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
+  it(`foo[ {bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
     const out = [
       '.',
       'foo',
@@ -449,7 +449,7 @@ describe.only('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it.skip('foo[{a.d[].c[].f, a.d[].g, a.b[].c[].e[], a.b[].g}]', function () {
+  it('foo[{a.d[].c[].f, a.d[].g, a.b[].c[].e[], a.b[].g}]', function () {
     const out = [
       '.',
       'foo',
