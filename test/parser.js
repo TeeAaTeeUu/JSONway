@@ -2,7 +2,7 @@ import { assert } from 'chai'
 
 import JSONway from '../index.js'
 
-describe.only('parser', () => {
+describe('parser', () => {
   it('foo', function () {
     const out = ['.', 'foo']
     assert.deepEqual(JSONway.parse(this.test.title), out)

@@ -5,7 +5,7 @@ import JSONway from '../index.js'
 import getter from '../lib/getter.js'
 import { _getJsonAsync, _readFile } from './_utils.js'
 
-describe.only('getter', () => {
+describe('getter', () => {
   it('a', function () {
     const object = { a: 'z' }
     assert.deepEqual(JSONway.get(object, this.test.title), 'z')

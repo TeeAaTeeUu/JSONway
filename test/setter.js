@@ -3,7 +3,7 @@ import { _getJsonAsync } from './_utils.js'
 
 import JSONway from '../index.js'
 
-describe.only('setter', () => {
+describe('setter', () => {
   it('a', function () {
     let out = { a: 'z' }
     assert.deepEqual(JSONway.set({}, this.test.title, 'z'), out)

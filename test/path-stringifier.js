@@ -2,7 +2,7 @@ import { assert } from 'chai'
 
 import JSONway from '../index.js'
 
-describe.only('path-stringifier', () => {
+describe('path-stringifier', () => {
   it('stringifyPath does nothing if not path-array', function () {
     const input = 'ab.cd'
 

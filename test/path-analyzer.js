@@ -2,7 +2,7 @@ import { assert } from 'chai'
 
 import JSONway from '../index.js'
 
-describe.only('path-analyzer', () => {
+describe('path-analyzer', () => {
   it('empty', function () {
     assert.isNull(JSONway.pathDepth(''))
   })
