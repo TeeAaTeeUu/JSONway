@@ -227,7 +227,7 @@ describe('expression-parser', () => {
   })
 
   it(`c[].d='a2'`, function () {
-    const out = [['.', 'c', '[]', '.', 'd'], '=', 'a2']
+    const out = [['.', 'c', '[]', ['.', 'd']], '=', 'a2']
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
       out,
       this.test.title.length,
