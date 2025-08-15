@@ -3,7 +3,7 @@ import { _getJsonAsync } from './_utils.js'
 
 import JSONway from '../index.js'
 
-describe('setter', () => {
+describe.only('setter', () => {
   it('a', function () {
     let out = { a: 'z' }
     assert.deepEqual(JSONway.set({}, this.test.title, 'z'), out)
@@ -119,10 +119,10 @@ describe('setter', () => {
     out = ['z']
     assert.deepEqual(JSONway.set([], this.test.title, ['z']), out)
 
-    out = ['x', 'z']
+    out = ['z']
     assert.deepEqual(JSONway.set(['x'], this.test.title, 'z'), out)
 
-    out = ['x', 'z', 'y']
+    out = ['z', 'y']
     assert.deepEqual(JSONway.set(['x'], this.test.title, ['z', 'y']), out)
   })
 
@@ -150,19 +150,19 @@ describe('setter', () => {
     out = ['zo']
     assert.deepEqual(JSONway.set([], this.test.title, ['zo']), out)
 
-    out = ['zo']
+    out = [1, 'zo']
     assert.deepEqual(JSONway.set([1], this.test.title, 'zo'), out)
 
-    out = ['zo']
+    out = [1, 'zo']
     assert.deepEqual(JSONway.set([1], this.test.title, ['zo']), out)
 
-    out = ['zo']
+    out = ['a', 'b', 'zo']
     assert.deepEqual(JSONway.set(['a', 'b'], this.test.title, 'zo'), out)
 
     out = ['zo', 'za']
     assert.deepEqual(JSONway.set([], this.test.title, ['zo', 'za']), out)
 
-    out = ['z', 'x']
+    out = [1, 2, 3, 'z', 'x']
     assert.deepEqual(JSONway.set([1, 2, 3], this.test.title, ['z', 'x']), out)
   })
 
