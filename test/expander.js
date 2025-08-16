@@ -71,8 +71,8 @@ describe('expander', () => {
     assert.deepEqual(JSONway.expand(JSON.parse(this.test.title)), out)
   })
 
-  it('{"aa[].bb":"cc","aa[*].dd":"ff"}', function () {
-    const out = { aa: [{ bb: 'cc', dd: 'ff' }] }
+  it('{"aa[].bb":"cc","aa[*].dd":"ff","aa[*].gg[]":"","aa[*].hh[]":5}', function () {
+    const out = { aa: [{ bb: 'cc', dd: 'ff', gg: [], hh: [5] }] }
     assert.deepEqual(JSONway.expand(JSON.parse(this.test.title)), out)
   })
 
