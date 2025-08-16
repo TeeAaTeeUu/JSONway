@@ -23,8 +23,8 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('[+]', function () {
-    const out = ['[+]', []]
+  it('[=]', function () {
+    const out = ['[=]', []]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -435,7 +435,7 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it(`foo[ {bur: foo, bar.bur[*].a, 'bar[+].b': bar.bur[].b}]`, function () {
+  it(`foo[ {bur: foo, bar.bur[*].a, 'bar[=].b': bar.bur[].b}]`, function () {
     const out = [
       '.',
       'foo',
@@ -443,7 +443,7 @@ describe('parser', () => {
       [
         ['bar.bur[0].a', ['.', 'bar', '.', 'bur', '[*]', ['.', 'a']], true],
         ['bur', ['.', 'foo'], false],
-        ['bar[+].b', ['.', 'bar', '.', 'bur', '[]', ['.', 'b']], false],
+        ['bar[=].b', ['.', 'bar', '.', 'bur', '[]', ['.', 'b']], false],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -503,13 +503,13 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('foo.bar[+]{id,name,}', function () {
+  it('foo.bar[=]{id,name,}', function () {
     const out = [
       '.',
       'foo',
       '.',
       'bar',
-      '[+]',
+      '[=]',
       [
         '{}',
         [
@@ -524,8 +524,8 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('bar[+][*].id', function () {
-    const out = ['.', 'bar', '[+]', ['[*]', ['.', 'id']]]
+  it('bar[=][*].id', function () {
+    const out = ['.', 'bar', '[=]', ['[*]', ['.', 'id']]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -544,8 +544,8 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('bar[][+]{id,,,,}', function () {
-    const out = ['.', 'bar', '[]', ['[+]', ['{}', [['id'], [['.', 'id']]]]]]
+  it('bar[][=]{id,,,,}', function () {
+    const out = ['.', 'bar', '[]', ['[=]', ['{}', [['id'], [['.', 'id']]]]]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 

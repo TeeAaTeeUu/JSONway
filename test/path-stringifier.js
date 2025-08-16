@@ -29,7 +29,7 @@ describe('path-stringifier', () => {
     assert.deepEqual(JSONway.stringifyPath(input), this.test.title)
   })
 
-  it('foo.bar[+]', function () {
+  it('foo.bar[=]', function () {
     const input = JSONway.parse(this.test.title)
     assert.deepEqual(JSONway.stringifyPath(input), this.test.title)
   })
