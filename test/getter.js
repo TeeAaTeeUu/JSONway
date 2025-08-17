@@ -223,6 +223,20 @@ describe('getter', () => {
     ])
   })
 
+  // TODO: handle default values
+  it.skip(`a[]{x: b.c = 'z', d[1]=5}`, function () {
+    const object = {
+      a: [
+        { b: { c: 'z' }, d: [1, 'x', 2] },
+        { b: { c: 'y' }, d: [1] },
+      ],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [
+      { x: 'z', 'd[1]': 'x' },
+      { x: 'y', 'd[1]': 5 },
+    ])
+  })
+
   it('a[][].b', function () {
     let object = { a: [[{ b: 'z' }]] }
     assert.deepEqual(JSONway.get(object, this.test.title), ['z'])

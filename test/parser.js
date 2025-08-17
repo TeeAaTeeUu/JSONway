@@ -102,8 +102,8 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('[,foo,.,bar,].baz', function () {
-    const out = ['.', ',foo,.,bar,', '.', 'baz']
+  it(`[,foo,: ''''.,bar,].baz`, function () {
+    const out = ['.', `,foo,: '.,bar,`, '.', 'baz']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -235,6 +235,22 @@ describe('parser', () => {
 
     const input = 'foo { bar: gee, baz }'
     assert.deepEqual(JSONway.parse(input), out)
+  })
+
+  it(`foo{bar[1,2],[baz:]['id,[]']}`, function () {
+    const out = [
+      '.',
+      'foo',
+      '{}',
+      [
+        ['bar[1,2]', `[baz:]['id,[]']`],
+        [
+          ['.', 'bar', '[_,]', [[1, 2]]],
+          ['.', 'baz:', '.', 'id,[]'],
+        ],
+      ],
+    ]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   // TODO: add default values also for tabletizer
@@ -736,6 +752,22 @@ describe('parser', () => {
 
   it('a[0,2,a].b', function () {
     const out = ['.', 'a', '.', '0,2,a', '.', 'b']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('[foo.bar,baz.gee]', function () {
+    const out = ['.', 'foo.bar,baz.gee']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('[ foo.bar , baz.gee ]', function () {
+    const out = ['.', ' foo.bar , baz.gee ']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  // TODO: syntax for multiList
+  it.skip('[foo.bar[],baz[].gee]', function () {
+    const out = ['.', 'foo.bar[', '.', 'baz', '[]', ['.', 'gee']]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
