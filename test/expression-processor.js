@@ -309,6 +309,127 @@ describe('expression-processor', () => {
     )
   })
 
+  it('<15', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let input = 5
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 15
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 25
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, input))
+  })
+
+  it('>15', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let input = 5
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 15
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 25
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, input))
+  })
+
+  it('>=15', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let input = 5
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 15
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 25
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, input))
+  })
+
+  it('<=15', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let input = 5
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 15
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, input))
+
+    input = 25
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, input))
+  })
+
+  it('15 != [5,15,20]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isFalse(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 != [5,16,20]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isTrue(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 > [5,15,20]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isTrue(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 > [15,17,20]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isFalse(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 >= [11,17,20]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isTrue(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 >= [16,17,20]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isFalse(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 < [5, 10, 15]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isFalse(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 < [5, 16, 14]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isTrue(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 <= [5, 10, 14]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isFalse(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('15 <= [5, 15, 14]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.isTrue(JSONway.calculateExpression(parsedExpression))
+  })
+
+  it('5 * [10, 2]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.equal(JSONway.calculateExpression(parsedExpression), 100)
+  })
+
+  it('220 / [10, 2]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+    assert.equal(JSONway.calculateExpression(parsedExpression), 11)
+  })
+
+  it('5 # 15', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let input = 5
+    assert.isUndefined(
+      JSONway.calculateExpression(parsedExpression, null, input),
+    )
+  })
+
   it('ab.cd >= 20 && (ab.cd / 2)', function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0]
 

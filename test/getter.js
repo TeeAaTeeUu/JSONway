@@ -778,7 +778,7 @@ describe('getter', () => {
     assert.deepEqual(getter.getArrayIndexes(object, path), out)
   })
 
-  it('testing', async function () {
+  it('testing longer format with new lines and spaces', async function () {
     const object = babelParse(await _readFile('./setter.js', 'utf8'), {
       sourceType: 'module',
     })
