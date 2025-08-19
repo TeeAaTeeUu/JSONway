@@ -59,6 +59,21 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
+  it('foo.bar.[]', function () {
+    const out = ['.', 'foo', '.', 'bar', '[]', []]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('foo..bar.[]', function () {
+    const out = ['.', 'foo', '.', 'bar', '[]', []]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('foo.bar[].', function () {
+    const out = ['.', 'foo', '.', 'bar', '[]', []]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
   it('foo.bar[].baz', function () {
     const out = ['.', 'foo', '.', 'bar', '[]', ['.', 'baz']]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -66,6 +81,21 @@ describe('parser', () => {
 
   it(`foo['bar'][].baz`, function () {
     const out = ['.', 'foo', '.', 'bar', '[]', ['.', 'baz']]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it(`foo['[]'].bar`, function () {
+    const out = ['.', 'foo', '.', '[]', '.', 'bar']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it(`foo['*'].bar`, function () {
+    const out = ['.', 'foo', '.', '*', '.', 'bar']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it(`foo['5'].bar`, function () {
+    const out = ['.', 'foo', '.', '5', '.', 'bar']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -250,6 +280,11 @@ describe('parser', () => {
         ],
       ],
     ]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('foo[bar{baz}]', function () {
+    const out = ['.', 'foo', '.', 'bar{baz}']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -451,7 +486,9 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it(`foo[ {bur: foo, bar.bur[*].a, 'bar[=].b': bar.bur[].b}]`, function () {
+  it(`foo[ {bur: foo, bar.bur[*].a, 'bar[=].b': bar.bur[].b}
+
+ ]  `, function () {
     const out = [
       '.',
       'foo',
@@ -873,7 +910,10 @@ describe('parser', () => {
         .bar( x = 'z'){
           aa[*] ,
           bb.5[4],
+
         }
+
+        ['aa[*]']
     `
 
     const out = [
@@ -893,6 +933,8 @@ describe('parser', () => {
             ['.', 'bb', '.', '5', '1', 4],
           ],
         ],
+        '.',
+        'aa[*]',
       ],
     ]
 
