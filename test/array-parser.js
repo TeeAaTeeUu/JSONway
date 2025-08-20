@@ -23,6 +23,11 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1), [out, 2])
   })
 
+  it('[0].foo', function () {
+    const out = ['1', 0]
+    assert.deepEqual(parseArray(this.test.title, 1), [out, 2])
+  })
+
   it(`['5'].foo`, function () {
     const out = ['.', '5']
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
@@ -63,7 +68,7 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
-  it('[-2]', function () {
+  it('[-2].foo', function () {
     const out = ['-1', -2]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
@@ -150,11 +155,25 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it(`[1,2,true,0,"1,test""'2"]`, function () {
+    const out = [1, 2, true, 0, `1,test"'2`]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it(`[foo[].bar, baz, foo[*].id]`, function () {
     const out = [
       ['.', 'foo', '[]', ['.', 'bar']],
       ['.', 'baz'],
       ['.', 'foo', '[*]', ['.', 'id']],
+    ]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`[foo[].bar, .baz, ...foo[*].id]`, function () {
+    const out = [
+      ['.', 'foo', '[]', ['.', 'bar']],
+      ['.', 'baz'],
+      ['[.]', ['.', 'foo', '[*]', ['.', 'id']]],
     ]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
