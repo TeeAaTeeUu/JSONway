@@ -28,12 +28,52 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it('["5"].foo', function () {
+    const out = ['.', '5']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('["5"""].foo', function () {
+    const out = ['.', '5"']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`["5'"].foo`, function () {
+    const out = ['.', `5'`]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`['5"'].foo`, function () {
+    const out = ['.', `5"`]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`['5'''].foo`, function () {
+    const out = ['.', `5'`]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`['5].foo`, function () {
+    const out = ['.', '5].foo']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`["5].foo`, function () {
+    const out = ['.', '5].foo']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it('[-2]', function () {
     const out = ['-1', -2]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
   it('[]', function () {
+    const out = ['[]', []]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[', function () {
     const out = ['[]', []]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
@@ -95,8 +135,18 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 4), [out, 15])
   })
 
-  it(`['error', false, null, ab.cd]`, function () {
-    const out = ['error', false, null, ['.', 'ab', '.', 'cd']]
+  it(`['error', false, null, ab.cd, "ef.gd"]`, function () {
+    const out = ['error', false, null, ['.', 'ab', '.', 'cd'], 'ef.gd']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`[1,2,true,0]`, function () {
+    const out = [1, 2, true, 0]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`[1, 2, true , 0]`, function () {
+    const out = [1, 2, true, 0]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
