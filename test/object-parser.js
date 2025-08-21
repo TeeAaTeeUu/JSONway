@@ -33,6 +33,11 @@ describe('object-parser', () => {
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
+  it('{foo', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], undefined]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
   it('{foo[].bar[*].baz}', function () {
     const out = [
       '{}',
