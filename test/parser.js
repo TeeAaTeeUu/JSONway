@@ -233,7 +233,7 @@ describe('parser', () => {
   })
 
   it('foo{bar}', function () {
-    const out = ['.', 'foo', '{}', [['bar'], [['.', 'bar']]]]
+    const out = ['.', 'foo', '{}', [['bar', ['.', 'bar']]]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -243,11 +243,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', 'baz'],
-        [
-          ['.', 'bar'],
-          ['.', 'baz'],
-        ],
+        ['bar', ['.', 'bar']],
+        ['baz', ['.', 'baz']],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -259,11 +256,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', 'baz'],
-        [
-          ['.', 'gee'],
-          ['.', 'baz'],
-        ],
+        ['bar', ['.', 'gee']],
+        ['baz', ['.', 'baz']],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -278,11 +272,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar[1,2]', `[baz:]['id,[]']`],
-        [
-          ['.', 'bar', '[_,]', [[1, 2]]],
-          ['.', 'baz:', '.', 'id,[]'],
-        ],
+        ['bar[1,2]', ['.', 'bar', '[_,]', [[1, 2]]]],
+        [`[baz:]['id,[]']`, ['.', 'baz:', '.', 'id,[]']],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -300,14 +291,10 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', "baz='test'", 'gee', 'yee=345'],
-        [
-          ['.', 'bar'],
-          ['.', 'baz'],
-          ['.', 'gee'],
-          ['.', 'yee'],
-        ],
-        [undefined, "'test'", undefined, 345],
+        ['bar', ['.', 'bar']],
+        ['baz', ['.', 'baz'], 'test'],
+        ['gee', ['.', 'gee']],
+        ['yee', ['.', 'yee'], 345],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -319,20 +306,13 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar=a', 'baz=5'],
-        [
-          ['.', 'bar'],
-          ['.', 'baz'],
-        ],
-        ['a', 5],
+        ['bar', ['.', 'bar'], 'a'],
+        ['baz', ['.', 'baz'], 5],
       ],
       '{}',
       [
-        ['bb', 'cc'],
-        [
-          ['.', 'bb'],
-          ['.', 'cc'],
-        ],
+        ['bb', ['.', 'bb']],
+        ['cc', ['.', 'cc']],
       ],
     ]
 
@@ -340,12 +320,7 @@ describe('parser', () => {
   })
 
   it(`foo{ [' bar= '] = 124 }`, function () {
-    const out = [
-      '.',
-      'foo',
-      '{}',
-      [[`[' bar= '] = 124`], [['.', ' bar= ']], [124]],
-    ]
+    const out = ['.', 'foo', '{}', [[`[' bar= ']`, ['.', ' bar= '], 124]]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -355,11 +330,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', 'baz'],
-        [
-          ['.', 'bar'],
-          ['.', 'baz'],
-        ],
+        ['bar', ['.', 'bar']],
+        ['baz', ['.', 'baz']],
       ],
       '.',
       'bar',
@@ -368,7 +340,7 @@ describe('parser', () => {
   })
 
   it('foo{bar}.bar', function () {
-    const out = ['.', 'foo', '{}', [['bar'], [['.', 'bar']]], '.', 'bar']
+    const out = ['.', 'foo', '{}', [['bar', ['.', 'bar']]], '.', 'bar']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -376,11 +348,8 @@ describe('parser', () => {
     const out = [
       '{}',
       [
-        ['bar', 'baz'],
-        [
-          ['.', 'bar'],
-          ['.', 'baz'],
-        ],
+        ['bar', ['.', 'bar']],
+        ['baz', ['.', 'baz']],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -396,11 +365,8 @@ describe('parser', () => {
       [
         '{}',
         [
-          ['id', 'name'],
-          [
-            ['.', 'id'],
-            ['.', 'name'],
-          ],
+          ['id', ['.', 'id']],
+          ['name', ['.', 'name']],
         ],
       ],
     ]
@@ -415,11 +381,8 @@ describe('parser', () => {
       [
         '{}',
         [
-          ['id', 'list[]'],
-          [
-            ['.', 'id'],
-            ['.', 'list', '[]', []],
-          ],
+          ['id', ['.', 'id']],
+          ['list[]', ['.', 'list', '[]', []]],
         ],
       ],
     ]
@@ -432,11 +395,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar.id', 'baz[].value.max'],
-        [
-          ['.', 'bar', '.', 'id'],
-          ['.', 'baz', '[]', ['.', 'value', '.', 'max']],
-        ],
+        ['bar.id', ['.', 'bar', '.', 'id']],
+        ['baz[].value.max', ['.', 'baz', '[]', ['.', 'value', '.', 'max']]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -448,13 +408,10 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['id', 'bar.id', 'baz[]', 'qee[].id'],
-        [
-          ['.', 'id'],
-          ['.', 'bar', '.', 'id'],
-          ['.', 'baz', '[]', []],
-          ['.', 'qee', '[]', ['.', 'id']],
-        ],
+        ['id', ['.', 'id']],
+        ['bar.id', ['.', 'bar', '.', 'id']],
+        ['baz[]', ['.', 'baz', '[]', []]],
+        ['qee[].id', ['.', 'qee', '[]', ['.', 'id']]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -466,12 +423,9 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['id', 'foo', 'bur'],
-        [
-          ['.', 'id', '.', 'key'],
-          ['.', 'foo'],
-          ['.', 'bar', '.', 'bur'],
-        ],
+        ['id', ['.', 'id', '.', 'key']],
+        ['foo', ['.', 'foo']],
+        ['bur', ['.', 'bar', '.', 'bur']],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -548,11 +502,8 @@ describe('parser', () => {
           [
             '{}',
             [
-              ['c', 'd'],
-              [
-                ['.', 'c'],
-                ['.', 'd'],
-              ],
+              ['c', ['.', 'c']],
+              ['d', ['.', 'd']],
             ],
           ],
         ],
@@ -571,11 +522,8 @@ describe('parser', () => {
       [
         '{}',
         [
-          ['id', 'name'],
-          [
-            ['.', 'id'],
-            ['.', 'name'],
-          ],
+          ['id', ['.', 'id']],
+          ['name', ['.', 'name']],
         ],
       ],
     ]
@@ -603,7 +551,7 @@ describe('parser', () => {
   })
 
   it('bar[][=]{id,,,,}', function () {
-    const out = ['.', 'bar', '[]', ['[=]', ['{}', [['id'], [['.', 'id']]]]]]
+    const out = ['.', 'bar', '[]', ['[=]', ['{}', [['id', ['.', 'id']]]]]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -613,18 +561,15 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['id{value,name}'],
         [
+          'id{value,name}',
           [
             '.',
             'id',
             '{}',
             [
-              ['value', 'name'],
-              [
-                ['.', 'value'],
-                ['.', 'name'],
-              ],
+              ['value', ['.', 'value']],
+              ['name', ['.', 'name']],
             ],
           ],
         ],
@@ -638,7 +583,7 @@ describe('parser', () => {
       '.',
       'foo',
       '{}',
-      [['id{value}'], [['.', 'id', '{}', [['value'], [['.', 'value']]]]]],
+      [['id{value}', ['.', 'id', '{}', [['value', ['.', 'value']]]]]],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
@@ -649,11 +594,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['name', 'id{value}'],
-        [
-          ['.', 'name'],
-          ['.', 'id', '{}', [['value'], [['.', 'value']]]],
-        ],
+        ['name', ['.', 'name']],
+        ['id{value}', ['.', 'id', '{}', [['value', ['.', 'value']]]]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -665,11 +607,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['name{value}', 'id'],
-        [
-          ['.', 'name', '{}', [['value'], [['.', 'value']]]],
-          ['.', 'id'],
-        ],
+        ['name{value}', ['.', 'name', '{}', [['value', ['.', 'value']]]]],
+        ['id', ['.', 'id']],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -941,7 +880,7 @@ describe('parser', () => {
       foo[]
         .bar( x = 'z'){
           aa[*] ,
-          bb.5[4],
+          bb.5[4] =  15  ,
 
         }
 
@@ -959,11 +898,8 @@ describe('parser', () => {
         [['.', 'x'], '=', 'z'],
         '{}',
         [
-          ['aa[*]', 'bb.5[4]'],
-          [
-            ['.', 'aa', '[*]', []],
-            ['.', 'bb', '.', '5', '1', 4],
-          ],
+          ['aa[*]', ['.', 'aa', '[*]', []]],
+          ['bb.5[4]', ['.', 'bb', '.', '5', '1', 4], 15],
         ],
         '.',
         'aa[*]',

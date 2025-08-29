@@ -481,6 +481,7 @@ describe('setter', () => {
     assert.deepEqual(JSONway.set({}, this.test.title, ['zo', 'yo', 'go']), out)
   })
 
+  // TODO: add tests with defaults
   it('a[]{[b.b],c,d,e[0],j,[j.j],k}', function () {
     const out = {
       a: [

@@ -29,22 +29,22 @@ describe('object-parser', () => {
   })
 
   it('{foo}', function () {
-    const out = ['{}', [['foo', ['.', 'foo'], undefined]]]
+    const out = ['{}', [['foo', ['.', 'foo']]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{ foo }', function () {
-    const out = ['{}', [['foo', ['.', 'foo'], undefined]]]
+    const out = ['{}', [['foo', ['.', 'foo']]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{foo', function () {
-    const out = ['{}', [['foo', ['.', 'foo'], undefined]]]
+    const out = ['{}', [['foo', ['.', 'foo']]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{foo  ', function () {
-    const out = ['{}', [['foo', ['.', 'foo'], undefined]]]
+    const out = ['{}', [['foo', ['.', 'foo']]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
@@ -55,7 +55,6 @@ describe('object-parser', () => {
         [
           'foo[].bar[*].baz',
           ['.', 'foo', '[]', ['.', 'bar', '[*]', ['.', 'baz']]],
-          undefined,
         ],
       ],
     ]
@@ -63,12 +62,17 @@ describe('object-parser', () => {
   })
 
   it('{foo: bar[]}', function () {
-    const out = ['{}', [['foo', ['.', 'bar', '[]', []], undefined]]]
+    const out = ['{}', [['foo', ['.', 'bar', '[]', []]]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{foo = 10}', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], 10]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{"foo[{""}]": bar[]}', function () {
-    const out = ['{}', [['foo[{"}]', ['.', 'bar', '[]', []], undefined]]]
+    const out = ['{}', [['foo[{"}]', ['.', 'bar', '[]', []]]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
@@ -87,7 +91,6 @@ describe('object-parser', () => {
               ['id', ['.', 'id'], false],
             ],
           ],
-          undefined,
         ],
       ],
     ]
@@ -99,8 +102,8 @@ describe('object-parser', () => {
     const out = [
       '{}',
       [
-        ['foo', [true, 'bar'], undefined],
-        ['baz', [true, 4], undefined],
+        ['foo', [true, 'bar']],
+        ['baz', [true, 4]],
         ['id', ['.', 'id', '[]', []], 'dd'],
       ],
     ]
@@ -112,7 +115,7 @@ describe('object-parser', () => {
       '{}',
       [
         ['foo', ['.', 'bar', '[]', []], false],
-        ['baz', ['.', 'baz'], undefined],
+        ['baz', ['.', 'baz']],
         ['cc', ['.', 'aa'], 'ee'],
         ['gee', ['.', 'gee'], 5],
       ],
@@ -124,11 +127,37 @@ describe('object-parser', () => {
     const out = [
       '{}',
       [
-        ['foo', ['.', 'foo'], undefined],
-        ['baz', [true, null], undefined],
-        ['id', ['.', 'id'], undefined],
+        ['foo', ['.', 'foo']],
+        ['baz', [true, null]],
+        ['id', ['.', 'id']],
       ],
     ]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('foo{bar=a,baz=5 }{bb,cc}', function () {
+    let out = [
+      [
+        '{}',
+        [
+          ['bar', ['.', 'bar'], 'a'],
+          ['baz', ['.', 'baz'], 5],
+        ],
+      ],
+      16,
+    ]
+    assert.deepEqual(parseObject(this.test.title, 4), out)
+
+    out = [
+      [
+        '{}',
+        [
+          ['bb', ['.', 'bb']],
+          ['cc', ['.', 'cc']],
+        ],
+      ],
+      23,
+    ]
+    assert.deepEqual(parseObject(this.test.title, 18), out)
   })
 })
