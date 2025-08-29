@@ -233,7 +233,7 @@ describe('parser', () => {
   })
 
   it('foo{bar}', function () {
-    const out = ['.', 'foo', '{}', [['bar', ['.', 'bar']]]]
+    const out = ['.', 'foo', '{}', [['bar', ['.', 'bar'], undefined, [false]]]]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -243,8 +243,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', ['.', 'bar']],
-        ['baz', ['.', 'baz']],
+        ['bar', ['.', 'bar'], undefined, [false]],
+        ['baz', ['.', 'baz'], undefined, [false]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -256,8 +256,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', ['.', 'gee']],
-        ['baz', ['.', 'baz']],
+        ['bar', ['.', 'gee'], undefined, [true]],
+        ['baz', ['.', 'baz'], undefined, [false]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -272,8 +272,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar[1,2]', ['.', 'bar', '[_,]', [[1, 2]]]],
-        [`[baz:]['id,[]']`, ['.', 'baz:', '.', 'id,[]']],
+        ['bar[1,2]', ['.', 'bar', '[_,]', [[1, 2]]], undefined, [false]],
+        [`[baz:]['id,[]']`, ['.', 'baz:', '.', 'id,[]'], undefined, [false]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -291,10 +291,10 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', ['.', 'bar']],
-        ['baz', ['.', 'baz'], 'test'],
-        ['gee', ['.', 'gee']],
-        ['yee', ['.', 'yee'], 345],
+        ['bar', ['.', 'bar'], undefined, [false]],
+        ['baz', ['.', 'baz'], 'test', [false]],
+        ['gee', ['.', 'gee'], undefined, [false]],
+        ['yee', ['.', 'yee'], 345, [false]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -306,13 +306,13 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', ['.', 'bar'], 'a'],
-        ['baz', ['.', 'baz'], 5],
+        ['bar', ['.', 'bar'], 'a', [false]],
+        ['baz', ['.', 'baz'], 5, [false]],
       ],
       '{}',
       [
-        ['bb', ['.', 'bb']],
-        ['cc', ['.', 'cc']],
+        ['bb', ['.', 'bb'], undefined, [false]],
+        ['cc', ['.', 'cc'], undefined, [false]],
       ],
     ]
 
@@ -320,7 +320,12 @@ describe('parser', () => {
   })
 
   it(`foo{ [' bar= '] = 124 }`, function () {
-    const out = ['.', 'foo', '{}', [[`[' bar= ']`, ['.', ' bar= '], 124]]]
+    const out = [
+      '.',
+      'foo',
+      '{}',
+      [[`[' bar= ']`, ['.', ' bar= '], 124, [false]]],
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -330,8 +335,8 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar', ['.', 'bar']],
-        ['baz', ['.', 'baz']],
+        ['bar', ['.', 'bar'], undefined, [false]],
+        ['baz', ['.', 'baz'], undefined, [false]],
       ],
       '.',
       'bar',
@@ -340,7 +345,14 @@ describe('parser', () => {
   })
 
   it('foo{bar}.bar', function () {
-    const out = ['.', 'foo', '{}', [['bar', ['.', 'bar']]], '.', 'bar']
+    const out = [
+      '.',
+      'foo',
+      '{}',
+      [['bar', ['.', 'bar'], undefined, [false]]],
+      '.',
+      'bar',
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -348,8 +360,8 @@ describe('parser', () => {
     const out = [
       '{}',
       [
-        ['bar', ['.', 'bar']],
-        ['baz', ['.', 'baz']],
+        ['bar', ['.', 'bar'], undefined, [false]],
+        ['baz', ['.', 'baz'], undefined, [false]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -365,8 +377,8 @@ describe('parser', () => {
       [
         '{}',
         [
-          ['id', ['.', 'id']],
-          ['name', ['.', 'name']],
+          ['id', ['.', 'id'], undefined, [false]],
+          ['name', ['.', 'name'], undefined, [false]],
         ],
       ],
     ]
@@ -381,8 +393,8 @@ describe('parser', () => {
       [
         '{}',
         [
-          ['id', ['.', 'id']],
-          ['list[]', ['.', 'list', '[]', []]],
+          ['id', ['.', 'id'], undefined, [false]],
+          ['list[]', ['.', 'list', '[]', []], undefined, [false]],
         ],
       ],
     ]
@@ -395,8 +407,13 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['bar.id', ['.', 'bar', '.', 'id']],
-        ['baz[].value.max', ['.', 'baz', '[]', ['.', 'value', '.', 'max']]],
+        ['bar.id', ['.', 'bar', '.', 'id'], undefined, [false]],
+        [
+          'baz[].value.max',
+          ['.', 'baz', '[]', ['.', 'value', '.', 'max']],
+          undefined,
+          [false],
+        ],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -408,10 +425,10 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['id', ['.', 'id']],
-        ['bar.id', ['.', 'bar', '.', 'id']],
-        ['baz[]', ['.', 'baz', '[]', []]],
-        ['qee[].id', ['.', 'qee', '[]', ['.', 'id']]],
+        ['id', ['.', 'id'], undefined, [false]],
+        ['bar.id', ['.', 'bar', '.', 'id'], undefined, [false]],
+        ['baz[]', ['.', 'baz', '[]', []], undefined, [false]],
+        ['qee[].id', ['.', 'qee', '[]', ['.', 'id']], undefined, [false]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -423,9 +440,9 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['id', ['.', 'id', '.', 'key']],
-        ['foo', ['.', 'foo']],
-        ['bur', ['.', 'bar', '.', 'bur']],
+        ['id', ['.', 'id', '.', 'key'], undefined, [true]],
+        ['foo', ['.', 'foo'], undefined, [false]],
+        ['bur', ['.', 'bar', '.', 'bur'], undefined, [true]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -502,8 +519,8 @@ describe('parser', () => {
           [
             '{}',
             [
-              ['c', ['.', 'c']],
-              ['d', ['.', 'd']],
+              ['c', ['.', 'c'], undefined, [false]],
+              ['d', ['.', 'd'], undefined, [false]],
             ],
           ],
         ],
@@ -522,8 +539,8 @@ describe('parser', () => {
       [
         '{}',
         [
-          ['id', ['.', 'id']],
-          ['name', ['.', 'name']],
+          ['id', ['.', 'id'], undefined, [false]],
+          ['name', ['.', 'name'], undefined, [false]],
         ],
       ],
     ]
@@ -551,7 +568,12 @@ describe('parser', () => {
   })
 
   it('bar[][=]{id,,,,}', function () {
-    const out = ['.', 'bar', '[]', ['[=]', ['{}', [['id', ['.', 'id']]]]]]
+    const out = [
+      '.',
+      'bar',
+      '[]',
+      ['[=]', ['{}', [['id', ['.', 'id'], undefined, [false]]]]],
+    ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
@@ -568,10 +590,12 @@ describe('parser', () => {
             'id',
             '{}',
             [
-              ['value', ['.', 'value']],
-              ['name', ['.', 'name']],
+              ['value', ['.', 'value'], undefined, [false]],
+              ['name', ['.', 'name'], undefined, [false]],
             ],
           ],
+          undefined,
+          [false],
         ],
       ],
     ]
@@ -583,7 +607,14 @@ describe('parser', () => {
       '.',
       'foo',
       '{}',
-      [['id{value}', ['.', 'id', '{}', [['value', ['.', 'value']]]]]],
+      [
+        [
+          'id{value}',
+          ['.', 'id', '{}', [['value', ['.', 'value'], undefined, [false]]]],
+          undefined,
+          [false],
+        ],
+      ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
@@ -594,8 +625,13 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['name', ['.', 'name']],
-        ['id{value}', ['.', 'id', '{}', [['value', ['.', 'value']]]]],
+        ['name', ['.', 'name'], undefined, [false]],
+        [
+          'id{value}',
+          ['.', 'id', '{}', [['value', ['.', 'value'], undefined, [false]]]],
+          undefined,
+          [false],
+        ],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -607,8 +643,13 @@ describe('parser', () => {
       'foo',
       '{}',
       [
-        ['name{value}', ['.', 'name', '{}', [['value', ['.', 'value']]]]],
-        ['id', ['.', 'id']],
+        [
+          'name{value}',
+          ['.', 'name', '{}', [['value', ['.', 'value'], undefined, [false]]]],
+          undefined,
+          [false],
+        ],
+        ['id', ['.', 'id'], undefined, [false]],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -879,7 +920,8 @@ describe('parser', () => {
     const path = `
       foo[]
         .bar( x = 'z'){
-          aa[*] ,
+          zz:
+            aa[*] ,
           bb.5[4] =  15  ,
 
         }
@@ -898,8 +940,8 @@ describe('parser', () => {
         [['.', 'x'], '=', 'z'],
         '{}',
         [
-          ['aa[*]', ['.', 'aa', '[*]', []]],
-          ['bb.5[4]', ['.', 'bb', '.', '5', '1', 4], 15],
+          ['zz', ['.', 'aa', '[*]', []], undefined, [true]],
+          ['bb.5[4]', ['.', 'bb', '.', '5', '1', 4], 15, [false]],
         ],
         '.',
         'aa[*]',

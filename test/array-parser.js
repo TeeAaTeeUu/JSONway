@@ -234,7 +234,7 @@ describe('array-parser', () => {
       '[,]',
       [
         [
-          ['.', 'foo', '{}', [['bar', ['.', 'bar']]]],
+          ['.', 'foo', '{}', [['bar', ['.', 'bar'], undefined, [false]]]],
           ['.', 'baz'],
         ],
       ],
@@ -258,8 +258,8 @@ describe('array-parser', () => {
             'foo',
             '{}',
             [
-              ['bar', ['.', 'bar']],
-              ['gee', ['.', 'gee']],
+              ['bar', ['.', 'bar'], undefined, [false]],
+              ['gee', ['.', 'gee'], undefined, [false]],
             ],
           ],
           ['.', 'baz', '[_,]', [[2, 1], '.', 'id']],

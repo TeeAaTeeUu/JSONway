@@ -29,22 +29,22 @@ describe('object-parser', () => {
   })
 
   it('{foo}', function () {
-    const out = ['{}', [['foo', ['.', 'foo']]]]
+    const out = ['{}', [['foo', ['.', 'foo'], undefined, [false]]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{ foo }', function () {
-    const out = ['{}', [['foo', ['.', 'foo']]]]
+    const out = ['{}', [['foo', ['.', 'foo'], undefined, [false]]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{foo', function () {
-    const out = ['{}', [['foo', ['.', 'foo']]]]
+    const out = ['{}', [['foo', ['.', 'foo'], undefined, [false]]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{foo  ', function () {
-    const out = ['{}', [['foo', ['.', 'foo']]]]
+    const out = ['{}', [['foo', ['.', 'foo'], undefined, [false]]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
@@ -55,6 +55,8 @@ describe('object-parser', () => {
         [
           'foo[].bar[*].baz',
           ['.', 'foo', '[]', ['.', 'bar', '[*]', ['.', 'baz']]],
+          undefined,
+          [false],
         ],
       ],
     ]
@@ -62,17 +64,20 @@ describe('object-parser', () => {
   })
 
   it('{foo: bar[]}', function () {
-    const out = ['{}', [['foo', ['.', 'bar', '[]', []]]]]
+    const out = ['{}', [['foo', ['.', 'bar', '[]', []], undefined, [true]]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{foo = 10}', function () {
-    const out = ['{}', [['foo', ['.', 'foo'], 10]]]
+    const out = ['{}', [['foo', ['.', 'foo'], 10, [false]]]]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
   it('{"foo[{""}]": bar[]}', function () {
-    const out = ['{}', [['foo[{"}]', ['.', 'bar', '[]', []]]]]
+    const out = [
+      '{}',
+      [['foo[{"}]', ['.', 'bar', '[]', []], undefined, [true]]],
+    ]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
@@ -91,6 +96,8 @@ describe('object-parser', () => {
               ['id', ['.', 'id'], false],
             ],
           ],
+          undefined,
+          [true],
         ],
       ],
     ]
@@ -102,9 +109,9 @@ describe('object-parser', () => {
     const out = [
       '{}',
       [
-        ['foo', [true, 'bar']],
-        ['baz', [true, 4]],
-        ['id', ['.', 'id', '[]', []], 'dd'],
+        ['foo', [true, 'bar'], undefined, [true]],
+        ['baz', [true, 4], undefined, [true]],
+        ['id', ['.', 'id', '[]', []], 'dd', [true]],
       ],
     ]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
@@ -114,10 +121,10 @@ describe('object-parser', () => {
     const out = [
       '{}',
       [
-        ['foo', ['.', 'bar', '[]', []], false],
-        ['baz', ['.', 'baz']],
-        ['cc', ['.', 'aa'], 'ee'],
-        ['gee', ['.', 'gee'], 5],
+        ['foo', ['.', 'bar', '[]', []], false, [true]],
+        ['baz', ['.', 'baz'], undefined, [false]],
+        ['cc', ['.', 'aa'], 'ee', [true]],
+        ['gee', ['.', 'gee'], 5, [false]],
       ],
     ]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
@@ -127,9 +134,9 @@ describe('object-parser', () => {
     const out = [
       '{}',
       [
-        ['foo', ['.', 'foo']],
-        ['baz', [true, null]],
-        ['id', ['.', 'id']],
+        ['foo', ['.', 'foo'], undefined, [false]],
+        ['baz', [true, null], undefined, [true]],
+        ['id', ['.', 'id'], undefined, [false]],
       ],
     ]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
@@ -140,8 +147,8 @@ describe('object-parser', () => {
       [
         '{}',
         [
-          ['bar', ['.', 'bar'], 'a'],
-          ['baz', ['.', 'baz'], 5],
+          ['bar', ['.', 'bar'], 'a', [false]],
+          ['baz', ['.', 'baz'], 5, [false]],
         ],
       ],
       16,
@@ -152,8 +159,8 @@ describe('object-parser', () => {
       [
         '{}',
         [
-          ['bb', ['.', 'bb']],
-          ['cc', ['.', 'cc']],
+          ['bb', ['.', 'bb'], undefined, [false]],
+          ['cc', ['.', 'cc'], undefined, [false]],
         ],
       ],
       23,
