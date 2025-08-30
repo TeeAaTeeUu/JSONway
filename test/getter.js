@@ -2,7 +2,7 @@ import { assert } from 'chai'
 import { parse as babelParse } from '@babel/parser'
 
 import JSONway from '../index.js'
-import getter from '../lib/getter.js'
+import { getArrayIndexes } from '../lib/getter.js'
 import { _getJsonAsync, _readFile } from './_utils.js'
 
 describe('getter', () => {
@@ -20,10 +20,7 @@ describe('getter', () => {
     let object = { a: { d: { e: 'x' }, b: { c: 'z' } } }
     assert.deepEqual(JSONway.get(object, this.test.title), 'z')
     assert.isTrue(JSONway.has(object, this.test.title))
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
-      'z',
-      undefined,
-    ])
+    assert.deepEqual(getArrayIndexes(object, this.test.title), ['z', undefined])
 
     object = { a: { b: 'a' } }
     assert.deepEqual(JSONway.get(object, this.test.title), undefined)
@@ -73,7 +70,7 @@ describe('getter', () => {
     const object = [{ a: 'x' }, { b: 'y' }, { a: 'z' }]
     assert.deepEqual(JSONway.get(object, this.test.title), ['x', 'z'])
 
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       ['x', 'z'],
       [[0], [2]],
     ])
@@ -106,7 +103,7 @@ describe('getter', () => {
     const object = [{ a: 'x' }, { b: 'y' }, { a: 'z' }, { a: 'x' }]
     assert.deepEqual(JSONway.get(object, this.test.title), ['x', 'z'])
 
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       ['x', 'z'],
       [[[0], [3]], [2]],
     ])
@@ -115,17 +112,14 @@ describe('getter', () => {
   it('a[-1]', function () {
     let object = { a: [1, 2, 3] }
     assert.deepEqual(JSONway.get(object, this.test.title), 3)
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
-      3,
-      undefined,
-    ])
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [3, undefined])
 
     object = { a: [1, 2, { dd: 'z' }] }
     assert.deepEqual(JSONway.get(object, this.test.title), { dd: 'z' })
 
     object = { a: [] }
     assert.deepEqual(JSONway.get(object, this.test.title), undefined)
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       undefined,
       undefined,
     ])
@@ -134,10 +128,7 @@ describe('getter', () => {
   it('a[-2][-1][-1][].b', function () {
     let object = { a: [1, [[1, 2, [{ b: 'z' }]]], 3] }
     assert.deepEqual(JSONway.get(object, this.test.title), ['z'])
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
-      ['z'],
-      [[0]],
-    ])
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [['z'], [[0]]])
 
     object = { a: [[]] }
     assert.deepEqual(JSONway.get(object, this.test.title), undefined)
@@ -248,7 +239,7 @@ describe('getter', () => {
       ],
     }
     assert.deepEqual(JSONway.get(object, this.test.title), ['z', 'x', 'y', 'g'])
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       ['z', 'x', 'y', 'g'],
       [
         [0, 0],
@@ -398,14 +389,14 @@ describe('getter', () => {
   it(`a(c='y'){b,d}`, function () {
     let object = { a: { b: 'x', c: 'y', d: 'z' } }
     assert.deepEqual(JSONway.get(object, this.test.title), { b: 'x', d: 'z' })
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       { b: 'x', d: 'z' },
       undefined,
     ])
 
     object = { a: { b: 'x', c: 'z' } }
     assert.deepEqual(JSONway.get(object, this.test.title), undefined)
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       undefined,
       undefined,
     ])
@@ -448,7 +439,7 @@ describe('getter', () => {
       ],
     }
     assert.deepEqual(JSONway.get(object, this.test.title), ['bb', 'cc'])
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       ['bb', 'cc'],
       [[1], [2]],
     ])
@@ -481,7 +472,7 @@ describe('getter', () => {
       ],
     }
     assert.deepEqual(JSONway.get(object, this.test.title), [2, 6])
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       [2, 6],
       [[0], [2]],
     ])
@@ -638,7 +629,7 @@ describe('getter', () => {
     const object = { a: [{ b: 'z' }, { c: 'x' }, { b: 'y' }] }
     assert.deepEqual(JSONway.get(object, this.test.title), ['z', 'y'])
 
-    assert.deepEqual(getter.getArrayIndexes(object, this.test.title), [
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
       ['z', 'y'],
       [[0], [2]],
     ])
@@ -682,7 +673,7 @@ describe('getter', () => {
 
     assert.deepEqual(JSONway.get(object, path), out)
     assert.isTrue(JSONway.has(object, path))
-    assert.deepEqual(getter.getArrayIndexes(object, path), [
+    assert.deepEqual(getArrayIndexes(object, path), [
       out,
       [
         [0, 0, 0],
@@ -706,7 +697,7 @@ describe('getter', () => {
     ]
 
     assert.deepEqual(JSONway.get(object, path), out)
-    assert.deepEqual(getter.getArrayIndexes(object, path), [
+    assert.deepEqual(getArrayIndexes(object, path), [
       out,
       [
         [
@@ -750,7 +741,7 @@ describe('getter', () => {
         [1, 1, 0, 1],
       ],
     ]
-    assert.deepEqual(getter.getArrayIndexes(object, path), out)
+    assert.deepEqual(getArrayIndexes(object, path), out)
 
     path = 'bb[].ee[].ff[:].gg[]'
     out = [
@@ -789,7 +780,7 @@ describe('getter', () => {
       ],
     ]
 
-    assert.deepEqual(getter.getArrayIndexes(object, path), out)
+    assert.deepEqual(getArrayIndexes(object, path), out)
   })
 
   it('testing longer format with new lines and spaces', async function () {

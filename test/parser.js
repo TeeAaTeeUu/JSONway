@@ -9,11 +9,21 @@ describe('parser', () => {
   })
 
   it('3', function () {
+    const out = ['.', '3']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('[3]', function () {
     const out = ['1', 3]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('-5', function () {
+    const out = ['.', '-5']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('[-5]', function () {
     const out = ['-1', -5]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
