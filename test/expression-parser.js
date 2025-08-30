@@ -24,6 +24,21 @@ describe('expression-parser', () => {
     assert.deepEqual(JSONway.parseExpression(this.test.title), [out, 5])
   })
 
+  it(`c='y''d'`, function () {
+    const out = [['.', 'c'], '=', "y'd"]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [out, 8])
+  })
+
+  it('c="y"', function () {
+    const out = [['.', 'c'], '=', 'y']
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [out, 5])
+  })
+
+  it('c="y""d"', function () {
+    const out = [['.', 'c'], '=', 'y"d']
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [out, 8])
+  })
+
   it('ab.cd>12', function () {
     const out = [['.', 'ab', '.', 'cd'], '>', 12]
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
@@ -212,6 +227,14 @@ describe('expression-parser', () => {
 
   it('>=12 && foo[0][bar', function () {
     const out = ['>=', 12, '&&', ['.', 'foo', '1', 0, '.', 'bar']]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [
+      out,
+      this.test.title.length,
+    ])
+  })
+
+  it(`'x'?`, function () {
+    const out = ['x', '?']
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
       out,
       this.test.title.length,
