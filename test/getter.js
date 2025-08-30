@@ -678,6 +678,21 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), [4])
   })
 
+  // TODO: add also syntax for getting [0]
+  it(`a[{ b, c: c[*].d, f: c[].f }][](b=c).f`, function () {
+    const object = {
+      a: {
+        b: 'x',
+        c: [
+          { f: 'd1', d: 'z' },
+          { f: 'd2', d: 'x' },
+          { f: 'd3', d: 'y' },
+        ],
+      },
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['d2'])
+  })
+
   it('nested-list-response.json bb[].ee[].hh[].dd', async function () {
     const object = await _getJsonAsync('./fixtures/nested-list-response.json')
     let path = 'bb[:].ee[:].hh[].dd'
