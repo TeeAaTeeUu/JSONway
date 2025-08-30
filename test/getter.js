@@ -214,8 +214,7 @@ describe('getter', () => {
     ])
   })
 
-  // TODO: handle default values
-  it.skip(`a[]{x: b.c = 'z', d[1]=5}`, function () {
+  it(`a[]{x: b.c = 'x', d[1]=5}`, function () {
     const object = {
       a: [
         { b: { c: 'z' }, d: [1, 'x', 2] },
