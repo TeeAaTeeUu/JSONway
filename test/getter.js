@@ -340,6 +340,22 @@ describe('getter', () => {
     assert.isTrue(JSONway.has(object, this.test.title))
   })
 
+  it('bar[:#].foo[].id', function () {
+    const object = {
+      bar: [
+        { foo: [{ id: 'aa' }] },
+        { foo: [{ id: 'bb' }] },
+        { foo: [{ id: 'bb' }] },
+        { foo: [{ id: 'cc' }] },
+      ],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [
+      ['aa'],
+      ['bb'],
+      ['cc'],
+    ])
+  })
+
   it(`a[](c='y').b`, function () {
     const object = {
       a: [
