@@ -92,8 +92,8 @@ describe('object-parser', () => {
             'bar',
             '[{}]',
             [
-              ['baz', ['.', 'baz'], false],
-              ['id', ['.', 'id'], false],
+              ['baz', ['.', 'baz'], undefined, [false, false, [0, 0]]],
+              ['id', ['.', 'id'], undefined, [false, false, [0, 0]]],
             ],
           ],
           undefined,

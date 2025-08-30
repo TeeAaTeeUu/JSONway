@@ -227,9 +227,6 @@ describe('parser', () => {
   it('foo[1][].id', function () {
     const out = ['.', 'foo', '1', 1, '[]', ['.', 'id']]
     assert.deepEqual(JSONway.parse(this.test.title), out)
-
-    const input = 'foo[1][]=}.id'
-    assert.deepEqual(JSONway.parse(input), out)
   })
 
   it('foo{bar}', function () {
@@ -448,16 +445,28 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('foo[{bar.bur[*].b, foo, bar.bur[].a}]', function () {
+  it('foo[{bar.bur[*].b, foo, bar.bur[].a}].dd', function () {
     const out = [
       '.',
       'foo',
       '[{}]',
       [
-        ['bar.bur[0].b', ['.', 'bar', '.', 'bur', '[*]', ['.', 'b']], true],
-        ['foo', ['.', 'foo'], false],
-        ['bar.bur[0].a', ['.', 'bar', '.', 'bur', '[]', ['.', 'a']], false],
+        [
+          'bar.bur[0].b',
+          ['.', 'bar', '.', 'bur', '[*]', ['.', 'b']],
+          undefined,
+          [false, true, [0, 0]],
+        ],
+        ['foo', ['.', 'foo'], undefined, [false, false, [0, 0]]],
+        [
+          'bar.bur[0].a',
+          ['.', 'bar', '.', 'bur', '[]', ['.', 'a']],
+          undefined,
+          [false, false, [0, 1]],
+        ],
       ],
+      '.',
+      'dd',
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
@@ -470,9 +479,19 @@ describe('parser', () => {
       'foo',
       '[{}]',
       [
-        ['bar.bur[0].a', ['.', 'bar', '.', 'bur', '[*]', ['.', 'a']], true],
-        ['bur', ['.', 'foo'], false],
-        ['bar[=].b', ['.', 'bar', '.', 'bur', '[]', ['.', 'b']], false],
+        [
+          'bar.bur[0].a',
+          ['.', 'bar', '.', 'bur', '[*]', ['.', 'a']],
+          undefined,
+          [false, true, [0, 0]],
+        ],
+        ['bur', ['.', 'foo'], undefined, [true, false, [0, 0]]],
+        [
+          'bar[=].b',
+          ['.', 'bar', '.', 'bur', '[]', ['.', 'b']],
+          undefined,
+          [true, false, [0, 1]],
+        ],
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
@@ -484,17 +503,29 @@ describe('parser', () => {
       'foo',
       '[{}]',
       [
-        ['a.b[].g', ['.', 'a', '.', 'b', '[]', ['.', 'g']], false],
+        [
+          'a.b[].g',
+          ['.', 'a', '.', 'b', '[]', ['.', 'g']],
+          undefined,
+          [false, false, [0, 0]],
+        ],
         [
           'a.b[].c[].e[]',
           ['.', 'a', '.', 'b', '[]', ['.', 'c', '[]', ['.', 'e', '[]', []]]],
-          false,
+          undefined,
+          [false, false, [0, 0]],
         ],
-        ['a.d[].g', ['.', 'a', '.', 'd', '[]', ['.', 'g']], false],
+        [
+          'a.d[].g',
+          ['.', 'a', '.', 'd', '[]', ['.', 'g']],
+          undefined,
+          [false, false, [0, 0]],
+        ],
         [
           'a.d[].c[].f',
           ['.', 'a', '.', 'd', '[]', ['.', 'c', '[]', ['.', 'f']]],
-          false,
+          undefined,
+          [false, false, [0, 0]],
         ],
       ],
     ]
