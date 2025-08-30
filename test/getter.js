@@ -14,6 +14,10 @@ describe('getter', () => {
   it('empty', () => {
     const object = 'zz'
     assert.deepEqual(JSONway.get(object, ''), 'zz')
+    assert.isUndefined(JSONway.get(undefined, 'aa.bb'))
+
+    assert.deepEqual(getArrayIndexes(object, ''), ['zz', undefined])
+    assert.isUndefined(getArrayIndexes(undefined, 'aa.bb'))
   })
 
   it('a.b.c', function () {
@@ -123,6 +127,13 @@ describe('getter', () => {
       undefined,
       undefined,
     ])
+
+    object = { a: { b: [] } }
+    assert.deepEqual(JSONway.get(object, this.test.title), undefined)
+    assert.deepEqual(getArrayIndexes(object, this.test.title), [
+      undefined,
+      undefined,
+    ])
   })
 
   it('a[-2][-1][-1][].b', function () {
@@ -157,6 +168,7 @@ describe('getter', () => {
 
     object = { a: 'b' }
     assert.deepEqual(JSONway.get(object, this.test.title), [])
+    assert.isFalse(JSONway.has(object, this.test.title))
 
     object = { a: [1, { dd: 'z' }, 3] }
     assert.deepEqual(JSONway.get(object, this.test.title), [1, { dd: 'z' }, 3])
