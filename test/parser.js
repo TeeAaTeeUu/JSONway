@@ -893,7 +893,7 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it.skip(`a[](c[~&d!][>][2]='y').b`, function () {
+  it(`a[](c[~&d!][>][2]='y').b`, function () {
     let out = [
       '.',
       'a',
