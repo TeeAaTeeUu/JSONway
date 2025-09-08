@@ -717,6 +717,66 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), []) // [11]
   })
 
+  it('a[1:3]', function () {
+    let object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['c', 'd'])
+
+    object = { a: ['b', 'c'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['c'])
+
+    object = { a: ['b'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), [])
+
+    object = { a: [] }
+    assert.deepEqual(JSONway.get(object, this.test.title), [])
+  })
+
+  it('a[:3]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['b', 'c', 'd'])
+  })
+
+  it('a[3:]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['e', 'f'])
+  })
+
+  it('a[:-2]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['b', 'c', 'd'])
+  })
+
+  it('a[-2:]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['e', 'f'])
+  })
+
+  it('a[-3::2]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['d', 'f'])
+  })
+
+  it('a[:]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), [
+      'b',
+      'c',
+      'd',
+      'e',
+      'f',
+    ])
+  })
+
+  it('a[1:3:2]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['c'])
+  })
+
+  it('a[1:4:2]', function () {
+    const object = { a: ['b', 'c', 'd', 'e', 'f'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['c', 'e'])
+  })
+
   it('nested-list-response.json bb[].ee[].hh[].dd', async function () {
     const object = await _getJsonAsync('./fixtures/nested-list-response.json')
     let path = 'bb[:].ee[:].hh[].dd'
