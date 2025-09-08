@@ -145,6 +145,11 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray('[#*]', 1)[0], out)
   })
 
+  it('[**]', function () {
+    const out = ['[**]', true]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it('[3,7]', function () {
     const out = ['[_,]', [[3, 7]]]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
@@ -152,6 +157,11 @@ describe('array-parser', () => {
 
   it('[,3,,7,]', function () {
     const out = ['[_,]', [[3, 7]]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it(`['**']`, function () {
+    const out = ['.', '**']
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 

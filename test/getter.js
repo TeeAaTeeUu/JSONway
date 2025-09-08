@@ -167,7 +167,7 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), [1, 2, 3])
 
     object = { a: 'b' }
-    assert.deepEqual(JSONway.get(object, this.test.title), [])
+    assert.isUndefined(JSONway.get(object, this.test.title))
     assert.isFalse(JSONway.has(object, this.test.title))
 
     object = { a: [1, { dd: 'z' }, 3] }
@@ -691,6 +691,30 @@ describe('getter', () => {
       },
     }
     assert.deepEqual(JSONway.get(object, this.test.title), ['d2'])
+  })
+
+  it('a[**].z', function () {
+    let object = { a: { b: { c: { z: 'foo', x: 'bar' }, d: { z: 'baz' } } } }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['foo', 'baz'])
+
+    object = {
+      a: { b: [{ c: { z: 'foo' } }, 10, null, [false, { z: 'baz' }]] },
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['foo', 'baz'])
+
+    object = { a: 'foo, baz' }
+    assert.isUndefined(JSONway.get(object, this.test.title))
+  })
+
+  it('a.**.z', function () {
+    const object = { a: { b: { c: { z: 'foo', x: 'bar' }, d: { z: 'baz' } } } }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['foo', 'baz'])
+  })
+
+  // TODO: support other deep value types
+  it('a[**](>10)', function () {
+    const object = { a: { b: { c: { z: 5, x: 11 }, d: { z: 'baz' } } } }
+    assert.deepEqual(JSONway.get(object, this.test.title), []) // [11]
   })
 
   it('nested-list-response.json bb[].ee[].hh[].dd', async function () {
