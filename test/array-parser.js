@@ -160,6 +160,11 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it('[null]', function () {
+    const out = ['.', 'null']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it(`['**']`, function () {
     const out = ['.', '**']
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
