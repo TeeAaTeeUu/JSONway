@@ -73,6 +73,47 @@ describe('object-parser', () => {
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
+  it('{foo == 10}', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], 10, [false]]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{foo ?? 10}', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], 10, [false]]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{foo ?| 10}', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], 10, [false]]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{foo | 10}', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], 10, [false]]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{foo || 10}', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], 10, [false]]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{foo |? 10}', function () {
+    const out = ['{}', [['foo', ['.', 'foo'], 10, [false]]]]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it("{aa: foo |? 10, bb: baz == 'bar'}", function () {
+    const out = [
+      '{}',
+      [
+        ['aa', ['.', 'foo'], 10, [true]],
+        ['bb', ['.', 'baz'], 'bar', [true]],
+      ],
+    ]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
   it('{"foo[{""}]": bar[]}', function () {
     const out = [
       '{}',
