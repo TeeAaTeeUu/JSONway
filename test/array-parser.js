@@ -205,6 +205,31 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it('[|>0]', function () {
+    const out = ['[]', [], [true, ['1', 0]]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[=>size]', function () {
+    const out = ['[]', [], [false, ['.', 'size']]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[ => max]', function () {
+    const out = ['[]', [], [false, ['.', 'max']]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[** |> [:2]]', function () {
+    const out = ['[**]', [], [true, ['[_:]', [[null, 2]]]]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[# => size]', function () {
+    const out = ['[#]', [], [false, ['.', 'size']]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it(`['**']`, function () {
     const out = ['.', '**']
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)

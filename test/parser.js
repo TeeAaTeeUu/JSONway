@@ -741,6 +741,22 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
+  it('a[** |> 0].z', function () {
+    const out = ['.', 'a', '[**]', ['.', 'z'], [true, ['1', 0]]]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('a[# |> [:2]].z.y', function () {
+    const out = [
+      '.',
+      'a',
+      '[#]',
+      ['.', 'z', '.', 'y'],
+      [true, ['[_:]', [[null, 2]]]],
+    ]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
   it(`a(c='y').b`, function () {
     const out = ['.', 'a', '()', [['.', 'c'], '=', 'y'], '.', 'b']
     assert.deepEqual(JSONway.parse(this.test.title), out)
