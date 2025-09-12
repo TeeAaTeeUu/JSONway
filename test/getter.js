@@ -756,6 +756,15 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), ['foo'])
   })
 
+  it('a[|> sort.reverse]', function () {
+    const object = { a: [5, 8, 2, 6, 8, -4, -2, 11, 15] }
+
+    assert.deepEqual(
+      JSONway.get(object, this.test.title),
+      [15, 11, 8, 8, 6, 5, 2, -2, -4],
+    )
+  })
+
   it('a[** |> [1:]].z', function () {
     const object = { a: { b: { c: { z: 'foo', x: 'bar' }, d: { z: 'baz' } } } }
     assert.deepEqual(JSONway.get(object, this.test.title), ['baz'])
