@@ -220,6 +220,16 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it('[ => MAX]', function () {
+    const out = ['[]', [], [false, ['.', 'max']]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[ => sort.max]', function () {
+    const out = ['[]', [], [false, ['.', 'sort', '.', 'max']]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it('[** |> [:2]]', function () {
     const out = ['[**]', [], [true, ['[_:]', [[null, 2]]]]]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
