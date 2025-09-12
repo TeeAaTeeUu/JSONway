@@ -130,12 +130,12 @@ describe('parser', () => {
   })
 
   it('foo[**].bar', function () {
-    const out = ['.', 'foo', '[**]', true, '.', 'bar']
+    const out = ['.', 'foo', '[**]', ['.', 'bar']]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
   it('foo.**.bar', function () {
-    const out = ['.', 'foo', '[**]', true, '.', 'bar']
+    const out = ['.', 'foo', '[**]', ['.', 'bar']]
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
