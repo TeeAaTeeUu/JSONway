@@ -1,14 +1,22 @@
 import { assert } from 'chai'
 
-import { processFunction } from '../lib/function-processor.js'
-import JSONway from '../index.js'
+import { parseFunction, processFunction } from '../lib/function-processor.js'
 
 describe('function-processor', () => {
   it('size', function () {
     const result = [4, 2, 7, 3]
     const output = 4
 
-    const pipe = JSONway.parse(this.test.title)
+    let pipe = parseFunction(this.test.title)
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    pipe = parseFunction('len')
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    pipe = parseFunction('length')
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    pipe = parseFunction('count')
     assert.deepEqual(processFunction(result, pipe), output)
   })
 
@@ -16,7 +24,7 @@ describe('function-processor', () => {
     const result = [4, 2, 7, 3]
     const output = 7
 
-    const pipe = JSONway.parse(this.test.title)
+    const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
   })
 
@@ -24,7 +32,7 @@ describe('function-processor', () => {
     const result = [4, 2, 7, 3]
     const output = 2
 
-    const pipe = JSONway.parse(this.test.title)
+    const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
   })
 
@@ -32,7 +40,7 @@ describe('function-processor', () => {
     let result = 15.7
     let output = 15
 
-    const pipe = JSONway.parse(this.test.title)
+    const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
 
     result = -15.7
@@ -44,7 +52,7 @@ describe('function-processor', () => {
     let result = 15.7
     let output = 16
 
-    const pipe = JSONway.parse(this.test.title)
+    const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
 
     result = -15.7
@@ -56,7 +64,7 @@ describe('function-processor', () => {
     let result = 15.7
     let output = 15
 
-    const pipe = JSONway.parse(this.test.title)
+    const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
 
     result = -15.7
@@ -68,7 +76,7 @@ describe('function-processor', () => {
     let result = 15.7
     let output = 16
 
-    const pipe = JSONway.parse(this.test.title)
+    const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
 
     result = 15.4
