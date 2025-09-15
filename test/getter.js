@@ -418,6 +418,36 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), undefined)
   })
 
+  it('(aa ?| bb |? cc ?? 15)', function () {
+    let object = { bb: 'x' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 'x')
+
+    object = { aa: 34, bb: 'x' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 34)
+
+    object = { aa: undefined }
+    assert.deepEqual(JSONway.get(object, this.test.title), 15)
+  })
+
+  it('( aa ?| bb )', function () {
+    let object = { bb: 'x' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 'x')
+
+    object = { aa: 34, bb: 'x' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 34)
+
+    object = {}
+    assert.isUndefined(JSONway.get(object, this.test.title))
+  })
+
+  it.skip('[aa, bb][](?)[0]', function () {
+    let object = { aa: false, bb: 'x' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 'x')
+
+    object = { aa: 34, b: 'x' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 34)
+  })
+
   it(`a(c='y'){b,d}`, function () {
     let object = { a: { b: 'x', c: 'y', d: 'z' } }
     assert.deepEqual(JSONway.get(object, this.test.title), { b: 'x', d: 'z' })

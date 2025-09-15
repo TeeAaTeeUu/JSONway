@@ -593,6 +593,51 @@ describe('expression-parser', () => {
     ])
   })
 
+  it('aa || bb || 15', function () {
+    const out = [['.', 'aa'], '||', ['.', 'bb'], '||', 15]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [
+      out,
+      this.test.title.length,
+    ])
+  })
+
+  it('aa ?| bb |? cc ?? 15', function () {
+    const out = [
+      '?|',
+      [['.', 'aa'], '?|', ['.', 'bb'], '?|', ['.', 'cc'], '?|', 15],
+    ]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [
+      out,
+      this.test.title.length,
+    ])
+  })
+
+  it(`(
+    aa ?|
+    bb
+    |? cc ??
+    15
+    )`, function () {
+    const out = [
+      '?|',
+      [['.', 'aa'], '?|', ['.', 'bb'], '?|', ['.', 'cc'], '?|', 15],
+    ]
+    assert.deepEqual(JSONway.parseExpression(this.test.title, 1), [
+      out,
+      this.test.title.length - 1,
+    ])
+  })
+
+  // TODO: find a better way to handle incorrect operators and spacing
+  it('5 # 15', function () {
+    const out = [['.', '5#15']]
+    console.log(JSONway.parseExpression(this.test.title)[0])
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [
+      out,
+      this.test.title.length,
+    ])
+  })
+
   it.skip(`c[~&d!][>][2]='y'`, function () {
     const out = [['c', '~&d!', '>'], 2, '=', 'y']
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
