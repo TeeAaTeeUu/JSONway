@@ -440,12 +440,12 @@ describe('getter', () => {
     assert.isUndefined(JSONway.get(object, this.test.title))
   })
 
-  it.skip('[aa, bb][](?)[0]', function () {
+  it('[aa, bb](?)', function () {
     let object = { aa: false, bb: 'x' }
-    assert.deepEqual(JSONway.get(object, this.test.title), 'x')
+    assert.deepEqual(JSONway.get(object, this.test.title), ['x'])
 
-    object = { aa: 34, b: 'x' }
-    assert.deepEqual(JSONway.get(object, this.test.title), 34)
+    object = { aa: 34, bb: 'x', cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), [34, 'x'])
   })
 
   it(`a(c='y'){b,d}`, function () {
@@ -713,8 +713,7 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), [4])
   })
 
-  // TODO: add also syntax for getting [0]
-  it(`a[{ b, c: c[*].d, f: c[].f }][](b=c).f`, function () {
+  it(`a[{ b, c: c[*].d, f: c[].f }](b=c).f`, function () {
     const object = {
       a: {
         b: 'x',
@@ -726,6 +725,23 @@ describe('getter', () => {
       },
     }
     assert.deepEqual(JSONway.get(object, this.test.title), ['d2'])
+  })
+
+  it(`a[{ b, c: c[*].d, f: c[].f }].0`, function () {
+    const object = {
+      a: {
+        b: 'x',
+        c: [
+          { f: 'd1', d: 'z' },
+          { f: 'd2', d: 'x' },
+          { f: 'd3', d: 'y' },
+        ],
+      },
+    }
+
+    const out = { c: 'z', b: 'x', f: 'd1' }
+
+    assert.deepEqual(JSONway.get(object, this.test.title), out)
   })
 
   it('a[**].z', function () {
@@ -849,6 +865,16 @@ describe('getter', () => {
   it('a[1:4:2]', function () {
     const object = { a: ['b', 'c', 'd', 'e', 'f'] }
     assert.deepEqual(JSONway.get(object, this.test.title), ['c', 'e'])
+  })
+
+  it('a[0,2,[2]]', function () {
+    const object = { a: [true, { b: 'x' }, 'y'] }
+    assert.deepEqual(JSONway.get(object, this.test.title), [0, 2, 'y'])
+  })
+
+  it('a[0,2,a,[2]].b', function () {
+    const object = { a: [true, { b: 'x' }, { b: 'y' }] }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['y'])
   })
 
   it('nested-list-response.json bb[].ee[].hh[].dd', async function () {

@@ -589,8 +589,6 @@ describe('expression-processor', () => {
   it('aa ?| bb |? cc ?? 15', function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0][1]
 
-    console.log(parsedExpression)
-
     let object = { bb: 'x' }
     assert.deepEqual(
       JSONway.calculateExpression(parsedExpression, null, object),

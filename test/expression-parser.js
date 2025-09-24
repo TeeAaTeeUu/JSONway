@@ -631,7 +631,6 @@ describe('expression-parser', () => {
   // TODO: find a better way to handle incorrect operators and spacing
   it('5 # 15', function () {
     const out = [['.', '5#15']]
-    console.log(JSONway.parseExpression(this.test.title)[0])
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
       out,
       this.test.title.length,
