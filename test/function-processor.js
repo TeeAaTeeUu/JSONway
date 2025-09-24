@@ -118,4 +118,28 @@ describe('function-processor', () => {
     const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
   })
+
+  it('split._', function () {
+    const result = 'a_b_c_d_e_f_g_h'
+    const output = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
+    const pipe = parseFunction(this.test.title)
+    assert.deepEqual(processFunction(result, pipe), output)
+  })
+
+  it('split._.5', function () {
+    const result = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    let output = 'f'
+
+    let pipe = parseFunction(this.test.title)
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    pipe = parseFunction('split._.-5')
+    output = 'd'
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    pipe = parseFunction('split._.()')
+    output = 'd'
+    assert.deepEqual(processFunction(result, pipe), result)
+  })
 })
