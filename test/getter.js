@@ -826,6 +826,11 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), 2)
   })
 
+  it('a.b |> split._.5', function () {
+    const object = { a: { b: 'a_b_c_d_e_f_g_h' } }
+    assert.deepEqual(JSONway.get(object, this.test.title), 'f')
+  })
+
   it('a[3:]', function () {
     const object = { a: ['b', 'c', 'd', 'e', 'f'] }
     assert.deepEqual(JSONway.get(object, this.test.title), ['e', 'f'])
