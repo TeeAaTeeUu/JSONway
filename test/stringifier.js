@@ -68,7 +68,7 @@ describe('stringify', () => {
   })
 
   it(`fo'o`, function () {
-    const out = `"fo''o"`
+    const out = `'fo''o'`
     assert.deepEqual(JSONway.stringify(this.test.title), out)
   })
 
@@ -77,25 +77,25 @@ describe('stringify', () => {
     assert.deepEqual(JSONway.stringify(this.test.title), out)
 
     let input = '\tfoo'
-    out = '"\tfoo"'
+    out = `'\tfoo'`
     assert.deepEqual(JSONway.stringify(input), out)
 
     input = 'foo\t'
-    out = '"foo\t"'
+    out = `'foo\t'`
     assert.deepEqual(JSONway.stringify(input), out)
   })
 
   it('fo\ro', function () {
-    const out = '"fo\ro"'
+    const out = `'fo\ro'`
     assert.deepEqual(JSONway.stringify(this.test.title), out)
   })
 
   it(`fo
 
     o`, function () {
-    const out = `"fo
+    const out = `'fo
 
-    o"`
+    o'`
     assert.deepEqual(JSONway.stringify(this.test.title), out)
   })
 

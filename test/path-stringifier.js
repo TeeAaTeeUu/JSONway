@@ -10,58 +10,31 @@ describe('path-stringifier', () => {
     assert.deepEqual(stringifyPath(input), input)
   })
 
-  it('ab.cd', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
+  const expressions = [
+    'ab.cd',
+    'ab[0]',
+    'ab[c.d]',
+    `ab['fo''o']`,
+    `foo.bar[1].baz['[qee[].0]']['o][]]']`,
+    'foo.bar[]',
+    'foo.bar[=]',
+    'foo.bar[*]',
+    'foo.bar[5,3,7].baz.id',
+    'bb[#].ee[].hh[].dd',
+    'foo.bar[0].baz[][].id',
+    `a(c = 'y').b`,
+    'foo.bar[]{id,name}',
+    'foo.bar[]{id: key, name}',
+    'foo.bar[]{id: id.key = x, name = 10}',
+  ]
 
-  it('ab[0]', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
+  /* eslint-disable mocha/no-setup-in-describe */
+  expressions.forEach(expression => {
+    //
+    it(expression, function () {
+      const input = JSONway.parse(this.test.title)
+      assert.deepEqual(stringifyPath(input), this.test.title)
+    })
   })
-
-  it(`foo.bar[1].baz['[qee[].0]']['o][]]']`, function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it('foo.bar[]', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it('foo.bar[=]', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it('foo.bar[*]', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it('foo.bar[5,3,7].baz.id', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it('bb[#].ee[].hh[].dd', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it('foo.bar[0].baz[][].id', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it(`a(c = 'y').b`, function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
-
-  it('foo.bar[]{id,name}', function () {
-    const input = JSONway.parse(this.test.title)
-    assert.deepEqual(stringifyPath(input), this.test.title)
-  })
+  /* eslint-enable mocha/no-setup-in-describe */
 })

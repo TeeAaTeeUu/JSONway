@@ -30,7 +30,7 @@ describe('analyzer', () => {
   })
 
   it('{"a":"b","c":{"d":{"e":"f","g,":{"h":"i"}},"j":{"k":"l"},"x":"y"},"m":-1}', function () {
-    const out = ['a', `c.d['g,'].h`, 'c.d.e', 'c.j.k', 'c.x', 'm']
+    const out = ['a', 'c.d.e', `c.d['g,'].h`, 'c.j.k', 'c.x', 'm']
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
@@ -59,8 +59,8 @@ describe('analyzer', () => {
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
-  it('{"a":"b","c":null}', function () {
-    const out = ['a', 'c']
+  it(`{"a":"b","c":null,"d.f":10,"f'h":5}`, function () {
+    const out = ['a', 'c', '[d.f]', `['f''h']`]
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
