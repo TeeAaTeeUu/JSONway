@@ -7,9 +7,11 @@ describe('expression-processor', () => {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0]
 
     let input = { ab: { cd: 'foo' } }
+    assert.isTrue(JSONway.calculateExpression(this.test.title, null, input))
     assert.isTrue(JSONway.calculateExpression(parsedExpression, null, input))
 
     input = { ab: { cd: 'bar' } }
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
     assert.isFalse(JSONway.calculateExpression(parsedExpression, null, input))
 
     input = { ab: { ce: 'foo' } }
@@ -87,6 +89,30 @@ describe('expression-processor', () => {
   it(`7 + 10 - 5 + 1 + (-5 - 3 + 1) + 3`, function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0]
     assert.deepEqual(JSONway.calculateExpression(parsedExpression, null, {}), 9)
+  })
+
+  it('true && true', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, {}))
+  })
+
+  it('false || true', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, {}))
+  })
+
+  it('false && true', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, {}))
+  })
+
+  it('true && false', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, {}))
   })
 
   it(`ab.cd='foo'&&x>10`, function () {
@@ -261,10 +287,7 @@ describe('expression-processor', () => {
     )
 
     input = { ab: 'foo' }
-    assert.deepEqual(
-      JSONway.calculateExpression(parsedExpression, null, input),
-      'foo2',
-    )
+    assert.equal(JSONway.calculateExpression(parsedExpression, null, input), 2)
   })
 
   it('ab - 2', function () {
@@ -279,7 +302,23 @@ describe('expression-processor', () => {
     input = { ab: 'foo' }
     assert.deepEqual(
       JSONway.calculateExpression(parsedExpression, null, input),
-      null,
+      -2,
+    )
+  })
+
+  it('2 - ab', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let input = { ab: 5 }
+    assert.deepEqual(
+      JSONway.calculateExpression(parsedExpression, null, input),
+      -3,
+    )
+
+    input = { ab: 'foo' }
+    assert.deepEqual(
+      JSONway.calculateExpression(parsedExpression, null, input),
+      2,
     )
   })
 
@@ -540,10 +579,16 @@ describe('expression-processor', () => {
     )
   })
 
-  it(`7 = [1,2,7,3,4]`, function () {
+  it('5 + 2 = [1,7,3,4]', function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0]
 
     assert.isTrue(JSONway.calculateExpression(parsedExpression, null, {}))
+  })
+
+  it('5 + 1 = [1,7,3,4]', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, {}))
   })
 
   it(`5 + [1,2,3,4]`, function () {
@@ -573,7 +618,10 @@ describe('expression-processor', () => {
   it(`20 - [1,2,3,true,4]`, function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0]
 
-    assert.deepEqual(JSONway.calculateExpression(parsedExpression, null, {}), 9)
+    assert.deepEqual(
+      JSONway.calculateExpression(parsedExpression, null, {}),
+      10,
+    )
   })
 
   it(`10 + [1,2,ab.cd,null,true,4]`, function () {
@@ -582,13 +630,13 @@ describe('expression-processor', () => {
     let input = { ab: { cd: 10 } }
     assert.deepEqual(
       JSONway.calculateExpression(parsedExpression, null, input),
-      28,
+      27,
     )
 
     input = { ab: { ef: 10 } }
     assert.deepEqual(
       JSONway.calculateExpression(parsedExpression, null, input),
-      18,
+      17,
     )
   })
 
@@ -611,6 +659,26 @@ describe('expression-processor', () => {
     assert.deepEqual(
       JSONway.calculateExpression(parsedExpression, null, object),
       15,
+    )
+  })
+
+  it('20 - 20 || 10', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let object = { aa: false }
+    assert.deepEqual(
+      JSONway.calculateExpression(parsedExpression, null, object),
+      10,
+    )
+  })
+
+  it('20 - 20 ?| 10', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    let object = { aa: false }
+    assert.deepEqual(
+      JSONway.calculateExpression(parsedExpression, null, object),
+      0,
     )
   })
 
@@ -643,6 +711,23 @@ describe('expression-processor', () => {
 
     values = 15
     assert.isFalse(JSONway.calculateExpression(parsedExpression, values, {}))
+  })
+
+  it('> $, != 22', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    const values = 20
+    let data = 15
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, values, data))
+
+    data = 20
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, values, data))
+
+    data = 22
+    assert.isFalse(JSONway.calculateExpression(parsedExpression, values, data))
+
+    data = 25
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, values, data))
   })
 
   it(`20 <= $`, function () {
