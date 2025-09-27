@@ -23,6 +23,10 @@ describe('path-analyzer', () => {
     assert.deepEqual(JSONway.pathDepth(this.test.title), 1)
   })
 
+  it('foo.bar[1,3].baz', function () {
+    assert.deepEqual(JSONway.pathDepth(this.test.title), 1)
+  })
+
   it(`foo['bar'][].baz`, function () {
     assert.deepEqual(JSONway.pathDepth(this.test.title), 1)
   })
@@ -32,6 +36,10 @@ describe('path-analyzer', () => {
   })
 
   it(`foo.bar[:].baz[].gee`, function () {
+    assert.deepEqual(JSONway.pathDepth(this.test.title), 2)
+  })
+
+  it(`foo.bar[:#].baz[].gee[]`, function () {
     assert.deepEqual(JSONway.pathDepth(this.test.title), 2)
   })
 
