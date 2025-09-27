@@ -4,8 +4,8 @@ import { parseFunction, processFunction } from '../lib/function-processor.js'
 
 describe('function-processor', () => {
   it('size', function () {
-    const result = [4, 2, 7, 3]
-    const output = 4
+    let result = [4, 2, 7, 3]
+    let output = 4
 
     let pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
@@ -18,22 +18,40 @@ describe('function-processor', () => {
 
     pipe = parseFunction('count')
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 10
+    assert.deepEqual(processFunction(result, pipe), result)
+
+    result = { b: 10 }
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('max', function () {
-    const result = [4, 2, 7, 3]
-    const output = 7
+    let result = [4, 2, 7, 3]
+    let output = 7
 
     const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 10
+    assert.deepEqual(processFunction(result, pipe), result)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('min', function () {
-    const result = [4, 2, 7, 3]
-    const output = 2
+    let result = [4, 2, 7, 3]
+    let output = 2
 
     const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 10
+    assert.deepEqual(processFunction(result, pipe), result)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('floor', function () {
@@ -46,6 +64,9 @@ describe('function-processor', () => {
     result = -15.7
     output = -16
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('ceil', function () {
@@ -58,6 +79,9 @@ describe('function-processor', () => {
     result = -15.7
     output = -15
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('trunc', function () {
@@ -70,6 +94,9 @@ describe('function-processor', () => {
     result = -15.7
     output = -15
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('round', function () {
@@ -90,10 +117,13 @@ describe('function-processor', () => {
     result = -15.3
     output = -15
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('avg', function () {
-    const result = [4, 2, 7, 3]
+    let result = [4, 2, 7, 3]
     const output = 4
 
     let pipe = parseFunction(this.test.title)
@@ -101,22 +131,35 @@ describe('function-processor', () => {
 
     pipe = parseFunction('average')
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('sort', function () {
-    const result = [4, 2, 'bc', 7, 'ab', 3, true, false, [], [3], { a: 5 }, {}]
-    const output = [[], 2, 3, [3], 4, 7, { a: 5 }, {}, 'ab', 'bc', false, true]
+    let result = [4, 2, 'bc', 7, 'ab', 3, true, false, [], [3], { a: 5 }, {}]
+    let output = [[], 2, 3, [3], 4, 7, { a: 5 }, {}, 'ab', 'bc', false, true]
 
     const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = ['cd', 'ab', 'de', 'cd']
+    output = ['ab', 'cd', 'cd', 'de']
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('reverse', function () {
-    const result = [4, 2, 'bc', 7, 'ab', 3, true, false, [], [3], { a: 5 }, {}]
+    let result = [4, 2, 'bc', 7, 'ab', 3, true, false, [], [3], { a: 5 }, {}]
     const output = [{}, { a: 5 }, [3], [], false, true, 3, 'ab', 7, 'bc', 2, 4]
 
     const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('split._', function () {
@@ -125,6 +168,13 @@ describe('function-processor', () => {
 
     const pipe = parseFunction(this.test.title)
     assert.deepEqual(processFunction(result, pipe), output)
+  })
+
+  it('split.0', function () {
+    const result = 'a_b_c_d_e_f_g_h'
+
+    const pipe = parseFunction(this.test.title)
+    assert.deepEqual(processFunction(result, pipe), result)
   })
 
   it('split._.5', function () {
