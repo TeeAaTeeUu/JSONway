@@ -1052,6 +1052,31 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
+  it('a[1234567890123456]', function () {
+    const out = ['.', 'a', '1', 1234567890123456]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('a[12345678901234567]', function () {
+    const out = ['.', 'a', '.', '12345678901234567']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('a.1234567890123456', function () {
+    const out = ['.', 'a', '1', 1234567890123456]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('a.12345678901234567', function () {
+    const out = ['.', 'a', '.', '12345678901234567']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
+  it('a.undefined', function () {
+    const out = ['.', 'a', '.', 'undefined']
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
   it('handles new lines and spaces', function () {
     const path = `
       foo[]

@@ -61,6 +61,12 @@ describe('expression-processor', () => {
     assert.isFalse(JSONway.calculateExpression(parsedExpression, null, {}))
   })
 
+  it('15 - 10 -', function () {
+    const parsedExpression = JSONway.parseExpression(this.test.title)[0]
+
+    assert.equal(JSONway.calculateExpression(parsedExpression, null, {}), 5)
+  })
+
   it(`7 + 10`, function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)[0]
 

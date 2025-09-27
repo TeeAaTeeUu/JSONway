@@ -265,6 +265,14 @@ describe('expression-parser', () => {
     ])
   })
 
+  it('ab - 10 -', function () {
+    const out = [['.', 'ab'], '-', 10, '-']
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [
+      out,
+      this.test.title.length,
+    ])
+  })
+
   it('ab.cd=12 && cd[ab] != 13', function () {
     const out = [
       ['.', 'ab', '.', 'cd'],
@@ -312,6 +320,28 @@ describe('expression-parser', () => {
 
   it('7 + 10 - 2 > (12 + 5)', function () {
     const out = [7, '+', 10, '-', 2, '>', '(', [12, '+', 5]]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), [
+      out,
+      this.test.title.length,
+    ])
+  })
+
+  it('7 + 10 - 5 + 1 + (-5 - 3 + 1) + 3', function () {
+    const out = [
+      7,
+      '+',
+      10,
+      '-',
+      5,
+      '+',
+      1,
+      '+',
+      '(',
+      [-5, '-', 3, '+', 1],
+      '+',
+      3,
+    ]
+
     assert.deepEqual(JSONway.parseExpression(this.test.title), [
       out,
       this.test.title.length,
