@@ -475,6 +475,33 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), [34, 'x'])
   })
 
+  it('[aa, bb][|0](?)', function () {
+    let object = { aa: false, bb: 'x' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 'x')
+
+    object = { aa: 34, bb: 'x', cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 34)
+
+    object = { aa: 0, bb: 'x', cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 'x')
+  })
+
+  it('[aa, bb, cc](>=10) |> round', function () {
+    let object = { aa: 0, bb: 10.4, cc: 20.7 }
+    assert.deepEqual(JSONway.get(object, this.test.title), [10, 21])
+
+    object = { aa: 34.1, bb: 'x', cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), [34])
+  })
+
+  it('[aa, bb, cc](i>=10).i |> round', function () {
+    let object = { aa: { i: 0 }, bb: { i: 10.4 }, cc: { i: 20.7 } }
+    assert.deepEqual(JSONway.get(object, this.test.title), [10, 21])
+
+    object = { aa: { i: 34.1 }, bb: { i: 'x' }, cc: { i: 'y' } }
+    assert.deepEqual(JSONway.get(object, this.test.title), [34])
+  })
+
   it(`a(c='y'){b,d}`, function () {
     let object = { a: { b: 'x', c: 'y', d: 'z' } }
     assert.deepEqual(JSONway.get(object, this.test.title), { b: 'x', d: 'z' })
