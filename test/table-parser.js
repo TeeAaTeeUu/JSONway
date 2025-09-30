@@ -12,6 +12,15 @@ describe('table-parser', () => {
     assert.deepEqual(parseTable(this.test.title), out)
   })
 
+  it('{b,a,a}', function () {
+    const out = [
+      ['a', ['.', 'a'], undefined, [false, false, [0, 0]]],
+      ['a', ['.', 'a'], undefined, [false, false, [0, 0]]],
+      ['b', ['.', 'b'], undefined, [false, false, [0, 0]]],
+    ]
+    assert.deepEqual(parseTable(this.test.title), out)
+  })
+
   it(`{x: b , a = null , z :c = 'test'}`, function () {
     const out = [
       ['a', ['.', 'a'], null, [false, false, [0, 0]]],
@@ -93,6 +102,56 @@ describe('table-parser', () => {
       bb[*].dd,
       bb[].ee[*].dd,
       bb[].ee[].hh[*].dd,
+      myKey: bb[].ee[].hh[].ii.dd,
+      aa,
+      bb[].cc,
+    }`, function () {
+    const out = [
+      [
+        'bb[0].dd',
+        ['.', 'bb', '[*]', ['.', 'dd']],
+        undefined,
+        [false, true, [0, 0]],
+      ],
+      [
+        'bb[0].ee[0].dd',
+        ['.', 'bb', '[]', ['.', 'ee', '[*]', ['.', 'dd']]],
+        undefined,
+        [false, true, [0, 1]],
+      ],
+      [
+        'bb[0].ee[0].hh[0].dd',
+        ['.', 'bb', '[]', ['.', 'ee', '[]', ['.', 'hh', '[*]', ['.', 'dd']]]],
+        undefined,
+        [false, true, [1, 2]],
+      ],
+      ['aa', ['.', 'aa'], undefined, [false, false, [0, 0]]],
+      [
+        'bb[0].cc',
+        ['.', 'bb', '[]', ['.', 'cc']],
+        undefined,
+        [false, false, [0, 1]],
+      ],
+      [
+        'myKey',
+        [
+          '.',
+          'bb',
+          '[]',
+          ['.', 'ee', '[]', ['.', 'hh', '[]', ['.', 'ii', '.', 'dd']]],
+        ],
+        undefined,
+        [true, false, [2, 3]],
+      ],
+    ]
+    assert.deepEqual(parseTable(this.test.title), out)
+  })
+
+  // TODO: support expressions on TABLE
+  it.skip(`{
+      bb[*].dd,
+      bb[].ee[*].dd,
+      bb[].ee[].hh[*].dd(dd != ['dd3', 'dd16', 'dd19']).dd,
       myKey: bb[].ee[].hh[].ii.dd,
       aa,
       bb[].cc,

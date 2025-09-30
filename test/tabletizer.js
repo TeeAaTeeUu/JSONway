@@ -75,6 +75,36 @@ describe('tabletizer', () => {
     assert.deepEqual(JSONway.get(object, path), out)
   })
 
+  it.skip('nested-list-response.json lists with filters', () => {
+    const object = nestedListResponse
+    const path = `[{
+      bb[*].dd,
+      bb[].ee[*].dd,
+      bb[].ee[].hh[].ii.dd,
+      aa,
+      bb[].ee[].hh[](dd != ['dd3', 'dd16', 'dd19']).dd,
+      bb[].cc,
+    }]`
+
+    // prettier-ignore
+    const out = _arrayOfObjects([
+      [
+        'bb[0].dd',
+        'bb[0].ee[0].dd',
+        `bb[0].ee[0].hh[](dd != ['dd3', 'dd16', 'dd19']).dd`,
+        'bb[0].ee[0].hh[].ii.dd',
+        'aa',
+        'bb[0].cc',
+      ],
+      ['dd1', 'dd2', ['dd3', 'dd5'], ['dd4', 'dd6'], 'aa1', 'cc1'],
+      ['dd1', 'dd7', ['dd8', 'dd10'], ['dd9', 'dd11'], 'aa1', 'cc1'],
+      ['dd12', 'dd13', ['dd14', 'dd16'], ['dd15', 'dd17'], 'aa1', 'cc12'],
+      ['dd12', 'dd18', ['dd19', 'dd21'], ['dd20', 'dd22'], 'aa1', 'cc12'],
+    ])
+
+    assert.deepEqual(JSONway.get(object, path), out)
+  })
+
   it('nested-list-response.json deep group, shallow fields', () => {
     const object = nestedListResponse
     const path = `[{
@@ -297,6 +327,27 @@ describe('tabletizer', () => {
     out[0]['bb[#].ee[0].dd'] = 'dd7'
     out[0]['bb[0].ee[].hh[].ii.dd'].push('dd9', 'dd11')
     out.splice(1, 1)
+
+    assert.deepEqual(JSONway.get(object, path), out)
+  })
+
+  it('nested-list-response.json unflat expand grouping values', () => {
+    const object = JSON.parse(JSON.stringify(nestedListResponse))
+
+    const path = `[{
+      bb[*].dd,
+      bb[:].ee[*].dd,
+      bb[].ee[].hh[].ii.dd,
+      aa,
+      bb[].cc,
+    }]`
+
+    // prettier-ignore
+    const out = _arrayOfObjects([
+      ['bb[0].dd', 'bb[:].ee[0].dd', 'bb[0].ee[].hh[].ii.dd', 'aa', 'bb[0].cc'],
+      ['dd1', ['dd2', 'dd7'], ['dd4', 'dd6', 'dd9', 'dd11'], 'aa1', 'cc1'],
+      ['dd12', ['dd13', 'dd18'], ['dd15', 'dd17', 'dd20', 'dd22'], 'aa1', 'cc12'],
+    ])
 
     assert.deepEqual(JSONway.get(object, path), out)
   })

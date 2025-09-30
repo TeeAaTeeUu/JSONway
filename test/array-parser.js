@@ -326,6 +326,28 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it('[{b,a,c]', function () {
+    const out = ['.', '{b,a,c']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[{b,a,c', function () {
+    const out = ['.', '{b,a,c']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[{b,a,c}]', function () {
+    const out = [
+      '[{}]',
+      [
+        ['a', ['.', 'a'], undefined, [false, false, [0, 0]]],
+        ['b', ['.', 'b'], undefined, [false, false, [0, 0]]],
+        ['c', ['.', 'c'], undefined, [false, false, [0, 0]]],
+      ],
+    ]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it('[foo[3,5].bar, baz]', function () {
     const out = [
       '[,]',
