@@ -147,11 +147,10 @@ describe('table-parser', () => {
     assert.deepEqual(parseTable(this.test.title), out)
   })
 
-  // TODO: support expressions on TABLE
-  it.skip(`{
+  it(`{
       bb[*].dd,
       bb[].ee[*].dd,
-      bb[].ee[].hh[*].dd(dd != ['dd3', 'dd16', 'dd19']).dd,
+      bb[].ee[].hh[*](dd != ['dd3', 'dd16', 'dd19']).dd,
       myKey: bb[].ee[].hh[].ii.dd,
       aa,
       bb[].cc,
@@ -170,8 +169,28 @@ describe('table-parser', () => {
         [false, true, [0, 1]],
       ],
       [
-        'bb[0].ee[0].hh[0].dd',
-        ['.', 'bb', '[]', ['.', 'ee', '[]', ['.', 'hh', '[*]', ['.', 'dd']]]],
+        `bb[0].ee[0].hh[0](dd != ['dd3', 'dd16', 'dd19']).dd`,
+        [
+          '.',
+          'bb',
+          '[]',
+          [
+            '.',
+            'ee',
+            '[]',
+            [
+              '.',
+              'hh',
+              '[*]',
+              [
+                '()',
+                [['.', 'dd'], '!=', '[', ['dd3', 'dd16', 'dd19']],
+                '.',
+                'dd',
+              ],
+            ],
+          ],
+        ],
         undefined,
         [false, true, [1, 2]],
       ],
