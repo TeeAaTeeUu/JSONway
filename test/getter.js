@@ -258,6 +258,44 @@ describe('getter', () => {
     ])
   })
 
+  it(`a[]{b.c(!= 'z'), d[1]}`, function () {
+    const object = {
+      a: [
+        { b: { c: 'z' }, d: [1, 'x', 2] },
+        { b: { c: 'y' }, d: [1, 'g', 2] },
+      ],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [
+      { 'd[1]': 'x' },
+      { "b.c(!= 'z')": 'y', 'd[1]': 'g' },
+    ])
+  })
+
+  it(`a[]{b.c: b.c(!= 'z'), d[1]}`, function () {
+    const object = {
+      a: [
+        { b: { c: 'z' }, d: [1, 'x', 2] },
+        { b: { c: 'y' }, d: [1, 'g', 2] },
+      ],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [
+      { 'd[1]': 'x' },
+      { 'b.c': 'y', 'd[1]': 'g' },
+    ])
+  })
+
+  it(`a[](b.c != 'z'){b.c, d[1]}`, function () {
+    const object = {
+      a: [
+        { b: { c: 'z' }, d: [1, 'x', 2] },
+        { b: { c: 'y' }, d: [1, 'g', 2] },
+      ],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [
+      { 'b.c': 'y', 'd[1]': 'g' },
+    ])
+  })
+
   it(`a[]{x: b.c = 'x', d[1]=5}`, function () {
     const object = {
       a: [
@@ -500,6 +538,17 @@ describe('getter', () => {
 
     object = { aa: { i: 34.1 }, bb: { i: 'x' }, cc: { i: 'y' } }
     assert.deepEqual(JSONway.get(object, this.test.title), [34])
+  })
+
+  it('[aa, bb(i < 10), cc].i', function () {
+    let object = { aa: { i: 0 }, bb: { i: 10.4 }, cc: { i: 20.7 } }
+    assert.deepEqual(JSONway.get(object, this.test.title), [0, 20.7])
+
+    object = { aa: { i: 34.1 }, bb: { i: 'x' }, cc: { i: 'y' } }
+    assert.deepEqual(JSONway.get(object, this.test.title), [34.1, 'y'])
+
+    object = { aa: { i: 34.1 }, bb: { i: 7 }, cc: { i: 'y' } }
+    assert.deepEqual(JSONway.get(object, this.test.title), [34.1, 7, 'y'])
   })
 
   it(`a(c='y'){b,d}`, function () {

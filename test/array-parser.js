@@ -298,14 +298,14 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
-  it(`[foo[].bar, baz, foo[*].id]`, function () {
+  it('[foo[].bar, baz, foo[*](id > 10).id]', function () {
     const out = [
       '[,]',
       [
         [
           ['.', 'foo', '[]', ['.', 'bar']],
           ['.', 'baz'],
-          ['.', 'foo', '[*]', ['.', 'id']],
+          ['.', 'foo', '[*]', ['()', [['.', 'id'], '>', 10], '.', 'id']],
         ],
       ],
     ]

@@ -305,8 +305,7 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(input), out)
   })
 
-  // TODO: support expressions on MULTI
-  it.skip('foo{bar:gee,baz(!=10)}', function () {
+  it('foo{bar:gee,baz(!=10)}', function () {
     const out = [
       '.',
       'foo',
@@ -317,9 +316,6 @@ describe('parser', () => {
       ],
     ]
     assert.deepEqual(JSONway.parse(this.test.title), out)
-
-    const input = 'foo { bar: gee, baz }'
-    assert.deepEqual(JSONway.parse(input), out)
   })
 
   it(`foo{bar[1,2],[baz:]['id,[]']}`, function () {

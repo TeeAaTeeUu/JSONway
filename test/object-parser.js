@@ -208,4 +208,15 @@ describe('object-parser', () => {
     ]
     assert.deepEqual(parseObject(this.test.title, 18), out)
   })
+
+  it('{bar:gee,baz(!=10)}', function () {
+    const out = [
+      '{}',
+      [
+        ['bar', ['.', 'gee'], undefined, [true]],
+        ['baz(!=10)', ['.', 'baz', '()', ['!=', 10]], undefined, [false]],
+      ],
+    ]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
 })
