@@ -1,0 +1,13 @@
+bench/
+coverage/
+node_modules/
+reports/
+test/
+.DS_Store
+.editorconfig
+.gitignore
+.npmignore
+.stryker-tmp/
+eslint.cofig.js
+pnpm-lock.yaml
+stryker.config.json
