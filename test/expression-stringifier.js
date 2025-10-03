@@ -34,7 +34,7 @@ describe('expression-stringifier', () => {
   expressions.forEach(expression => {
     //
     it(expression, function () {
-      const input = JSONway.parseExpression(this.test.title)[0]
+      const input = JSONway.parseExpression(this.test.title)
       assert.deepEqual(stringifyExpression(input), this.test.title)
     })
   })

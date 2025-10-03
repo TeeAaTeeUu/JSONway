@@ -1,13 +1,12 @@
 import { assert } from 'chai'
 
 import JSONway from '../index.js'
-import { stringifyPath } from '../lib/path-stringifier.js'
 
 describe('path-stringifier', () => {
   it('stringifyPath does nothing if not path-array', function () {
     const input = 'ab.cd'
 
-    assert.deepEqual(stringifyPath(input), input)
+    assert.deepEqual(JSONway.stringify(input), input)
   })
 
   const expressions = [
@@ -33,7 +32,7 @@ describe('path-stringifier', () => {
     //
     it(expression, function () {
       const input = JSONway.parse(this.test.title)
-      assert.deepEqual(stringifyPath(input), this.test.title)
+      assert.deepEqual(JSONway.stringify(input), this.test.title)
     })
   })
   /* eslint-enable mocha/no-setup-in-describe */
