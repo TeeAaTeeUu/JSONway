@@ -540,6 +540,14 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), [34])
   })
 
+  it('aa[# |> size].bb', function () {
+    let object = { aa: [{ bb: 5 }, { bb: 6 }, { bb: 7 }] }
+    assert.deepEqual(JSONway.get(object, this.test.title), 3)
+
+    object = { aa: [{ bb: 5 }, { bb: 6 }, { bb: 5 }] }
+    assert.deepEqual(JSONway.get(object, this.test.title), 2)
+  })
+
   it('[aa, bb(i < 10), cc].i', function () {
     let object = { aa: { i: 0 }, bb: { i: 10.4 }, cc: { i: 20.7 } }
     assert.deepEqual(JSONway.get(object, this.test.title), [0, 20.7])

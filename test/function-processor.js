@@ -178,7 +178,7 @@ describe('function-processor', () => {
   })
 
   it('split._.5', function () {
-    const result = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    let result = 'a_b_c_d_e_f_g_h'
     let output = 'f'
 
     let pipe = parseFunction(this.test.title)
@@ -189,7 +189,12 @@ describe('function-processor', () => {
     assert.deepEqual(processFunction(result, pipe), output)
 
     pipe = parseFunction('split._.()')
-    output = 'd'
-    assert.deepEqual(processFunction(result, pipe), result)
+    output = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    result = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    pipe = parseFunction(this.test.title)
+    output = 'f'
+    assert.deepEqual(processFunction(result, pipe), output)
   })
 })
