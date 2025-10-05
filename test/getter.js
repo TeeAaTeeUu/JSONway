@@ -1179,13 +1179,18 @@ describe('getter', () => {
         .expression.arguments{
           path: [0].value,
           path: [0].quasis[0].value.cooked,
-          type: [1].body.body[0].type,
+          vars: [1].body.body[](type = 'VariableDeclaration')
+                .declarations[0].id.name,
+          're = #': [1].body
+                .body[>| length](
+                  expression.type = 'AssignmentExpression'
+                ),
         }
-    ` // TODO: check if empty when with tabletizer syntax
+    `
 
-    const out = { path: '{a}', type: 'VariableDeclaration' }
+    const out = { path: 'a.b.c', vars: ['object', 'out'], 're = #': 8 }
 
-    assert.deepEqual(JSONway.get(object, path)[3], out)
+    assert.deepEqual(JSONway.get(object, path)[5], out)
 
     const javascriptVersion = object.program.body
       .map(body1 => body1.expression)
@@ -1205,7 +1210,12 @@ describe('getter', () => {
         path:
           expressionArguments[0]?.value ||
           expressionArguments[0]?.quasis[0]?.value?.cooked,
-        type: expressionArguments[1]?.body?.body[0]?.type,
+        vars: expressionArguments[1]?.body?.body
+          .filter(body => body?.type === 'VariableDeclaration')
+          .map(body => body?.declarations[0]?.id?.name),
+        're = #': expressionArguments[1]?.body?.body.filter(
+          body => body?.expression?.type === 'AssignmentExpression',
+        ).length,
       }))
 
     assert.deepEqual(JSONway.get(object, path), javascriptVersion)

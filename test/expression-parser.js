@@ -113,6 +113,12 @@ describe('expression-parser', () => {
     ])
   })
 
+  // TODO: differentiate operators from strings
+  it(`a = '='`, function () {
+    const out = [['.', 'a'], '=', '=']
+    assert.deepEqual(JSONway.parseExpression(this.test.title), out)
+  })
+
   it('>=12 && foo[0][bar]', function () {
     const out = ['>=', 12, '&&', ['.', 'foo', '1', 0, '.', 'bar']]
     assert.deepEqual(JSONway.parseExpression(this.test.title, 0), [
@@ -649,6 +655,16 @@ describe('expression-parser', () => {
       '?|',
       [['.', 'aa'], '?|', ['.', 'bb'], '?|', ['.', 'cc'], '?|', 15],
     ]
+    assert.deepEqual(JSONway.parseExpression(this.test.title, 1), [
+      out,
+      this.test.title.length - 1,
+    ])
+  })
+
+  it(`(
+      aa.bb = 'xx'
+    )`, function () {
+    const out = [['.', 'aa', '.', 'bb'], '=', 'xx']
     assert.deepEqual(JSONway.parseExpression(this.test.title, 1), [
       out,
       this.test.title.length - 1,
