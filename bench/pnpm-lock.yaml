@@ -14,6 +14,9 @@ importers:
       jmespath:
         specifier: ^0.16.0
         version: 0.16.0
+      jsonata:
+        specifier: ^2.1.0
+        version: 2.1.0
       jsonpath-plus:
         specifier: ^10.3.0
         version: 10.3.0
@@ -48,6 +51,10 @@ packages:
     resolution: {integrity: sha512-B7qPcEVE3NVkmSJbaYxvv4cHkVW7DQsZz13pUMrfS8z8Q/BuShN+gcTXrUlPiGqM2/t/EEaI030bpxMqY8gMlw==}
     engines: {node: '>= 10.16.0'}
 
+  jsonata@2.1.0:
+    resolution: {integrity: sha512-OCzaRMK8HobtX8fp37uIVmL8CY1IGc/a6gLsDqz3quExFR09/U78HUzWYr7T31UEB6+Eu0/8dkVD5fFDOl9a8w==}
+    engines: {node: '>= 8'}
+
   jsonpath-plus@10.3.0:
     resolution: {integrity: sha512-8TNmfeTCk2Le33A3vRRwtuworG/L5RrgMvdjhKZxvyShO+mBu2fP50OWUjRLNtvw344DdDarFh9buFAZs5ujeA==}
     engines: {node: '>=18.0.0'}
@@ -71,6 +78,8 @@ snapshots:
   jmespath@0.16.0: {}
 
   jsep@1.4.0: {}
+
+  jsonata@2.1.0: {}
 
   jsonpath-plus@10.3.0:
     dependencies:

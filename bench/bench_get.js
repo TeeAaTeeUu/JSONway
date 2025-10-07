@@ -5,6 +5,7 @@ import { get } from '../lib/getter.js'
 import { search } from '@jmespath-community/jmespath'
 import { search as searchOrig } from 'jmespath'
 import { JSONPath } from 'jsonpath-plus'
+import jsonata from 'jsonata'
 
 const babelFiles = JSON.parse(await _readFile('../bench/babel_files.json'))
 const paths = JSON.parse(await _readFile('../bench/babel_files_paths.json'))
@@ -21,6 +22,17 @@ const jmesPaths = paths.map(path => {
   )
 })
 const JSONpaths = paths.map(path => '$.' + path.replaceAll('[]', '[*]'))
+const JSONataPaths = paths.map(path => {
+  if (!path.startsWith('devDependencies') && !path.startsWith('scripts'))
+    return path
+  if (!path.includes('@') && !path.includes('-')) return path
+
+  return (
+    path
+      .replace('devDependencies.', 'devDependencies.$lookup("')
+      .replace('scripts.', 'scripts.$lookup("') + '")'
+  )
+})
 
 summary(() => {
   bench('JSONway', function () {
@@ -62,6 +74,19 @@ summary(() => {
     for (let i = 0; i < JSONpaths.length; i++) {
       const value = JSONPath(JSONpaths[i], babelFiles)
       count += value.length
+    }
+
+    count
+  })
+
+  bench('jsonata', async function () {
+    let count = 0
+
+    for (let i = 0; i < JSONataPaths.length; i++) {
+      const value = await jsonata(JSONataPaths[i]).evaluate(babelFiles)
+
+      if (value === undefined) count++
+      else count += value.length
     }
 
     count

@@ -4,6 +4,7 @@
   "devDependencies": {
     "@jmespath-community/jmespath": "^1.3.0",
     "jmespath": "^0.16.0",
+    "jsonata": "^2.1.0",
     "jsonpath-plus": "^10.3.0",
     "mitata": "^1.0.34"
   },
