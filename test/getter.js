@@ -532,20 +532,28 @@ describe('getter', () => {
 
   it('[aa, bb](?)', function () {
     let object = { aa: false, bb: 'x' }
-    assert.deepEqual(JSONway.get(object, this.test.title), ['x'])
 
-    object = { aa: 34, bb: 'x', cc: 'y' }
-    assert.deepEqual(JSONway.get(object, this.test.title), [34, 'x'])
+    object = { aa: null, bb: false, cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), [false])
+
+    object = { aa: 0, bb: '', cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), [0, ''])
+
+    object = { cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), [])
   })
 
   it('[aa, bb][|0](?)', function () {
     let object = { aa: false, bb: 'x' }
-    assert.deepEqual(JSONway.get(object, this.test.title), 'x')
+    assert.deepEqual(JSONway.get(object, this.test.title), false)
 
     object = { aa: 34, bb: 'x', cc: 'y' }
     assert.deepEqual(JSONway.get(object, this.test.title), 34)
 
     object = { aa: 0, bb: 'x', cc: 'y' }
+    assert.deepEqual(JSONway.get(object, this.test.title), 0)
+
+    object = { aa: null, bb: 'x', cc: 'y' }
     assert.deepEqual(JSONway.get(object, this.test.title), 'x')
   })
 
@@ -801,7 +809,6 @@ describe('getter', () => {
       a: [{ b: 53 }, { b: 55 }, { b: 63 }],
     }
 
-    console.dir(JSONway.parse(this.test.title))
     assert.deepEqual(JSONway.get(object, this.test.title), [55, 63])
   })
 
