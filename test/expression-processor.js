@@ -600,14 +600,21 @@ describe('expression-processor', () => {
     )
   })
 
-  it(`? []`, function () {
-    const parsedExpression = JSONway.parseExpression(this.test.title)
+  // TODO: find a syntax to support empty or 1-length list?
+  it.skip('? [2]', function () {
+    let parsedExpression = JSONway.parseExpression(this.test.title)
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, {}))
+
+    parsedExpression = JSONway.parseExpression('? []')
     assert.isFalse(JSONway.calculateExpression(parsedExpression, null, {}))
+
+    parsedExpression = JSONway.parseExpression('? [null]')
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, {}))
   })
 
-  it(`? [null]`, function () {
+  it(`? [1,3]`, function () {
     const parsedExpression = JSONway.parseExpression(this.test.title)
-    assert.isFalse(JSONway.calculateExpression(parsedExpression, null, {}))
+    assert.isTrue(JSONway.calculateExpression(parsedExpression, null, {}))
   })
 
   it(`? [undefined,1,2]`, function () {

@@ -796,6 +796,23 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), [2, 4])
   })
 
+  it('a[].b(>54)', function () {
+    const object = {
+      a: [{ b: 53 }, { b: 55 }, { b: 63 }],
+    }
+
+    console.dir(JSONway.parse(this.test.title))
+    assert.deepEqual(JSONway.get(object, this.test.title), [55, 63])
+  })
+
+  it('a[].b(~="bar")', function () {
+    const object = {
+      a: [{ b: 'foo' }, { b: 'bar' }, { b: 'fobaru' }],
+    }
+
+    assert.deepEqual(JSONway.get(object, this.test.title), ['bar', 'fobaru'])
+  })
+
   it('[](a?).a', function () {
     const object = [{ a: 'x' }, { b: 'y' }, { a: 'z' }]
     assert.deepEqual(JSONway.get(object, this.test.title), ['x', 'z'])
