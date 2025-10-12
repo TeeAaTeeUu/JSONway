@@ -98,6 +98,31 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it('[-1]', function () {
+    const out = ['-1', -1]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[0]', function () {
+    const out = ['1', 0]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[-0]', function () {
+    const out = ['1', 0]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[+0]', function () {
+    const out = ['1', 0]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
+  it('[01]', function () {
+    const out = ['.', '01']
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it('[*]', function () {
     const out = ['[*]', []]
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
