@@ -25,6 +25,20 @@ describe('path-stringifier', () => {
     'foo.bar[]{id,name}',
     'foo.bar[]{id: key, name}',
     'foo.bar[]{id: id.key = x, name = 10}',
+    'foo.bar3',
+    'foo[baz 3]',
+    'foo[baz.3]',
+    'foo.bar',
+    'foo[bar.]',
+    `foo['bar
+      baz']`,
+    "foo['bar\nbaz']",
+    "foo.bar[' baz 3']",
+    "foo['bar''baz']",
+    "foo['baz]3']",
+    "foo['baz[3']",
+    `foo['baz"3']`,
+    `foo['baz,3']`,
   ]
 
   /* eslint-disable mocha/no-setup-in-describe */

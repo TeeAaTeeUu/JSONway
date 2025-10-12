@@ -1526,24 +1526,6 @@
   ],
   [
     "lib/path-stringifier.js",
-    "[Survived] Regex",
-    "-   const numbersOnly = /^\\d+$/u",
-    "+   const numbersOnly = /\\d+$/u"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] Regex",
-    "-   const numbersOnly = /^\\d+$/u",
-    "+   const numbersOnly = /^\\d$/u"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] Regex",
-    "-   const numbersOnly = /^\\d+$/u",
-    "+   const numbersOnly = /^\\d+/u"
-  ],
-  [
-    "lib/path-stringifier.js",
     "[Survived] EqualityOperator",
     "-     for (let i = 0; i < parsedPath.length; i++) {",
     "+     for (let i = 0; i <= parsedPath.length; i++) {"
@@ -1571,54 +1553,6 @@
     "[Survived] UnaryOperator",
     "-           i = -1",
     "+           i = +1"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] ConditionalExpression",
-    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
-    "+     if (false || typeof key !== 'string') return `[${key}]`"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] ConditionalExpression",
-    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
-    "+     if (false) return `[${key}]`"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] LogicalOperator",
-    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
-    "+     if (typeof key === 'number' && typeof key !== 'string') return `[${key}]`"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] StringLiteral",
-    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
-    "+     if (typeof key === \"\" || typeof key !== 'string') return `[${key}]`"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] ConditionalExpression",
-    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
-    "+     if (typeof key === 'number' || false) return `[${key}]`"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[NoCoverage] StringLiteral",
-    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
-    "+     if (typeof key === 'number' || typeof key !== 'string') return ``"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] ConditionalExpression",
-    "-     if (key.includes(\"'\")) return `['${key.split(\"'\").join(\"''\")}']`",
-    "+     if (true) return `['${key.split(\"'\").join(\"''\")}']`"
-  ],
-  [
-    "lib/path-stringifier.js",
-    "[Survived] StringLiteral",
-    "-     if (key.includes(\"'\")) return `['${key.split(\"'\").join(\"''\")}']`",
-    "+     if (key.includes(\"\")) return `['${key.split(\"'\").join(\"''\")}']`"
   ],
   [
     "lib/setter.js",
