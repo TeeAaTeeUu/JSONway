@@ -680,8 +680,8 @@ describe('expression-parser', () => {
     ])
   })
 
-  it.skip(`c[~&d!][>][2]='y'`, function () {
-    const out = [['c', '~&d!', '>'], 2, '=', 'y']
+  it(`c[~&d!][>][2]='y'`, function () {
+    const out = [['.', 'c', '.', '~&d!', '.', '>', '1', 2], '=', 'y']
     assert.deepEqual(JSONway.parseExpression(this.test.title, 0), [
       out,
       this.test.title.length,
