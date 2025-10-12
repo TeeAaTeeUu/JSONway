@@ -932,10 +932,33 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), ['foo', 'baz'])
   })
 
-  // TODO: support other deep value types
+  it('**.z', function () {
+    const object = {
+      a: [{ b: 'foo' }, { b: { z: 'bar' } }, { c: 10 }, { z: 15 }],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [15, 'bar'])
+  })
+
+  it('a.**.z.y', function () {
+    let object = { a: { b: { c: { z: 'foo', x: 'bar' }, d: { z: 'baz' } } } }
+    assert.deepEqual(JSONway.get(object, this.test.title), [])
+
+    object = { a: { b: { c: { z: { y: 'foo' }, x: 'bar' }, d: { z: 'baz' } } } }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['foo'])
+  })
+
   it('a[**](>10)', function () {
     const object = { a: { b: { c: { z: 5, x: 11 }, d: { z: 'baz' } } } }
-    assert.deepEqual(JSONway.get(object, this.test.title), []) // [11]
+    assert.deepEqual(JSONway.get(object, this.test.title), [11])
+  })
+
+  it('a[**][2]', function () {
+    let object = { a: { b: { c: { z: 5, x: 11 }, d: { z: 'baz' } } } }
+    assert.deepEqual(JSONway.get(object, this.test.title), [])
+
+    object = { a: { b: { c: { z: 5, x: ['a', 'b', 'c'] }, d: { z: 'baz' } } } }
+    assert.deepEqual(JSONway.get(object, this.test.title), ['c'])
+    assert.deepEqual(JSONway.get(object, 'a[**].2'), ['c'])
   })
 
   it('a[1:3]', function () {

@@ -951,50 +951,15 @@
   ],
   [
     "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (parsedPath[i][0] !== OBJECT_PROPERTY) return []",
-    "+     if (false) return []"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-       if (Array.isArray(current)) {",
-    "+       if (false) {"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] BlockStatement",
-    "-       if (Array.isArray(current)) {",
-    "-         for (let i = 0, len = current.length; i < len; i++)",
-    "-           if (!_isArrayOrObject(current[i])) continue",
-    "-           else stack.push(current[i])",
-    "-         continue",
-    "-       }",
-    "+       if (Array.isArray(current)) {}"
+    "[Survived] ArrayDeclaration",
+    "-     let keys = []",
+    "+     let keys = [\"Stryker was here\"]"
   ],
   [
     "lib/getter.js",
     "[Survived] EqualityOperator",
-    "-         for (let i = 0, len = current.length; i < len; i++)",
-    "+         for (let i = 0, len = current.length; i <= len; i++)"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-           if (!_isArrayOrObject(current[i])) continue",
-    "+           if (false) continue"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-           if (temp !== undefined) result.push(temp)",
-    "+           if (true) result.push(temp)"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     return value !== null && typeof value === 'object'",
-    "+     return true && typeof value === 'object'"
+    "-       for (let i = 0; i < keys.length; i++) {",
+    "+       for (let i = 0; i <= keys.length; i++) {"
   ],
   [
     "lib/getter.js",
@@ -1232,12 +1197,6 @@
     "[Survived] ConditionalExpression",
     "-           if (current) {",
     "+           if (true) {"
-  ],
-  [
-    "lib/parser.js",
-    "[Survived] UnaryOperator",
-    "-             if (parsedPath.at(-2) === DEEP_OBJECT_PROPERTY) {",
-    "+             if (parsedPath.at(+2) === DEEP_OBJECT_PROPERTY) {"
   ],
   [
     "lib/parser.js",
