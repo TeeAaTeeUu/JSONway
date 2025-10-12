@@ -1,0 +1,2129 @@
+[
+  [
+    "lib/analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof object !== 'object') return []",
+    "+     if (false) return []"
+  ],
+  [
+    "lib/analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     if (x === y) return _normalized(a) < _normalized(b) ? -1 : 1",
+    "+     if (x === y) return _normalized(a) <= _normalized(b) ? -1 : 1"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (token === ']' || startIndex >= len) return [[ARRAY_ALL, []], startIndex]",
+    "+     if (false || startIndex >= len) return [[ARRAY_ALL, []], startIndex]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (token === ']' || startIndex >= len) return [[ARRAY_ALL, []], startIndex]",
+    "+     if (false) return [[ARRAY_ALL, []], startIndex]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] LogicalOperator",
+    "-     if (token === ']' || startIndex >= len) return [[ARRAY_ALL, []], startIndex]",
+    "+     if (token === ']' && startIndex >= len) return [[ARRAY_ALL, []], startIndex]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] StringLiteral",
+    "-     if (token === ']' || startIndex >= len) return [[ARRAY_ALL, []], startIndex]",
+    "+     if (token === \"\" || startIndex >= len) return [[ARRAY_ALL, []], startIndex]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (token === ']' || startIndex >= len) return [[ARRAY_ALL, []], startIndex]",
+    "+     if (token === ']' || false) return [[ARRAY_ALL, []], startIndex]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] EqualityOperator",
+    "-     if (token === ']' || startIndex >= len) return [[ARRAY_ALL, []], startIndex]",
+    "+     if (token === ']' || startIndex > len) return [[ARRAY_ALL, []], startIndex]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] StringLiteral",
+    "-     let current = ''",
+    "+     let current = \"Stryker was here!\""
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] StringLiteral",
+    "-     let currentPrePipe = ''",
+    "+     let currentPrePipe = \"Stryker was here!\""
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] EqualityOperator",
+    "-     for (; i < len; i++) {",
+    "+     for (; i <= len; i++) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (pipeStart !== -1 && items.length === 0) {",
+    "+           if (true && items.length === 0) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (pipeStart !== -1 && items.length === 0) {",
+    "+           if (true) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] LogicalOperator",
+    "-           if (pipeStart !== -1 && items.length === 0) {",
+    "+           if (pipeStart !== -1 || items.length === 0) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] UnaryOperator",
+    "-           if (pipeStart !== -1 && items.length === 0) {",
+    "+           if (pipeStart !== +1 && items.length === 0) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (pipeStart !== -1 && items.length === 0) {",
+    "+           if (pipeStart !== -1 && true) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         if (objectDepth > 0) objectDepth--",
+    "+         if (true) objectDepth--"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] EqualityOperator",
+    "-         if (objectDepth > 0) objectDepth--",
+    "+         if (objectDepth >= 0) objectDepth--"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       } else if (token === '(') expressionDepth++",
+    "+       } else if (false) expressionDepth++"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] StringLiteral",
+    "-       } else if (token === '(') expressionDepth++",
+    "+       } else if (token === \"\") expressionDepth++"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         if (expressionDepth > 0) expressionDepth--",
+    "+         if (true) expressionDepth--"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] EqualityOperator",
+    "-         if (expressionDepth > 0) expressionDepth--",
+    "+         if (expressionDepth >= 0) expressionDepth--"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       } else if (depth === 1 && objectDepth === 0 && expressionDepth === 0) {",
+    "+       } else if (depth === 1 && objectDepth === 0 && true) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         if (items.length === 0)",
+    "+         if (true)"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (token === '|' || token === '=')",
+    "+           if (true)"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (start < i) {",
+    "+     if (true) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] EqualityOperator",
+    "-     if (start < i) {",
+    "+     if (start <= i) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       if (pipeStart !== -1 && items.length === 0) {",
+    "+       if (pipeStart !== -1 && true) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] MethodExpression",
+    "-           items[j] = [ARRAY_SPREAD, parse(value.slice(3))]",
+    "+           items[j] = [ARRAY_SPREAD, parse(value)]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       } else if (typeof value === 'string' && isEscaped(value)) {",
+    "+       } else if (true && isEscaped(value)) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] LogicalOperator",
+    "-       } else if (typeof value === 'string' && isEscaped(value)) {",
+    "+       } else if (typeof value === 'string' || isEscaped(value)) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     return path[0] === OBJECT_PROPERTY && path.slice(0, 3) === ARRAY_SPREAD_SYNTAX",
+    "+     return true && path.slice(0, 3) === ARRAY_SPREAD_SYNTAX"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         if (_isPotentialSlice(value)) {",
+    "+         if (true) {"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     return value.length > 1 && value.indexOf(':') !== -1",
+    "+     return true"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     return value.length > 1 && value.indexOf(':') !== -1",
+    "+     return true && value.indexOf(':') !== -1"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] EqualityOperator",
+    "-     return value.length > 1 && value.indexOf(':') !== -1",
+    "+     return value.length >= 1 && value.indexOf(':') !== -1"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] LogicalOperator",
+    "-     return value.length > 1 && value.indexOf(':') !== -1",
+    "+     return value.length > 1 || value.indexOf(':') !== -1"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     return value.length > 1 && value.indexOf(':') !== -1",
+    "+     return value.length > 1 && true"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] StringLiteral",
+    "-     return value.length > 1 && value.indexOf(':') !== -1",
+    "+     return value.length > 1 && value.indexOf(\"\") !== -1"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ArrayDeclaration",
+    "-     const result = []",
+    "+     const result = [\"Stryker was here\"]"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (result[2] !== undefined && result[1] === null) result[1] = undefined",
+    "+     if (true && result[1] === null) result[1] = undefined"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       default:",
+    "-         return false",
+    "+       default:"
+  ],
+  [
+    "lib/array-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       default:",
+    "-         return false",
+    "+       default:"
+  ],
+  [
+    "lib/expander.js",
+    "[Survived] StringLiteral",
+    "-   const ARRAY_BRACKETS = '[]'",
+    "+   const ARRAY_BRACKETS = \"\""
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] BooleanLiteral",
+    "-     let potentialNestingNeeded = false",
+    "+     let potentialNestingNeeded = true"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ArrayDeclaration",
+    "-     let tempResult = []",
+    "+     let tempResult = [\"Stryker was here\"]"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] EqualityOperator",
+    "-           for (; i < len; i++) {",
+    "+           for (; i <= len; i++) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] StringLiteral",
+    "-         case '\\n':",
+    "+         case \"\":"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (temp) {",
+    "+           if (true) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-             if (temp.trim()) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })",
+    "+             if (true) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] MethodExpression",
+    "-             if (temp.trim()) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })",
+    "+             if (temp) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (temp) {",
+    "+           if (true) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
+    "+             if (true) expression.push(_parseTemp(temp))"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] MethodExpression",
+    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
+    "+             if (temp) expression.push(_parseTemp(temp))"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (temp) {",
+    "+           if (true) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
+    "+             if (true) expression.push(_parseTemp(temp))"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] MethodExpression",
+    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
+    "+             if (temp) expression.push(_parseTemp(temp))"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] BooleanLiteral",
+    "-                 potentialNestingNeeded = true",
+    "+                 potentialNestingNeeded = false"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-               if (current[i] === '?' || current[i] === '|') {",
+    "+               if (true) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] BooleanLiteral",
+    "-                 potentialNestingNeeded = true",
+    "+                 potentialNestingNeeded = false"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] MethodExpression",
+    "-     if (temp.trim()) expression.push(_parseTemp(temp))",
+    "+     if (temp) expression.push(_parseTemp(temp))"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] EqualityOperator",
+    "-     if (i > len) i = len",
+    "+     if (i >= len) i = len"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (potentialNestingNeeded) _doPotentialNesting(returnExpression)",
+    "+     if (true) _doPotentialNesting(returnExpression)"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         if (Array.isArray(returnExpression[i + 1])) {",
+    "+         if (true) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         returnExpression[i] !== EXISTS_OR &&",
+    "+         true &&"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] EqualityOperator",
+    "-       if (potentialNestIndex < 0) {",
+    "+       if (potentialNestIndex <= 0) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       if (i - potentialNestIndex === 2) {",
+    "+       if (true) {"
+  ],
+  [
+    "lib/expression-parser.js",
+    "[Survived] ArithmeticOperator",
+    "-         i -= toBeNested.length - 2",
+    "+         i -= toBeNested.length + 2"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-           if (leftExists && !rightExists && left) return left",
+    "+           if (true && left) return left"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] LogicalOperator",
+    "-           if (leftExists && !rightExists && left) return left",
+    "+           if (leftExists || !rightExists && left) return left"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-           if (leftResult !== undefined && !leftExists && !rightExists)",
+    "+           if (true && !leftExists && !rightExists)"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-           if (leftExists && !rightExists && left !== undefined) return left",
+    "+           if (true && left !== undefined) return left"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] LogicalOperator",
+    "-           if (leftExists && !rightExists && left !== undefined) return left",
+    "+           if (leftExists || !rightExists && left !== undefined) return left"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] BooleanLiteral",
+    "-               leftResultExists = true",
+    "+               leftResultExists = false"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] LogicalOperator",
+    "-         (leftExists || leftResultExists) &&",
+    "-         operator &&",
+    "+         leftExists || leftResultExists || operator &&"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-         (leftExists || leftResultExists) &&",
+    "+         (true) &&"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] BooleanLiteral",
+    "-         leftResultExists = true",
+    "+         leftResultExists = false"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] BooleanLiteral",
+    "-         rightExists = false",
+    "+         rightExists = true"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] BooleanLiteral",
+    "-       return _getCleanedResult(data, delayedOperator, false)",
+    "+       return _getCleanedResult(data, delayedOperator, true)"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] BooleanLiteral",
+    "-     let result = false",
+    "+     let result = true"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] BooleanLiteral",
+    "-     let result = false",
+    "+     let result = true"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (result === true || Number.isFinite(result)) return result",
+    "+       if (false || Number.isFinite(result)) return result"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (result === true || Number.isFinite(result)) return result",
+    "+       if (false) return result"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (result === true || Number.isFinite(result)) return result",
+    "+       if (true) return result"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] EqualityOperator",
+    "-       if (result === true || Number.isFinite(result)) return result",
+    "+       if (result !== true || Number.isFinite(result)) return result"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] LogicalOperator",
+    "-       if (result === true || Number.isFinite(result)) return result",
+    "+       if (result === true && Number.isFinite(result)) return result"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] BooleanLiteral",
+    "-       if (result === true || Number.isFinite(result)) return result",
+    "+       if (result === false || Number.isFinite(result)) return result"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-     if (Number.isNaN(result)) return null",
+    "+     if (false) return null"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[NoCoverage] BooleanLiteral",
+    "-     return false // Should not get here, but for safety",
+    "+     return true // Should not get here, but for safety"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof left !== 'number') return typeof right === 'number' ? right : NaN",
+    "+     if (typeof left !== 'number') return true ? right : NaN"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof right !== 'number') return typeof left === 'number' ? left : NaN",
+    "+     if (typeof right !== 'number') return true ? left : NaN"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof left !== 'number') return typeof right === 'number' ? -right : NaN",
+    "+     if (typeof left !== 'number') return true ? -right : NaN"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof right !== 'number') return typeof left === 'number' ? left : NaN",
+    "+     if (typeof right !== 'number') return true ? left : NaN"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[Survived] EqualityOperator",
+    "-         for (right of rights) if (left >= right) return true",
+    "+         for (right of rights) if (left > right) return true"
+  ],
+  [
+    "lib/expression-processor.js",
+    "[NoCoverage] BooleanLiteral",
+    "-     return false // Should not get here, but for safety",
+    "+     return true // Should not get here, but for safety"
+  ],
+  [
+    "lib/expression-stringifier.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedExpression.length; i++) {",
+    "+     for (let i = 0; i <= parsedExpression.length; i++) {"
+  ],
+  [
+    "lib/expression-stringifier.js",
+    "[Survived] BooleanLiteral",
+    "-         nextIsList = false",
+    "+         nextIsList = true"
+  ],
+  [
+    "lib/expression-stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-               if (Array.isArray(parsedExpression[i + 1]))",
+    "+               if (true)"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] BooleanLiteral",
+    "-     return _flatten(object, true)",
+    "+     return _flatten(object, false)"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] ConditionalExpression",
+    "-       if (isArray && onlySameObjectArray) {",
+    "+       if (true) {"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] LogicalOperator",
+    "-       if (isArray && onlySameObjectArray) {",
+    "+       if (isArray || onlySameObjectArray) {"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] ConditionalExpression",
+    "-       if (deepKeys.length === 0) flat[escapedKey + '{}'] = ''",
+    "+       if (false) flat[escapedKey + '{}'] = ''"
+  ],
+  [
+    "lib/flattener.js",
+    "[NoCoverage] StringLiteral",
+    "-       if (deepKeys.length === 0) flat[escapedKey + '{}'] = ''",
+    "+       if (deepKeys.length === 0) flat[escapedKey + \"\"] = ''"
+  ],
+  [
+    "lib/flattener.js",
+    "[NoCoverage] StringLiteral",
+    "-       if (deepKeys.length === 0) flat[escapedKey + '{}'] = ''",
+    "+       if (deepKeys.length === 0) flat[escapedKey + '{}'] = \"Stryker was here!\""
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] ConditionalExpression",
+    "-       if (valueLength > 40) return false",
+    "+       if (false) return false"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] EqualityOperator",
+    "-       if (valueLength > 40) return false",
+    "+       if (valueLength >= 40) return false"
+  ],
+  [
+    "lib/flattener.js",
+    "[NoCoverage] BooleanLiteral",
+    "-       if (valueLength > 40) return false",
+    "+       if (valueLength > 40) return true"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] ConditionalExpression",
+    "-       if (keysLength > 70) return false",
+    "+       if (false) return false"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] EqualityOperator",
+    "-       if (keysLength > 70) return false",
+    "+       if (keysLength >= 70) return false"
+  ],
+  [
+    "lib/flattener.js",
+    "[NoCoverage] BooleanLiteral",
+    "-       if (keysLength > 70) return false",
+    "+       if (keysLength > 70) return true"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] ConditionalExpression",
+    "-         typeof object[key] === 'string'",
+    "+         false"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] StringLiteral",
+    "-         typeof object[key] === 'string'",
+    "+         typeof object[key] === \"\""
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedPipes.length; i++) {",
+    "+     for (let i = 0; i <= parsedPipes.length; i++) {"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (parsedPipes[i++] !== OBJECT_PROPERTY) continue",
+    "+       if (false) continue"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedPipes.length; i++) {",
+    "+     for (let i = 0; i <= parsedPipes.length; i++) {"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-           if (Array.isArray(output)) output = output[parsedPipes[i]]",
+    "+           if (true) output = output[parsedPipes[i]]"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-           if (Array.isArray(output))",
+    "+           if (true)"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-         default:",
+    "-           continue",
+    "+         default:"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-     if (!Array.isArray(input) && typeof output !== 'string') return input",
+    "+     if (!Array.isArray(input) && true) return input"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] StringLiteral",
+    "-     if (!Array.isArray(input) && typeof output !== 'string') return input",
+    "+     if (!Array.isArray(input) && typeof output !== \"\") return input"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 1; i < input.length; i++)",
+    "+     for (let i = 1; i <= input.length; i++)"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-       if (input[i] > output) output = input[i]",
+    "+       if (input[i] >= output) output = input[i]"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 1; i < input.length; i++)",
+    "+     for (let i = 1; i <= input.length; i++)"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-       if (input[i] < output) output = input[i]",
+    "+       if (input[i] <= output) output = input[i]"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < input.length; i++)",
+    "+     for (let i = 0; i <= input.length; i++)"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (typeof input[i] === 'number') sum += input[i]",
+    "+       if (true) sum += input[i]"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (typeA === 'string' && typeB === 'string') {",
+    "+       if (false) {"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] StringLiteral",
+    "-       if (typeA === 'string' && typeB === 'string') {",
+    "+       if (typeA === \"\" && typeB === 'string') {"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (typeA === 'string' && typeB === 'string') {",
+    "+       if (typeA === 'string' && true) {"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-       if (typeA === 'string' && typeB === 'string') {",
+    "+       if (typeA === 'string' && typeB !== 'string') {"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] StringLiteral",
+    "-       if (typeA === 'string' && typeB === 'string') {",
+    "+       if (typeA === 'string' && typeB === \"\") {"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] BlockStatement",
+    "-       if (typeA === 'string' && typeB === 'string') {",
+    "-         if (a > b) return 1",
+    "-         else if (a < b) return -1",
+    "-         return 0",
+    "-       }",
+    "+       if (typeA === 'string' && typeB === 'string') {}"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-         if (a > b) return 1",
+    "+         if (false) return 1"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-         if (a > b) return 1",
+    "+         if (a >= b) return 1"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-         else if (a < b) return -1",
+    "+         else if (true) return -1"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-         else if (a < b) return -1",
+    "+         else if (a <= b) return -1"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] ConditionalExpression",
+    "-       if (stringA > stringB) return 1",
+    "+       if (false) return 1"
+  ],
+  [
+    "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-       if (stringA > stringB) return 1",
+    "+       if (stringA >= stringB) return 1"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (path === undefined || path === '') return [object, undefined]",
+    "+     if (false || path === '') return [object, undefined]"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (path === undefined || path === '') return [object, undefined]",
+    "+     if (false) return [object, undefined]"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] LogicalOperator",
+    "-     if (path === undefined || path === '') return [object, undefined]",
+    "+     if (path === undefined && path === '') return [object, undefined]"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (path === undefined || path === '') return [object, undefined]",
+    "+     if (path === undefined || false) return [object, undefined]"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] StringLiteral",
+    "-     if (path === undefined || path === '') return [object, undefined]",
+    "+     if (path === undefined || path === \"Stryker was here!\") return [object, undefined]"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (!object) return",
+    "+     if (false) return"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (path === undefined || path === '') return object",
+    "+     if (false || path === '') return object"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (path === undefined || path === '') return object",
+    "+     if (false) return object"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] LogicalOperator",
+    "-     if (path === undefined || path === '') return object",
+    "+     if (path === undefined && path === '') return object"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (path === undefined || path === '') return object",
+    "+     if (path === undefined || false) return object"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] StringLiteral",
+    "-     if (path === undefined || path === '') return object",
+    "+     if (path === undefined || path === \"Stryker was here!\") return object"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (Array.isArray(value) && value.length === 0) return false",
+    "+     if (false) return false"
+  ],
+  [
+    "lib/getter.js",
+    "[NoCoverage] BooleanLiteral",
+    "-     if (Array.isArray(value) && value.length === 0) return false",
+    "+     if (Array.isArray(value) && value.length === 0) return true"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (object === undefined) return",
+    "+     if (false) return"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (typeof current === 'object' && current !== null)",
+    "+           if (true && current !== null)"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (current === undefined) return",
+    "+           if (false) return"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (current === undefined) return",
+    "+           if (false) return"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (current === undefined) return",
+    "+           if (false) return"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (current === undefined) return",
+    "+           if (false) return"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (parsedPath[i][0] !== OBJECT_PROPERTY) return []",
+    "+     if (false) return []"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-       if (Array.isArray(current)) {",
+    "+       if (false) {"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] BlockStatement",
+    "-       if (Array.isArray(current)) {",
+    "-         for (let i = 0, len = current.length; i < len; i++)",
+    "-           if (!_isArrayOrObject(current[i])) continue",
+    "-           else stack.push(current[i])",
+    "-         continue",
+    "-       }",
+    "+       if (Array.isArray(current)) {}"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] EqualityOperator",
+    "-         for (let i = 0, len = current.length; i < len; i++)",
+    "+         for (let i = 0, len = current.length; i <= len; i++)"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (!_isArrayOrObject(current[i])) continue",
+    "+           if (false) continue"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (temp !== undefined) result.push(temp)",
+    "+           if (true) result.push(temp)"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     return value !== null && typeof value === 'object'",
+    "+     return true && typeof value === 'object'"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (Array.isArray(parsedPath[i + 2]))",
+    "+     if (false)"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ArithmeticOperator",
+    "-     if (Array.isArray(parsedPath[i + 2]))",
+    "+     if (Array.isArray(parsedPath[i - 2]))"
+  ],
+  [
+    "lib/getter.js",
+    "[NoCoverage] ArithmeticOperator",
+    "-       return _getPiped(results, parsedPath[i + 2])",
+    "+       return _getPiped(results, parsedPath[i - 2])"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] EqualityOperator",
+    "-     const step = slice[2] > 1 ? slice[2] : 1",
+    "+     const step = slice[2] >= 1 ? slice[2] : 1"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (start > end) return []",
+    "+     if (false) return []"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] EqualityOperator",
+    "-     if (start > end) return []",
+    "+     if (start >= end) return []"
+  ],
+  [
+    "lib/getter.js",
+    "[NoCoverage] ArrayDeclaration",
+    "-     if (start > end) return []",
+    "+     if (start > end) return [\"Stryker was here\"]"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (start >= len) return []",
+    "+     if (false) return []"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] EqualityOperator",
+    "-     if (start >= len) return []",
+    "+     if (start > len) return []"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] EqualityOperator",
+    "-     else if (value >= 0) return value",
+    "+     else if (value > 0) return value"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-       parsedPath[i] === ARRAY_UN_FLAT || parsedPath[i] === ARRAY_UN_FLAT_UNIQUE",
+    "+       parsedPath[i] === ARRAY_UN_FLAT || false"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] EqualityOperator",
+    "-     for (let j = 0, len = current.length; j < len; j++) {",
+    "+     for (let j = 0, len = current.length; j <= len; j++) {"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-       if (arrayIndexes) indexResults.push([j])",
+    "+       if (true) indexResults.push([j])"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-         if (keepStructure && typeof rest[0] !== 'object') {",
+    "+         if (keepStructure && true) {"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] StringLiteral",
+    "-         if (keepStructure && typeof rest[0] !== 'object') {",
+    "+         if (keepStructure && typeof rest[0] !== \"\") {"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-       if (parsedPath[i] === ARRAY_UNIQUE && !pathHasFlatArray(parsedPath[i + 1]))",
+    "+       if (true && !pathHasFlatArray(parsedPath[i + 1]))"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] MethodExpression",
+    "-         return _arrayUnique(results, indexResults, arrayIndexes).filter(",
+    "-           value => value !== undefined,",
+    "-         )",
+    "+         return _arrayUnique(results, indexResults, arrayIndexes)"
+  ],
+  [
+    "lib/getter.js",
+    "[Survived] ConditionalExpression",
+    "-           value => value !== undefined,",
+    "+           value => true,"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (token === '}' || startIndex >= len) return [[], startIndex]",
+    "+     if (false || startIndex >= len) return [[], startIndex]"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] StringLiteral",
+    "-     if (token === '}' || startIndex >= len) return [[], startIndex]",
+    "+     if (token === \"\" || startIndex >= len) return [[], startIndex]"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (token === ':' && (path[startIndex + 1] === '}' || startIndex + 1 >= len))",
+    "+     if (token === ':' && (true))"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] EqualityOperator",
+    "-     for (; i < len; i++) {",
+    "+     for (; i <= len; i++) {"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       else if (token === DOUBLE_QUOTE && !singleEscaped)",
+    "+       else if (false)"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] BooleanLiteral",
+    "-       else if (token === DOUBLE_QUOTE && !singleEscaped)",
+    "+       else if (token === DOUBLE_QUOTE && singleEscaped)"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] BooleanLiteral",
+    "-         doubleEscaped = !doubleEscaped",
+    "+         doubleEscaped = doubleEscaped"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         if (arrayDepth > 0) arrayDepth--",
+    "+         if (true) arrayDepth--"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] EqualityOperator",
+    "-         if (arrayDepth > 0) arrayDepth--",
+    "+         if (arrayDepth >= 0) arrayDepth--"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         if (expressionDepth > 0) expressionDepth--",
+    "+         if (true) expressionDepth--"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] EqualityOperator",
+    "-         if (expressionDepth > 0) expressionDepth--",
+    "+         if (expressionDepth >= 0) expressionDepth--"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] EqualityOperator",
+    "-     if (start < i) {",
+    "+     if (start <= i) {"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       default:",
+    "-         return false",
+    "+       default:"
+  ],
+  [
+    "lib/object-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       value[0] !== DOUBLE_QUOTE",
+    "+       true"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ArrayDeclaration",
+    "-     let previousParsedPath = []",
+    "+     let previousParsedPath = [\"Stryker was here\"]"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ArrayDeclaration",
+    "-     let multiBack = []",
+    "+     let multiBack = [\"Stryker was here\"]"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] StringLiteral",
+    "-         case '=':",
+    "+         case \"\":"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (path[i] === '=' && path[i + 1] !== '>') break",
+    "+           if (path[i] === '=' && true) break"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ArithmeticOperator",
+    "-           if (path[i] === '=' && path[i + 1] !== '>') break",
+    "+           if (path[i] === '=' && path[i - 1] !== '>') break"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] StringLiteral",
+    "-           if (path[i] === '=' && path[i + 1] !== '>') break",
+    "+           if (path[i] === '=' && path[i + 1] !== \"\") break"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ConditionalExpression",
+    "-           if (current) {",
+    "+           if (true) {"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] UnaryOperator",
+    "-             if (parsedPath.at(-2) === DEEP_OBJECT_PROPERTY) {",
+    "+             if (parsedPath.at(+2) === DEEP_OBJECT_PROPERTY) {"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] UnaryOperator",
+    "-                 } else if (parsedPath.at(-2) !== TABLE) {",
+    "+                 } else if (parsedPath.at(+2) !== TABLE) {"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] UnaryOperator",
+    "-                   parsedPath.at(-2) === TABLE ||",
+    "+                   parsedPath.at(+2) === TABLE ||"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ConditionalExpression",
+    "-                   (parsedPath.length === 1 &&",
+    "+                   (true &&"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] LogicalOperator",
+    "-                   (parsedPath.length === 1 &&",
+    "-                     previousParsedPath[0] === ARRAY_LIST)",
+    "+                   (parsedPath.length === 1 || previousParsedPath[0] === ARRAY_LIST)"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ConditionalExpression",
+    "-                     previousParsedPath[0] === ARRAY_LIST)",
+    "+                     true)"
+  ],
+  [
+    "lib/parser.js",
+    "[NoCoverage] StringLiteral",
+    "-             case '=':",
+    "+             case \"\":"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ConditionalExpression",
+    "-               if (path[i + 1] === '|') i++",
+    "+               if (true) i++"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ConditionalExpression",
+    "-               else if (path[i + 1] === '>') i++",
+    "+               else if (true) i++"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] UnaryOperator",
+    "-               parsedPath = parsedPath.at(-1).at(-1)",
+    "+               parsedPath = parsedPath.at(-1).at(+1)"
+  ],
+  [
+    "lib/parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (current) {",
+    "+     if (true) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-     if (path === undefined || path === '') return null",
+    "+     if (false || path === '') return null"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] BooleanLiteral",
+    "-     let lastUnFlat = false",
+    "+     let lastUnFlat = true"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedPath.length; i++) {",
+    "+     for (let i = 0; i <= parsedPath.length; i++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-         case ARRAY_INDEXES:",
+    "-           depth++",
+    "-           lastUnFlat = false",
+    "-           parsedPath = parsedPath[i + 1]",
+    "-           i = -1",
+    "-           break",
+    "+         case ARRAY_INDEXES:"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] BooleanLiteral",
+    "-           lastUnFlat = false",
+    "+           lastUnFlat = true"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ArithmeticOperator",
+    "-           parsedPath = parsedPath[i + 1]",
+    "+           parsedPath = parsedPath[i - 1]"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] UnaryOperator",
+    "-           i = -1",
+    "+           i = +1"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] UnaryOperator",
+    "-           i = -1",
+    "+           i = +1"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-         default:",
+    "-           i++",
+    "+         default:"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-     for (let i = 0, j = 0; i < pathA.length && j <= pathB.length; i++, j++) {",
+    "+     for (let i = 0, j = 0; true && j <= pathB.length; i++, j++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0, j = 0; i < pathA.length && j <= pathB.length; i++, j++) {",
+    "+     for (let i = 0, j = 0; i <= pathA.length && j <= pathB.length; i++, j++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] LogicalOperator",
+    "-     for (let i = 0, j = 0; i < pathA.length && j <= pathB.length; i++, j++) {",
+    "+     for (let i = 0, j = 0; i < pathA.length || j <= pathB.length; i++, j++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-     for (let i = 0, j = 0; i < pathA.length && j <= pathB.length; i++, j++) {",
+    "+     for (let i = 0, j = 0; i < pathA.length && true; i++, j++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0, j = 0; i < pathA.length && j <= pathB.length; i++, j++) {",
+    "+     for (let i = 0, j = 0; i < pathA.length && j < pathB.length; i++, j++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ArithmeticOperator",
+    "-       sharedPath = i + 1",
+    "+       sharedPath = i - 1"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-       while (pathA[i].rule) i++",
+    "+       while (false) i++"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[NoCoverage] UpdateOperator",
+    "-       while (pathA[i].rule) i++",
+    "+       while (pathA[i].rule) i--"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-       while (pathB[j].rule) j++",
+    "+       while (false) j++"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[NoCoverage] UpdateOperator",
+    "-       while (pathB[j].rule) j++",
+    "+       while (pathB[j].rule) j--"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] LogicalOperator",
+    "-       if (isSubArray(pathA[i]) && isSubArray(pathB[j])) {",
+    "+       if (isSubArray(pathA[i]) || isSubArray(pathB[j])) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-       if (isNestedArray(pathA[i]) && isNestedArray(pathB[j])) continue",
+    "+       if (false) continue"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] LogicalOperator",
+    "-       if (isNestedArray(pathA[i]) && isNestedArray(pathB[j])) continue",
+    "+       if (isNestedArray(pathA[i]) || isNestedArray(pathB[j])) continue"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ArithmeticOperator",
+    "-       sharedPath = i - 1",
+    "+       sharedPath = i + 1"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-     if (sharedPath <= 1) return subPathDepth",
+    "+     if (false) return subPathDepth"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-     if (sharedPath <= 1) return subPathDepth",
+    "+     if (true) return subPathDepth"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     if (sharedPath <= 1) return subPathDepth",
+    "+     if (sharedPath < 1) return subPathDepth"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     if (sharedPath <= 1) return subPathDepth",
+    "+     if (sharedPath > 1) return subPathDepth"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-     if (sharedPath % 2 === 1) --sharedPath",
+    "+     if (true) --sharedPath"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] BooleanLiteral",
+    "-     return pathDepth(pathA.slice(0, sharedPath), true) + subPathDepth",
+    "+     return pathDepth(pathA.slice(0, sharedPath), false) + subPathDepth"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedPath.length; i++) {",
+    "+     for (let i = 0; i <= parsedPath.length; i++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ArithmeticOperator",
+    "-           parsedPath = parsedPath[i + 1]",
+    "+           parsedPath = parsedPath[i - 1]"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] UnaryOperator",
+    "-           i = -1",
+    "+           i = +1"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-         default:",
+    "-           i++",
+    "+         default:"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedPath.length; i++) {",
+    "+     for (let i = 0; i <= parsedPath.length; i++) {"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] UnaryOperator",
+    "-           i = -1",
+    "+           i = +1"
+  ],
+  [
+    "lib/path-analyzer.js",
+    "[Survived] ConditionalExpression",
+    "-         default:",
+    "-           i++",
+    "+         default:"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] Regex",
+    "-   const numbersOnly = /^\\d+$/u",
+    "+   const numbersOnly = /\\d+$/u"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] Regex",
+    "-   const numbersOnly = /^\\d+$/u",
+    "+   const numbersOnly = /^\\d$/u"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] Regex",
+    "-   const numbersOnly = /^\\d+$/u",
+    "+   const numbersOnly = /^\\d+/u"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedPath.length; i++) {",
+    "+     for (let i = 0; i <= parsedPath.length; i++) {"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] ArithmeticOperator",
+    "-           parsedPath = parsedPath[i + 1]",
+    "+           parsedPath = parsedPath[i - 1]"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] UnaryOperator",
+    "-           i = -1",
+    "+           i = +1"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] ArithmeticOperator",
+    "-           parsedPath = parsedPath[i + 1]",
+    "+           parsedPath = parsedPath[i - 1]"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] UnaryOperator",
+    "-           i = -1",
+    "+           i = +1"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
+    "+     if (false || typeof key !== 'string') return `[${key}]`"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
+    "+     if (false) return `[${key}]`"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] LogicalOperator",
+    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
+    "+     if (typeof key === 'number' && typeof key !== 'string') return `[${key}]`"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] StringLiteral",
+    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
+    "+     if (typeof key === \"\" || typeof key !== 'string') return `[${key}]`"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
+    "+     if (typeof key === 'number' || false) return `[${key}]`"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[NoCoverage] StringLiteral",
+    "-     if (typeof key === 'number' || typeof key !== 'string') return `[${key}]`",
+    "+     if (typeof key === 'number' || typeof key !== 'string') return ``"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-     if (key.includes(\"'\")) return `['${key.split(\"'\").join(\"''\")}']`",
+    "+     if (true) return `['${key.split(\"'\").join(\"''\")}']`"
+  ],
+  [
+    "lib/path-stringifier.js",
+    "[Survived] StringLiteral",
+    "-     if (key.includes(\"'\")) return `['${key.split(\"'\").join(\"''\")}']`",
+    "+     if (key.includes(\"\")) return `['${key.split(\"'\").join(\"''\")}']`"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] BooleanLiteral",
+    "-     let earlyReturn = false",
+    "+     let earlyReturn = true"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ArrayDeclaration",
+    "-     let temp = []",
+    "+     let temp = [\"Stryker was here\"]"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] BlockStatement",
+    "-           if (parsedPath[++i].length === 0) {",
+    "-             previous.push(...valueList)",
+    "-             continue",
+    "-           }",
+    "+           if (parsedPath[++i].length === 0) {}"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] EqualityOperator",
+    "-           for (let j = 0, len = valueList.length; j < len; j++) {",
+    "+           for (let j = 0, len = valueList.length; j <= len; j++) {"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] EqualityOperator",
+    "-           for (let j = 0, len = valueList.length; j < len; j++) {",
+    "+           for (let j = 0, len = valueList.length; j <= len; j++) {"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ConditionalExpression",
+    "-             if (parsedPath[i].length === 1) previous[j] = value",
+    "+             if (false) previous[j] = value"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] MethodExpression",
+    "-             else set(previous, [ARRAY_INDEX, j, ...parsedPath[i].slice(1)], value)",
+    "+             else set(previous, [ARRAY_INDEX, j, ...parsedPath[i]], value)"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] EqualityOperator",
+    "-           for (let j = 0, len = previous.length; j < len; j++) {",
+    "+           for (let j = 0, len = previous.length; j <= len; j++) {"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (i++ !== lastPathIndex) break // TODO: should we do something?",
+    "+           if (false) break // TODO: should we do something?"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ConditionalExpression",
+    "-           if (i++ !== lastPathIndex) break // TODO: should we do something?",
+    "+           if (false) break // TODO: should we do something?"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ConditionalExpression",
+    "-     if (!Array.isArray(rule[0])) return",
+    "+     if (false) return"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] StringLiteral",
+    "-       throw new Error('previous was not a list')",
+    "+       throw new Error(\"\")"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] StringLiteral",
+    "-       throw new Error('previous was not a object')",
+    "+       throw new Error(\"\")"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ConditionalExpression",
+    "-       object !== null",
+    "+       true"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ConditionalExpression",
+    "-     return pathType === OBJECT_PROPERTY || pathType === MULTI",
+    "+     return pathType === OBJECT_PROPERTY || false"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0, len = parsedPath.length; i < len; i++)",
+    "+     for (let i = 0, len = parsedPath.length; i <= len; i++)"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] EqualityOperator",
+    "-     return key < 0 ? 0 : key",
+    "+     return key <= 0 ? 0 : key"
+  ],
+  [
+    "lib/setter.js",
+    "[Survived] ConditionalExpression",
+    "-     while (parsedPath[j] === RULE) j += 2",
+    "+     while (false) j += 2"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-     if (orig === undefined) return ''",
+    "+     if (false) return ''"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-     if (orig === null) return 'null'",
+    "+     if (false) return 'null'"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-       if (orig <= Number.MAX_SAFE_INTEGER) return `${orig}`",
+    "+       if (false) return `${orig}`"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-       if (orig <= Number.MAX_SAFE_INTEGER) return `${orig}`",
+    "+       if (true) return `${orig}`"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] EqualityOperator",
+    "-       if (orig <= Number.MAX_SAFE_INTEGER) return `${orig}`",
+    "+       if (orig < Number.MAX_SAFE_INTEGER) return `${orig}`"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] EqualityOperator",
+    "-       if (orig <= Number.MAX_SAFE_INTEGER) return `${orig}`",
+    "+       if (orig > Number.MAX_SAFE_INTEGER) return `${orig}`"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0, len = value.length; i < len; i++) {",
+    "+     for (let i = 0, len = value.length; i <= len; i++) {"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] BooleanLiteral",
+    "-           dirty = true",
+    "+           dirty = false"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] StringLiteral",
+    "-         case ' ':",
+    "+         case \"\":"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] StringLiteral",
+    "-         case '\\f':",
+    "+         case \"\":"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-       if (dirty && quotes) break",
+    "+       if (false) break"
+  ],
+  [
+    "lib/stringifier.js",
+    "[Survived] LogicalOperator",
+    "-       if (dirty && quotes) break",
+    "+       if (dirty || quotes) break"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     return typeof value === 'string' && value[0] === '{' && value.at(-1) === '}'",
+    "+     return true && value[0] === '{' && value.at(-1) === '}'"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ArrayDeclaration",
+    "-     const groupByPaths = []",
+    "+     const groupByPaths = [\"Stryker was here\"]"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ArrayDeclaration",
+    "-     const newParsedPath = []",
+    "+     const newParsedPath = [\"Stryker was here\"]"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < parsedPath.length; i++) {",
+    "+     for (let i = 0; i <= parsedPath.length; i++) {"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       i < parsedField.length && j <= currentParsedGroupBy.length;",
+    "+       true && j <= currentParsedGroupBy.length;"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-       i < parsedField.length && j <= currentParsedGroupBy.length;",
+    "+       i <= parsedField.length && j <= currentParsedGroupBy.length;"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] LogicalOperator",
+    "-       i < parsedField.length && j <= currentParsedGroupBy.length;",
+    "+       i < parsedField.length || j <= currentParsedGroupBy.length;"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       i < parsedField.length && j <= currentParsedGroupBy.length;",
+    "+       i < parsedField.length && true;"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-       i < parsedField.length && j <= currentParsedGroupBy.length;",
+    "+       i < parsedField.length && j < currentParsedGroupBy.length;"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       while (parsedField[i] === RULE) i++",
+    "+       while (false) i++"
+  ],
+  [
+    "lib/table-parser.js",
+    "[NoCoverage] UpdateOperator",
+    "-       while (parsedField[i] === RULE) i++",
+    "+       while (parsedField[i] === RULE) i--"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       while (currentParsedGroupBy[j] == RULE) j++",
+    "+       while (false) j++"
+  ],
+  [
+    "lib/table-parser.js",
+    "[NoCoverage] UpdateOperator",
+    "-       while (currentParsedGroupBy[j] == RULE) j++",
+    "+       while (currentParsedGroupBy[j] == RULE) j--"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         (currentParsedGroupBy[j] === ARRAY_ALL ||",
+    "-           currentParsedGroupBy[j] === ARRAY_FOREACH)",
+    "+         (true)"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         parsedField[i] === ARRAY_INDEX &&",
+    "+         true &&"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         parsedField[i] === ARRAY_INDEX &&",
+    "-         parsedField[i + 1] === 0 &&",
+    "+         true &&"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] LogicalOperator",
+    "-         parsedField[i] === ARRAY_INDEX &&",
+    "-         parsedField[i + 1] === 0 &&",
+    "+         parsedField[i] === ARRAY_INDEX || parsedField[i + 1] === 0 &&"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-         parsedField[i + 1] === 0 &&",
+    "+         true &&"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] BooleanLiteral",
+    "-     const depthA = pathDepth(a, true)",
+    "+     const depthA = pathDepth(a, false)"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] BooleanLiteral",
+    "-     const depthB = pathDepth(b, true)",
+    "+     const depthB = pathDepth(b, false)"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (depthA === 0 && depthB === 0) {",
+    "+     if (true && depthB === 0) {"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] LogicalOperator",
+    "-     if (depthA === 0 && depthB === 0) {",
+    "+     if (depthA === 0 || depthB === 0) {"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (depthA === 0 && depthB === 0) {",
+    "+     if (depthA === 0 && true) {"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       if (a.length !== b.length) return a.length < b.length ? -1 : 1",
+    "+       if (false) return a.length < b.length ? -1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       if (a.length !== b.length) return a.length < b.length ? -1 : 1",
+    "+       if (a.length !== b.length) return false ? -1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       if (a.length !== b.length) return a.length < b.length ? -1 : 1",
+    "+       if (a.length !== b.length) return true ? -1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-       if (a.length !== b.length) return a.length < b.length ? -1 : 1",
+    "+       if (a.length !== b.length) return a.length <= b.length ? -1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-       if (a.length !== b.length) return a.length < b.length ? -1 : 1",
+    "+       if (a.length !== b.length) return a.length >= b.length ? -1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] UnaryOperator",
+    "-       if (a.length !== b.length) return a.length < b.length ? -1 : 1",
+    "+       if (a.length !== b.length) return a.length < b.length ? +1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-       for (let i = 0; i < a.length; i++)",
+    "+       for (let i = 0; i <= a.length; i++)"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-         else return a[i] < b[i] ? -1 : 1",
+    "+         else return a[i] <= b[i] ? -1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] LogicalOperator",
+    "-       if (isNestedArray(a[i]) && isNestedArray(b[j]))",
+    "+       if (isNestedArray(a[i]) || isNestedArray(b[j]))"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       return a[i] < b[j] ? -1 : 1",
+    "+       return true ? -1 : 1"
+  ],
+  [
+    "lib/table-parser.js",
+    "[Survived] EqualityOperator",
+    "-       return a[i] < b[j] ? -1 : 1",
+    "+       return a[i] <= b[j] ? -1 : 1"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ArrayDeclaration",
+    "-     let indexes = [{}]",
+    "+     let indexes = []"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-       if (subKeys.length === 0) continue",
+    "+       if (false) continue"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-           if (subKeys.length === 1 && subKeys[0] === '') {",
+    "+           if (true && subKeys[0] === '') {"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-               subResults[i][subKeys[0]].length === 1 &&",
+    "+               true &&"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-           if (currentIndex === undefined) subResult = subResults[i][currentIndex]",
+    "+           if (false) subResult = subResults[i][currentIndex]"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] MethodExpression",
+    "-                 subResults[i][currentIndexPart.slice(0, parsedPaths[i][3][2][1])],",
+    "+                 subResults[i][currentIndexPart],"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-         if (subKeys.length === 1 && subKeys[0] === '') {",
+    "+         if (true && subKeys[0] === '') {"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] LogicalOperator",
+    "-         if (subKeys.length === 1 && subKeys[0] === '') {",
+    "+         if (subKeys.length === 1 || subKeys[0] === '') {"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-         if (subKeys.length === 1 && subKeys[0] === '') {",
+    "+         if (subKeys.length === 1 && true) {"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-       if (parsedPaths[i][3][1]) {",
+    "+       if (true) {"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-                 value => value[0] === subResults[i][0][j],",
+    "+                 value => true,"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] ConditionalExpression",
+    "-               if (!Array.isArray(temp[key][matchingIndex][1][0]))",
+    "+               if (true)"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] BlockStatement",
+    "-               else {",
+    "-                 temp[key][matchingIndex][1].push(subResults[i][1][j][k])",
+    "-               }",
+    "+               else {}"
+  ],
+  [
+    "lib/tabletizer.js",
+    "[Survived] EqualityOperator",
+    "-       .map(depth => (depth < 0 ? 0 : depth))",
+    "+       .map(depth => (depth <= 0 ? 0 : depth))"
+  ],
+  [
+    "lib/value-parser.js",
+    "[Survived] Regex",
+    "-   const IS_INT_REGEX = /^(-|\\+)?(?:([1-9]+[0-9]*)|0)$/",
+    "+   const IS_INT_REGEX = /^(-|\\+)?(?:([1-9][0-9]*)|0)$/"
+  ],
+  [
+    "lib/value-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (value === undefined) return value",
+    "+     if (false) return value"
+  ],
+  [
+    "lib/value-parser.js",
+    "[Survived] ConditionalExpression",
+    "-     if (typeof value !== 'string') return false",
+    "+     if (false) return false"
+  ],
+  [
+    "lib/value-parser.js",
+    "[Survived] ConditionalExpression",
+    "-       if (value.indexOf(TWO_DOUBLE_QUOTES) === -1) return key",
+    "+       if (false) return key"
+  ],
+  [
+    "lib/value-parser.js",
+    "[Survived] UnaryOperator",
+    "-       if (value.indexOf(TWO_DOUBLE_QUOTES) === -1) return key",
+    "+       if (value.indexOf(TWO_DOUBLE_QUOTES) === +1) return key"
+  ]
+]

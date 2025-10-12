@@ -23,7 +23,8 @@
     "test": "mocha",
     "lint": "eslint .",
     "coverage": "c8 pnpm test",
-    "mutate-test": "stryker run"
+    "mutate-test": "stryker run",
+    "stryker-expected": "pnpm mutate-test | tee /dev/tty | node scripts/_stryker_expected.js"
   },
   "devDependencies": {
     "@babel/parser": "^7.28.4",
