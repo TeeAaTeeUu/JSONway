@@ -87,6 +87,9 @@ describe('expression-parser', () => {
       out,
       this.test.title.length,
     ])
+
+    const input = ' \t\n\f >= 12 '
+    assert.deepEqual(JSONway.parseExpression(input), out)
   })
 
   it('=[0,2]', function () {
@@ -604,11 +607,12 @@ describe('expression-parser', () => {
     ])
   })
 
-  it('ab > round(cd / 2)', function () {
+  it('ab > ef (cd / 2)', function () {
     const out = [
       ['.', 'ab'],
       '>',
-      { func: 'round' },
+      ['.', 'ef'],
+      '&&',
       '(',
       [['.', 'cd'], '/', 2],
     ]
@@ -616,6 +620,22 @@ describe('expression-parser', () => {
       out,
       this.test.title.length,
     ])
+  })
+
+  it('ab > (cd / 2)', function () {
+    const out = [['.', 'ab'], '>', '(', [['.', 'cd'], '/', 2]]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), out)
+
+    const input = '\n\f ab \n\t\f > \n\f ( \n\f cd \n\f / 2 \n\f) \n\f'
+    assert.deepEqual(JSONway.parseExpression(input), out)
+  })
+
+  it('ab? && (cd?)', function () {
+    const out = [['.', 'ab'], '?', '&&', '(', [['.', 'cd'], '?']]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), out)
+
+    const input = 'ab? && (cd? \n\f)'
+    assert.deepEqual(JSONway.parseExpression(input), out)
   })
 
   it('!(10 > ab)', function () {

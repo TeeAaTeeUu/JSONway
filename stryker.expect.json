@@ -291,57 +291,9 @@
   ],
   [
     "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-           if (temp) {",
-    "+           if (true) {"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-             if (temp.trim()) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })",
-    "+             if (true) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] MethodExpression",
-    "-             if (temp.trim()) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })",
-    "+             if (temp) expression.push({ [FUNCTION_PROPERTY]: _safe(temp) })"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-           if (temp) {",
-    "+           if (true) {"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
-    "+             if (true) expression.push(_parseTemp(temp))"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] MethodExpression",
-    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
-    "+             if (temp) expression.push(_parseTemp(temp))"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-           if (temp) {",
-    "+           if (true) {"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
-    "+             if (true) expression.push(_parseTemp(temp))"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] MethodExpression",
-    "-             if (temp.trim()) expression.push(_parseTemp(temp))",
-    "+             if (temp) expression.push(_parseTemp(temp))"
+    "[Survived] StringLiteral",
+    "-         case '\\t':",
+    "+         case \"\":"
   ],
   [
     "lib/expression-parser.js",
@@ -360,12 +312,6 @@
     "[Survived] BooleanLiteral",
     "-                 potentialNestingNeeded = true",
     "+                 potentialNestingNeeded = false"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] MethodExpression",
-    "-     if (temp.trim()) expression.push(_parseTemp(temp))",
-    "+     if (temp) expression.push(_parseTemp(temp))"
   ],
   [
     "lib/expression-parser.js",
