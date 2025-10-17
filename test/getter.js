@@ -40,6 +40,13 @@ describe('getter', () => {
     object = { a: { d: { e: 'x' }, b: { c: { z: 'y' } } } }
     assert.deepEqual(JSONway.get(object, this.test.title), { z: 'y' })
     assert.isTrue(JSONway.has(object, this.test.title))
+    assert.isTrue(JSONway.has(object, 'a.b'))
+
+    object.a.b.c = {}
+    assert.isFalse(JSONway.has(object, this.test.title))
+
+    object.a.b.c = null
+    assert.isTrue(JSONway.has(object, this.test.title))
   })
 
   it('a{b}', function () {
@@ -229,6 +236,11 @@ describe('getter', () => {
 
     object = { a: [1, { dd: 'z' }, 3] }
     assert.deepEqual(JSONway.get(object, this.test.title), [1, { dd: 'z' }, 3])
+    assert.isTrue(JSONway.has(object, this.test.title))
+
+    object = { a: [] }
+    assert.deepEqual(JSONway.get(object, this.test.title), [])
+    assert.isFalse(JSONway.has(object, this.test.title))
   })
 
   it('a[].c', function () {

@@ -850,18 +850,6 @@
   [
     "lib/getter.js",
     "[Survived] ConditionalExpression",
-    "-     if (Array.isArray(value) && value.length === 0) return false",
-    "+     if (false) return false"
-  ],
-  [
-    "lib/getter.js",
-    "[NoCoverage] BooleanLiteral",
-    "-     if (Array.isArray(value) && value.length === 0) return false",
-    "+     if (Array.isArray(value) && value.length === 0) return true"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
     "-     if (object === undefined) return",
     "+     if (false) return"
   ],
