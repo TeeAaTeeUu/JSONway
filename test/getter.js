@@ -933,10 +933,19 @@ describe('getter', () => {
   })
 
   it('**.z', function () {
-    const object = {
+    let object = {
       a: [{ b: 'foo' }, { b: { z: 'bar' } }, { c: 10 }, { z: 15 }],
     }
     assert.deepEqual(JSONway.get(object, this.test.title), [15, 'bar'])
+
+    object = {
+      a: [{ b: 'foo' }, { b: { z: { nested: { z: 'bar' } } } }, { z: 15 }],
+    }
+    assert.deepEqual(JSONway.get(object, this.test.title), [
+      15,
+      { nested: { z: 'bar' } },
+      'bar',
+    ])
   })
 
   it('a.**.z.y', function () {
