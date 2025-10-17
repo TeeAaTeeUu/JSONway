@@ -225,6 +225,11 @@ describe('array-parser', () => {
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)
   })
 
+  it('[ 1 : -3 : 2 ]', function () {
+    const out = ['[_:]', [[1, -3, 2]]]
+    assert.deepEqual(parseArray(this.test.title, 1)[0], out)
+  })
+
   it('[1:-3:2:2]', function () {
     const out = ['.', '1:-3:2:2']
     assert.deepEqual(parseArray(this.test.title, 1)[0], out)

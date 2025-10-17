@@ -193,7 +193,7 @@ describe('getter', () => {
     ])
   })
 
-  it('a[-2][-1][-1][].b', function () {
+  it('a.-2.[-1].-1[].b', function () {
     let object = { a: [1, [[1, 2, [{ b: 'z' }]]], 3] }
     assert.deepEqual(JSONway.get(object, this.test.title), ['z'])
     assert.deepEqual(getArrayIndexes(object, this.test.title), [['z'], [[0]]])
