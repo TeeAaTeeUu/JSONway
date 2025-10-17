@@ -413,12 +413,6 @@
   [
     "lib/expression-processor.js",
     "[Survived] BooleanLiteral",
-    "-         rightExists = false",
-    "+         rightExists = true"
-  ],
-  [
-    "lib/expression-processor.js",
-    "[Survived] BooleanLiteral",
     "-       return _getCleanedResult(data, delayedOperator, false)",
     "+       return _getCleanedResult(data, delayedOperator, true)"
   ],
@@ -448,18 +442,6 @@
   ],
   [
     "lib/expression-processor.js",
-    "[Survived] ConditionalExpression",
-    "-       if (result === true || Number.isFinite(result)) return result",
-    "+       if (true) return result"
-  ],
-  [
-    "lib/expression-processor.js",
-    "[Survived] EqualityOperator",
-    "-       if (result === true || Number.isFinite(result)) return result",
-    "+       if (result !== true || Number.isFinite(result)) return result"
-  ],
-  [
-    "lib/expression-processor.js",
     "[Survived] LogicalOperator",
     "-       if (result === true || Number.isFinite(result)) return result",
     "+       if (result === true && Number.isFinite(result)) return result"
@@ -472,12 +454,6 @@
   ],
   [
     "lib/expression-processor.js",
-    "[Survived] ConditionalExpression",
-    "-     if (Number.isNaN(result)) return null",
-    "+     if (false) return null"
-  ],
-  [
-    "lib/expression-processor.js",
     "[NoCoverage] BooleanLiteral",
     "-     return false // Should not get here, but for safety",
     "+     return true // Should not get here, but for safety"
@@ -485,26 +461,8 @@
   [
     "lib/expression-processor.js",
     "[Survived] ConditionalExpression",
-    "-     if (typeof left !== 'number') return typeof right === 'number' ? right : NaN",
-    "+     if (typeof left !== 'number') return true ? right : NaN"
-  ],
-  [
-    "lib/expression-processor.js",
-    "[Survived] ConditionalExpression",
-    "-     if (typeof right !== 'number') return typeof left === 'number' ? left : NaN",
-    "+     if (typeof right !== 'number') return true ? left : NaN"
-  ],
-  [
-    "lib/expression-processor.js",
-    "[Survived] ConditionalExpression",
     "-     if (typeof left !== 'number') return typeof right === 'number' ? -right : NaN",
     "+     if (typeof left !== 'number') return true ? -right : NaN"
-  ],
-  [
-    "lib/expression-processor.js",
-    "[Survived] ConditionalExpression",
-    "-     if (typeof right !== 'number') return typeof left === 'number' ? left : NaN",
-    "+     if (typeof right !== 'number') return true ? left : NaN"
   ],
   [
     "lib/expression-processor.js",

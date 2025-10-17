@@ -181,6 +181,40 @@ describe('expression-processor', () => {
     assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
   })
 
+  it(`bb ~= 'foo' && bb != ['foo', 'foobar']`, function () {
+    const input = { bb: 'footer' }
+    assert.isTrue(JSONway.calculateExpression(this.test.title, null, input))
+
+    input.bb = 'foobar'
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
+
+    input.bb = 'foo'
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
+
+    input.bb = 'bar'
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
+
+    input.bb = 'barfoo'
+    assert.isTrue(JSONway.calculateExpression(this.test.title, null, input))
+  })
+
+  it(`~= 'foo' && != ['foo', 'foobar']`, function () {
+    let input = 'footer'
+    assert.isTrue(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = 'foobar'
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = 'foo'
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = 'bar'
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = 'barfoo'
+    assert.isTrue(JSONway.calculateExpression(this.test.title, null, input))
+  })
+
   it('x = $', function () {
     let input = { x: 'baz' }
     let values = ['foo', 'baz', 'bar']
@@ -292,6 +326,52 @@ describe('expression-processor', () => {
     )
   })
 
+  it('ab + cd', function () {
+    let input = { ab: 5, cd: 10 }
+    assert.deepEqual(
+      JSONway.calculateExpression(this.test.title, null, input),
+      15,
+    )
+
+    input = { ab: 'foo', cd: 'bar' }
+    assert.isNull(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = { ab: 'foo', cd: 10 }
+    assert.deepEqual(
+      JSONway.calculateExpression(this.test.title, null, input),
+      10,
+    )
+
+    input = { ab: 5, cd: 'bar' }
+    assert.deepEqual(
+      JSONway.calculateExpression(this.test.title, null, input),
+      5,
+    )
+  })
+
+  it('ab - cd', function () {
+    let input = { ab: 5, cd: 10 }
+    assert.deepEqual(
+      JSONway.calculateExpression(this.test.title, null, input),
+      -5,
+    )
+
+    input = { ab: 'foo', cd: 'bar' }
+    assert.isNull(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = { ab: 'foo', cd: 10 }
+    assert.deepEqual(
+      JSONway.calculateExpression(this.test.title, null, input),
+      -10,
+    )
+
+    input = { ab: 5, cd: 'bar' }
+    assert.deepEqual(
+      JSONway.calculateExpression(this.test.title, null, input),
+      5,
+    )
+  })
+
   it('<15', function () {
     let input = 5
     assert.isTrue(JSONway.calculateExpression(this.test.title, null, input))
@@ -382,6 +462,46 @@ describe('expression-processor', () => {
 
   it('220 / [10, 2]', function () {
     assert.equal(JSONway.calculateExpression(this.test.title), 11)
+  })
+
+  it('aa * [bb, cc]', function () {
+    let input = { aa: 10, bb: 5, cc: 3 }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 150)
+
+    input = { aa: 10, bb: 'bar', cc: 3 }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 30)
+
+    input = { aa: 10, bb: 5, cc: 'baz' }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 50)
+
+    input = { aa: 10, bb: 'bar', cc: 'baz' }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 10)
+
+    input = { aa: 'foo', bb: 'bar', cc: 'baz' }
+    assert.isNull(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = { aa: 'foo', bb: 5, cc: 3 }
+    assert.isNull(JSONway.calculateExpression(this.test.title, null, input))
+  })
+
+  it('aa / [bb, cc]', function () {
+    let input = { aa: 150, bb: 5, cc: 3 }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 10)
+
+    input = { aa: 150, bb: 'bar', cc: 3 }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 50)
+
+    input = { aa: 150, bb: 5, cc: 'baz' }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 30)
+
+    input = { aa: 150, bb: 'bar', cc: 'baz' }
+    assert.equal(JSONway.calculateExpression(this.test.title, null, input), 150)
+
+    input = { aa: 'foo', bb: 'bar', cc: 'baz' }
+    assert.isNull(JSONway.calculateExpression(this.test.title, null, input))
+
+    input = { aa: 'foo', bb: 5, cc: 3 }
+    assert.isNull(JSONway.calculateExpression(this.test.title, null, input))
   })
 
   it('5 # 15', function () {
@@ -494,18 +614,26 @@ describe('expression-processor', () => {
   })
 
   // TODO: find a syntax to support empty or 1-length list?
-  it.skip('? [2]', function () {
+  it.skip('? [2,]', function () {
     assert.isTrue(JSONway.calculateExpression(this.test.title, null, {}))
     assert.isFalse(JSONway.calculateExpression('? []', null, {}))
     assert.isTrue(JSONway.calculateExpression('? [null]', null, {}))
   })
 
-  it(`? [1,3]`, function () {
+  it('? [1,3]', function () {
     assert.isTrue(JSONway.calculateExpression(this.test.title, null, {}))
   })
 
-  it(`? [undefined,1,2]`, function () {
+  it('? [undefined,1,2]', function () {
     assert.isTrue(JSONway.calculateExpression(this.test.title, null, {}))
+  })
+
+  it('? [undefined,undefined]', function () {
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, {}))
+  })
+
+  it('? [undefined,null]', function () {
+    assert.isFalse(JSONway.calculateExpression(this.test.title, null, {}))
   })
 
   it(`20 - [1,2,3,true,4]`, function () {
