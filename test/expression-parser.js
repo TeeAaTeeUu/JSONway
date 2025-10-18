@@ -309,6 +309,21 @@ describe('expression-parser', () => {
     ])
   })
 
+  it('ab.cd === 12 & cd[ab] == 13', function () {
+    const out = [
+      ['.', 'ab', '.', 'cd'],
+      '=',
+      12,
+      '&&',
+      '(',
+      [['.', 'cd', '.', 'ab'], '=', 13],
+    ]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), out)
+
+    const input = this.test.title.replaceAll(' ', '')
+    assert.deepEqual(JSONway.parseExpression(input), out)
+  })
+
   it('ab.cd=12 || cd.ab != 13', function () {
     const out = [
       ['.', 'ab', '.', 'cd'],
