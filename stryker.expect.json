@@ -1501,12 +1501,6 @@
   [
     "lib/setter.js",
     "[Survived] EqualityOperator",
-    "-     for (let i = 0, len = parsedPath.length; i < len; i++)",
-    "+     for (let i = 0, len = parsedPath.length; i <= len; i++)"
-  ],
-  [
-    "lib/setter.js",
-    "[Survived] EqualityOperator",
     "-     return key < 0 ? 0 : key",
     "+     return key <= 0 ? 0 : key"
   ],
