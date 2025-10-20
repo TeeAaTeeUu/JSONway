@@ -1,6 +1,6 @@
 {
   "name": "jsonway",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "JSONway - object value getter & setter from path strings",
   "keywords": ["json", "path", "getter", "setter", "flattener", "expander", "expressions"],
   "license": "MIT",
