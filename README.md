@@ -63,7 +63,7 @@ In general spaces and new lines are ignored and trimmed in the syntax, so that e
 - `a.**.c` all `c` values regardless where they are nested under `a`.
 - `**.(>10)` all numbers anywhere in the JSON that are larger than `10`.
 - `{ a.b, d.e }` object with keys matching their own query results.
-- `{ myKey: a[].b }` keys can be renamed similarly like in JSON or Javascript.
+- `{ myKey: a[].b }` keys can be renamed similarly like in JSON or JavaScript.
 - `[{ a[*].b, c.d }]` list of objects expanded by values of `b`.
 
 When a key name in a path needs to be escaped, it can be done like `a[b.c].d` or `a['b[]'].c`.
@@ -155,7 +155,7 @@ Returns list of objects separately for each value found with paths having `[*]` 
 
 ### Other methods
 
-Overall JSONway exposes following methods:
+JSONway exposes following methods:
 
 ```js
 {
@@ -179,7 +179,7 @@ For further explanations check [documentation](./docs/) folder. For more example
 
 It's true that there are already many popular JSON query languages like JSONPath, JSONata, and JMESPath. I wanted to create my own syntax and language from scratch that was slightly different, while indeed inspired by those and many others.
 
-Goals and guiding principles for JSONway have been to have concise but safety restricted syntax, imitating Javascript syntax and logic when possible, and zero dependencies. Creating table-like lists of objects from complex JSON structures, has been one of the main use cases JSONway has been trying to solve.
+Goals and guiding principles for JSONway have been to have concise but safety-restricted syntax, imitating JavaScript syntax and logic when possible, and zero dependencies. Creating table-like lists of objects from complex JSON structures, has been one of the main use cases JSONway has been trying to solve.
 
 Writing your own parser and interpreter for your own query language are educational already on their own, and I would strongly recommend others to do the same. Deciding on a syntax and available capabilities for the language depends heavily on the use cases you have in mind, and I don't believe we will have *"one query language to rule them all"* in the future, either.
 

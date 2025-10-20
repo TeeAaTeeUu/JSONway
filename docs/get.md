@@ -1,6 +1,6 @@
 # Get values from nested JSON
 
-With getter, you can query values from JSON objects and arrays. We'll be using an example JSON object below. Let's go through all features, capabilities, and syntax one by one.
+With getter, you can query values from JSON objects and arrays. We'll use an example JSON object below. Let's go through all features, capabilities, and syntax one by one.
 
 In general queries will do an early exit and return `undefined`, in case the indicated path in the query doesn't exist, or for example an array was expected but some other JSON value was found instead.
 
@@ -22,7 +22,7 @@ In general queries will do an early exit and return `undefined`, in case the ind
 
 ## `.` Nested object paths
 
-At its simplest when no escaping is needed, properties only need to be separated by `.` full stop:
+At its simplest when no escaping is needed, properties only need to be separated by `.` period:
 
 ```js
 aa.bb.cc
@@ -54,7 +54,7 @@ aa
 
 As long as the property name can't be misunderstood to be a syntax for something else, escaping with square brackets `[]` or with quoted square brackets `['']` isn't needed. If the name contains any of the following characters, it needs to be escaped: `[`, `]`, `,`, `"`, `'`, `.`, or any empty spaces or new line characters.
 
-In case some part of the path doesn't exist, then `undefined` is returned instead:
+If some part of the path doesn't exist, then `undefined` is returned instead:
 
 ```js
 aa.missing.bb
@@ -100,7 +100,7 @@ dd[2][1]
 dd.2.1
 ```
 
-The first two and the last two of the above are equivalent with each other.
+The first two and the last two of the above are equivalent to each other.
 
 When wanting to start the indexing from the end of the array list, use negative numbers instead (starting from `-1`):
 
@@ -160,7 +160,7 @@ JSONway.get(myObject, 'dd.101')
 
 ## Nested array paths
 
-If wanted to get the whole array one way or another, there are a plethora of different ways to do that. The remaining path of the query is processed for each of the array values, allowing to select more deeply nested values within arrays.
+If wanted to get the whole array one way or another, there are many different ways to do that. The remaining path of the query is processed for each of the array values, allowing to select more deeply nested values within arrays.
 
 For example `ff[].0` would select from a list of lists the first value within all of the latter nested lists.
 
@@ -280,7 +280,7 @@ ff[:#][:#]
 
 ### `[0,2]` - List of indexes
 
-Selecting multiple indexes from array, allowing both positive and negative indexes similarly like with single indexed array paths. If the path until the array has existed, the array is always returned. If the selected index doesn't exist, `undefined` will be given in its place to keep otherwise structurally the same. Allows selecting as many indexes as you need.
+Selecting multiple indexes from array, allowing both positive and negative indexes, is done similarly to how single indexed array paths are used. If the path until the array has existed, a result array is always returned. If one of the selected indexes doesn't exist, `undefined` will be returned in its place to keep the order of the list otherwise the same. Allows selecting as many indexes as needed.
 
 ```js
 dd[0,1]
@@ -306,7 +306,7 @@ JSONway.get(myObject, 'ff[0,-1].1')
 
 ### `[0:2]` - Array slices
 
-Convenience syntax for above list of indexes, when wanting to e.g. select first 5 or last 3 from array. Full syntax is `[{start} : {stop} : {step}]`, where `0`, end of array, and `1` are assumed as defaults if not specified. Meaning that `[:5]` means the first 5, and `[-3:]` returns the last 3.
+Convenience syntax for the earlier mentioned list of indexes, when wanting to e.g. select first 5 or last 3 from array. Full syntax is `[start : stop : step]`, where `0`, the end of the array, and `1` are assumed as defaults if not specified. Meaning that `[:5]` means the first 5, and `[-3:]` returns the last 3.
 
 ```js
 gg[:10:2]
@@ -331,7 +331,7 @@ JSONway.get(myObject, 'gg[gg[1:7:2]]')
 
 ## `[**]` - Deep search
 
-Allows to find properties and values regardless where those are in the JSON, without knowing the exact path. Either `**` or `[**]` syntax can be used. If the path until the search exists, at least an empty array is returned. Deep search comes with the performance cost of needing to traverse the JSON for each of its paths and values. Traversal search is done as Breadth First Search.
+Allows to find properties and values regardless where those are in the JSON, without needing to know the exact path. Either `**` or `[**]` syntax can be used. If the path until the search exists, at least an empty array is returned. Deep search comes with the performance cost of needing to traverse the JSON for each of its paths and values. Traversal search is done as Breadth First Search.
 
 ```js
 **.cc
@@ -357,11 +357,11 @@ JSONway.get(myObject, 'ff[**][0]')
 
 ## Multiple paths together
 
-Sometimes multiple different paths are wanted to be queried within a single group query. Depending on the need, there are few different options to do that.
+Sometimes multiple different paths are wanted to be queried within a single group query. Depending on the need, there are a few different options to do that.
 
 ### `[...]` - List of paths and values
 
-When an array is wanted to be returned, multiple paths can be listed as comma `,` separated list, surrounded within square brackets `[` `]`. Regular JSON values are also able to be used within the list, if needed.
+When an array is wanted to be returned, multiple paths can be listed as comma `,` separated list, surrounded within square brackets `[` `]`. Regular JSON values can also be used within the list, if needed.
 
 ```js
 [aa.bb.cc, dd.2.0, 'filler', gg[:5]]
@@ -376,7 +376,7 @@ When an array is wanted to be returned, multiple paths can be listed as comma `,
 ]
 ```
 
-Path until the list of paths can be also applied, that will narrow down the paths, and reduce repetition. In case of selecting only by an index, `[0]` escaped syntax is required to distinguish from plain numbers as JSON values.
+Path until the list of paths can be also applied, which will narrow down the paths, and reduce repetition. In case of selecting only by an index, `[0]` escaped syntax is required to distinguish from plain numbers as JSON values.
 
 ```js
 dd[
@@ -431,7 +431,7 @@ JSONway.get(
 
 ### `{}` - Object of paths
 
-When an object is wanted to be returned, multiple paths can be listed as comma `,` separated list, surrounded within curly brackets `{` `}`. By default the name for the key within the object is going to be the path itself, but can be overwritten by prefixing with `myName:` syntax. Similarly default value can be set, in case path doesn't exist or returns `undefined`, with postfixing `= 'myValue'` syntax. Also following aliases for the default value is accepted: `=`, `=?`, `||`.
+When an object is wanted to be returned, multiple paths can be listed as comma `,` separated list, surrounded within curly brackets `{` `}`. By default the name for the key within the object will be the path itself, but can be overwritten by prefixing with `myName:`. Similarly default value can be set, in case path doesn't exist or returns `undefined`, with postfixing `= 'myValue'`. Also, the following aliases for the default value are accepted: `=`, `=?`, `||`.
 
 ```js
 {aa.bb.cc, dd.2.0, gg[:5]}
@@ -476,7 +476,7 @@ JSONway.get(
 
 ### `?|` - First existing or matching path
 
-When not certain which of the different paths the wanted result is found from, a list of paths can be used to search the first matching one. Syntax is to separate a list of paths and values with `|?`, surrounded within parenthesis `(` `)`. Also following separators are accepted: `||`, `??`, `?|`.
+When not certain which of the different paths the wanted result is found from, a list of paths can be used to search the first matching one. The syntax is to separate a list of paths and values with `|?`, surrounded within parenthesis `(` `)`. Also following separators are accepted: `||`, `??`, `?|`.
 
 ```js
 (aa.bb.dd |? dd.2.missing |? dd.2.0 |? 'default')
@@ -504,9 +504,9 @@ JSONway.get(myObject, "(aa.bb.dd |? dd.2.missing |? dd.2.0 |? 'default')")
 
 ## `[*]` - Normalized table view
 
-Especially if wanted to view a mix of interconnected and complex nested JSON objects and arrays, table or sheet format is often desired. This can be achieved with `[*]` syntax within nested array paths, to indicate all the individual values should be expanded to their own rows. `[*]` is otherwise treated similarly to flattening `[]`. Other paths are then grouped by and spread out according to their relation to those expanded values. This might sound complicated, but when needed to be used, it will make more sense.
+Especially if wanted to view a mix of interconnected and complex nested JSON objects and arrays, table or spreadsheet format is often useful. This can be achieved with `[*]` syntax within nested array paths, to indicate all the individual values should be expanded to their own rows. `[*]` is otherwise treated similarly to flattening `[]`. Other paths are then grouped by and spread out according to their relation to those expanded values. This might sound complicated, but when needed to be used, it will make more sense.
 
-Syntax is otherwise the same as with the object of paths, but surrounded within `[{` and `}]`.
+The syntax is otherwise the same as with the object of paths, but surrounded within `[{` and `}]`.
 
 <details>
 
@@ -673,7 +673,7 @@ JSONway.get(
 
 ## `|>` - Pipe modifiers
 
-With pipe modifiers the results can be further processed, for example returning the size of the list instead of the list itself. These can be used either at the end of the path to modify the current value, or within array operators to work on the matched values as a list. Multiple pipe modifiers can be added in a chain separated by full stop `.`. Also following pipe modifier indicators can be used: `||` and `=>`.
+With pipe modifiers the results can be further processed, for example returning the size of the list instead of the list itself. These can be used either at the end of the path to modify the current value, or within array operators to work on the matched values as a list. Multiple pipe modifiers can be added in a chain, separated by period `.`. Also following pipe modifier indicators can be used: `||` and `=>`.
 
 Following pipe modifiers are supported:
 - `size` for the length of the list
@@ -686,8 +686,8 @@ Following pipe modifiers are supported:
 - `round` to round a number to closest integer
 - `average` to calculate average of the numbers
  - Alias: `avg`
-- `sort` to organize list in an ascending order
-- `reverse` to turn the direction of the list
+- `sort` to organize the list in ascending order
+- `reverse` to turn around the direction of the list
 - `split` to separate a text by a given delimiter
 - takes one argument for the separator
 
@@ -707,7 +707,7 @@ aa.bb.cc |> split[' '].2
 gg |> reverse.0
 ```
 
-In case the modifier is not supported by the value given, current value is given for the next modifier in the pipe chain. If none match, value is returned as it would have been without any modifiers.
+In case the modifier is not supported by the value given, the current value is passed to the next modifier in the pipe chain. If none match, value is returned as it would have been without any modifiers.
 
 <details>
 

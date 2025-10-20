@@ -1,6 +1,6 @@
 # Flatten nested JSON to a single object
 
-If wanting to have each nested values within a JSON with their corresponding path, `JSONway.flatten` can be used. This does traversal of the JSON, and returns an object of key-value pairs, where the key is the path to the value within the nested JSON. Especially useful when done to each individual object within a JSON list, to reduce the nestedness and to return more readable list of objects.
+If wanting to have each nested value within a JSON with their corresponding path, `JSONway.flatten` can be used. This does traversal of the JSON, and returns an object of key-value pairs, where the key is the path to the value within the nested JSON. Especially useful when done to each individual object within a JSON list, to reduce the nestedness and to return more readable list of objects.
 
 The opposite transformation back to nested JSON is `JSONway.expand`.
 

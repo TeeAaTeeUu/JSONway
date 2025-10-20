@@ -1,8 +1,8 @@
 # Set values into or create a nested JSON
 
-`JSONway.set` uses almost the same syntax as `JSONway.get`, but for creating the path into the given object if missing or not matching, and placing the given value at the end of the nested path. This is what `JSONway.expand` uses internally.
+`JSONway.set` uses almost the same syntax as `JSONway.get`, but for creating the path in the given object if missing or not matching, and placing the given value at the end of the nested path. This is what `JSONway.expand` uses internally.
 
-Setter path can be cached and reused with `JSONway.parse`, if desired.
+Setter path can be cached and reused with `JSONway.parse`.
 
 ```js
 const myObject = {}
@@ -38,7 +38,7 @@ There are some key differences in how `JSONway.set` handles paths compared to `J
 
 ### `[]` - Create array or add to it
 
-Paths like `a.b.c[]` will first check if the `a.b.c` path exists, and create it with an empty array for `c` within `a.b` if it doesn't exist or was not an array. After that one the given value is added to the end of the array, which in case when array was just created will also be its only value.
+Paths like `a.b.c[]` will first check if the `a.b.c` path exists, and create it with an empty array for `c` within `a.b` if it doesn't exist or was not an array. After that, the given value is added to the end of the array, which in case when array was just created will also be its only value.
 
 This means that repeated setter calls will be appending to that same list one after another.
 
@@ -120,7 +120,7 @@ JSONway.set(myObject, 'a.b.c[=].d', 'new value')
 
 ### `()` - Set path-given values
 
-In addition to the given value to be set, path can also include other nested values to be set, too. This makes it easier to for example set some nested objects that will always have the same 'boilerplate' values needed, too. Context and the JSON-value being operated is the current JSON value in the path thus far.
+In addition to the given value to be set, path can also include other nested values to be set, too. This makes it easier to for example set some nested objects that will always have the same 'boilerplate' values needed, too. The context and the JSON value being operated on is the current JSON value in the path thus far.
 
 Syntax is the same as with `JSONway.calculateExpression` for multiple `=` operations, but also an object-like imitation syntax is available. Any empty space is ignored similarly like with `JSONway.get` and `JSONway.calculateExpression`, meaning that any formatting that feels appropriate can be used.
 
@@ -138,7 +138,7 @@ JSONway.set(myObject, setPath, 'first')
 
 ### `{}` - Set multiple values at the same time
 
-Similarly to `()` syntax, but with `{}` we can set values given as the 3rd parameter. Values can be given either as an ordered list, or as an object with the same sub-paths as the keys.
+Similarly to `()` syntax, but with `{}` we can set values given as the 3rd parameter. Values can be given either as an ordered list, or as an object where the keys match the sub-paths.
 
 ```js
 a{ b, c.d, e[] }
@@ -172,11 +172,11 @@ JSONway.set(anotherObject, setPath, setObject)
 // { a: { b: 'first', c: { d: 'second' }, e: [ 3 ] } }
 ```
 
-If a given set value doesn't have a key with the sub-path, it won't be set and, effectively skipped and ignored.
+If a given set value doesn't have a key corresponding to the sub-path, it won't be set and, effectively skipped and ignored.
 
 ### `{:}` Expand given paths
 
-Similarly to `{}` syntax with an object set value, but all the paths are set and expanded without needing to have matching sub-paths in the main path. Behaves very similarly to `JSONway.expand`, except allowing having `{:}` after some prefix nested path to reduce repetition on the given sub-paths.
+Similarly to `{}` syntax with an object set value, but all the paths are set and expanded without requiring matching sub-paths in the main path. Behaves very similarly to `JSONway.expand`, except allowing having `{:}` after some prefix nested path to reduce repetition on the given sub-paths.
 
 ```js
 const myObject = {}

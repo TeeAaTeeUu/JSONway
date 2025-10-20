@@ -1,6 +1,6 @@
 # Logical Expressions
 
-JSONway expressions generally evaluate into either `true` or `false` values. It's also possible to return e.g. numeric results, which can be especially useful as sub-expressions. Logic works very similarly to Javascript expressions, and similarly supports expressions without space characters between operands and operators.
+JSONway expressions generally evaluate into either `true` or `false` values. It's also possible to return e.g. numeric results, which can be especially useful as sub-expressions. Logic works very similarly to JavaScript expressions, and similarly supports expressions without space characters between operands and operators.
 
 Expressions can be used either on their own, or as part of a path in the query for `JSONway.get`.
 
@@ -29,7 +29,7 @@ JSONway.calculateExpression('(a >= 5)', { a: 10 })
 - `!` for boolean negation, not
 - `(` and `)` for nested grouping of sub-expressions
 
-Both the left and right right side of the operations can be either pure JSON-value, sub-expression, or a JSONway path. In the below example, `a` and `bb` are taken to be paths within the given context. Evaluation of the expression is done from left to right, and stops and returns as early as possible when the end result is not going to change anymore.
+Both the left and right side of the operations can be either pure JSON value, sub-expression, or a JSONway path. In the below example, `a` and `bb` are taken to be paths within the given context. Evaluation of the expression is done from left to right, and stops and returns as early as possible when the end result is not going to change anymore.
 
 ```js
 (a >= 5)
@@ -50,7 +50,7 @@ JSONway.calculateExpression('(a >= 5)', { a: 3 })
 // false
 ```
 
-One of the ways how `JSONway.calculateExpression` differs from Javascript, is that JSONway doesn't do type-casting. Meaning that regardless if the equality is checked with `=` or `==`, it will always return `false` for `5 = '5'` and `true` for `5 != '5'`.
+One of the ways in which `JSONway.calculateExpression` differs from JavaScript, is that JSONway doesn't do type-casting. Meaning that regardless if the equality is checked with `=` or `==`, it will always return `false` for `5 = '5'` and `true` for `5 != '5'`.
 
 ## Convenience assumptions
 
@@ -58,7 +58,7 @@ Expression syntax reduces repetition in the query language itself, and let's go 
 
 ### Left assumed to be context
 
-Left operand is assumed to be the current JSON-value as the context, if not specifically given in the query.
+Left operand is assumed to be the current JSON value as the context, if not specifically given in the query.
 
 ```js
 (<0)
@@ -102,7 +102,7 @@ Alternative syntax for more lengthy `=` and `&&` condition, is to imitate object
 )
 ```
 
-Meaning they are both checking if `aa.bb` is equal to `'bar'`, that `cc` is `15`, and that `dd.ee` is either `foo` or `baz`.
+Meaning they are all checking if `aa.bb` is equal to `'bar'`, that `cc` is `15`, and that `dd.ee` is either `foo` or `baz`.
 
 ## `$` - placeholder for extra context
 
