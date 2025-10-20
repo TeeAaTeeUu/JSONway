@@ -1429,14 +1429,14 @@
   [
     "lib/setter.js",
     "[Survived] EqualityOperator",
-    "-           for (let j = 0, len = valueList.length; j < len; j++) {",
-    "+           for (let j = 0, len = valueList.length; j <= len; j++) {"
+    "-           for (let j = 0, len = valueList.length; j < len; j++)",
+    "+           for (let j = 0, len = valueList.length; j <= len; j++)"
   ],
   [
     "lib/setter.js",
     "[Survived] EqualityOperator",
-    "-           for (let j = 0, len = valueList.length; j < len; j++) {",
-    "+           for (let j = 0, len = valueList.length; j <= len; j++) {"
+    "-           for (let j = 0, len = valueList.length; j < len; j++)",
+    "+           for (let j = 0, len = valueList.length; j <= len; j++)"
   ],
   [
     "lib/setter.js",
@@ -1449,12 +1449,6 @@
     "[Survived] MethodExpression",
     "-             else set(previous, [ARRAY_INDEX, j, ...parsedPath[i].slice(1)], value)",
     "+             else set(previous, [ARRAY_INDEX, j, ...parsedPath[i]], value)"
-  ],
-  [
-    "lib/setter.js",
-    "[Survived] EqualityOperator",
-    "-           for (let j = 0, len = previous.length; j < len; j++) {",
-    "+           for (let j = 0, len = previous.length; j <= len; j++) {"
   ],
   [
     "lib/setter.js",
