@@ -635,6 +635,12 @@
   ],
   [
     "lib/function-processor.js",
+    "[Survived] EqualityOperator",
+    "-     for (let i = 0; i < input.length; i++)",
+    "+     for (let i = 0; i <= input.length; i++)"
+  ],
+  [
+    "lib/function-processor.js",
     "[Survived] ConditionalExpression",
     "-       if (typeof input[i] === 'number') sum += input[i]",
     "+       if (true) sum += input[i]"

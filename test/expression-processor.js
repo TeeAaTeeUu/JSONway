@@ -646,4 +646,9 @@ describe('expression-processor', () => {
     let input = { a: [5, 6, 7], b: [4, 2, 3, 5] }
     assert.deepEqual(JSONway.calculateExpression(this.test.title, input), 10.5)
   })
+
+  it('a => sum / b =| avg.floor * a |> sort.reverse.0', function () {
+    let input = { a: [5, 6, 7], b: [4, 2, 3, 5] }
+    assert.deepEqual(JSONway.calculateExpression(this.test.title, input), 42)
+  })
 })

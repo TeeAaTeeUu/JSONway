@@ -54,6 +54,26 @@ describe('function-processor', () => {
     assert.deepEqual(processFunction(result, pipe), result)
   })
 
+  it('sum', function () {
+    let result = [4, 2, 7, 3]
+    let output = 16
+
+    const pipe = parseFunction(this.test.title)
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    result = [4, true, 2, 0, 7, 'foo', 3]
+    assert.deepEqual(processFunction(result, pipe), output)
+
+    result = 10
+    assert.deepEqual(processFunction(result, pipe), result)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
+
+    result = 'foo'
+    assert.deepEqual(processFunction(result, pipe), result)
+  })
+
   it('floor', function () {
     let result = 15.7
     let output = 15
