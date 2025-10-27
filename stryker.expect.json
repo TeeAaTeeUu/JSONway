@@ -1038,30 +1038,6 @@
   ],
   [
     "lib/parser.js",
-    "[Survived] StringLiteral",
-    "-         case '=':",
-    "+         case \"\":"
-  ],
-  [
-    "lib/parser.js",
-    "[Survived] ConditionalExpression",
-    "-           if (path[i] === '=' && path[i + 1] !== '>') break",
-    "+           if (path[i] === '=' && true) break"
-  ],
-  [
-    "lib/parser.js",
-    "[Survived] ArithmeticOperator",
-    "-           if (path[i] === '=' && path[i + 1] !== '>') break",
-    "+           if (path[i] === '=' && path[i - 1] !== '>') break"
-  ],
-  [
-    "lib/parser.js",
-    "[Survived] StringLiteral",
-    "-           if (path[i] === '=' && path[i + 1] !== '>') break",
-    "+           if (path[i] === '=' && path[i + 1] !== \"\") break"
-  ],
-  [
-    "lib/parser.js",
     "[Survived] ConditionalExpression",
     "-           if (current) {",
     "+           if (true) {"
@@ -1096,12 +1072,6 @@
     "[Survived] ConditionalExpression",
     "-                     previousParsedPath[0] === ARRAY_LIST)",
     "+                     true)"
-  ],
-  [
-    "lib/parser.js",
-    "[NoCoverage] StringLiteral",
-    "-             case '=':",
-    "+             case \"\":"
   ],
   [
     "lib/parser.js",

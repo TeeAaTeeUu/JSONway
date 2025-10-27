@@ -39,6 +39,11 @@ describe('path-stringifier', () => {
     "foo['baz[3']",
     `foo['baz"3']`,
     `foo['baz,3']`,
+    'ab[==]',
+    'ab[>]',
+    'ab.<',
+    'ab.!',
+    `ab['|']`,
   ]
 
   /* eslint-disable mocha/no-setup-in-describe */

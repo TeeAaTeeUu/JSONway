@@ -960,6 +960,23 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
+  it('aa || round', function () {
+    const out = ['.', 'aa', '|', [true, ['.', 'round']]]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+
+    let input = 'aa | round'
+    assert.deepEqual(JSONway.parse(input), out)
+
+    input = 'aa = round'
+    assert.deepEqual(JSONway.parse(input), out)
+
+    input = 'aa => round'
+    assert.deepEqual(JSONway.parse(input), out)
+
+    input = 'aa =| round'
+    assert.deepEqual(JSONway.parse(input), out)
+  })
+
   it('[foo.bar,baz.gee][0]', function () {
     const out = [
       '[,]',
@@ -990,7 +1007,7 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
-  it('aa.==.cc', function () {
+  it('aa[==].cc', function () {
     const out = ['.', 'aa', '.', '==', '.', 'cc']
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })

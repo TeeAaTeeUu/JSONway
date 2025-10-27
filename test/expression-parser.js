@@ -216,14 +216,14 @@ describe('expression-parser', () => {
     ])
   })
 
-  it('ab.cd>12 |> cd !=10', function () {
+  it('ab.cd>12 | cd !=10', function () {
     const out = [
       ['.', 'ab', '.', 'cd'],
       '>',
       12,
       '||',
       '(',
-      ['>', ['.', 'cd'], '!=', 10],
+      [['.', 'cd'], '!=', 10],
     ]
     assert.deepEqual(JSONway.parseExpression(this.test.title, 0), [
       out,
@@ -736,5 +736,16 @@ describe('expression-parser', () => {
       out,
       this.test.title.length,
     ])
+  })
+
+  it('a => max / b =| min * a |> size', function () {
+    const out = [
+      ['.', 'a', '|', [true, ['.', 'max']]],
+      '/',
+      ['.', 'b', '|', [true, ['.', 'min']]],
+      '*',
+      ['.', 'a', '|', [true, ['.', 'size']]],
+    ]
+    assert.deepEqual(JSONway.parseExpression(this.test.title), out)
   })
 })

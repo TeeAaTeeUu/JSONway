@@ -641,4 +641,9 @@ describe('expression-processor', () => {
     values = 15
     assert.isFalse(JSONway.calculateExpression(this.test.title, {}, values))
   })
+
+  it('a => max / b =| min * a |> size', function () {
+    let input = { a: [5, 6, 7], b: [4, 2, 3, 5] }
+    assert.deepEqual(JSONway.calculateExpression(this.test.title, input), 10.5)
+  })
 })
