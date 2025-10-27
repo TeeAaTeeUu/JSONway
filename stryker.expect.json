@@ -297,24 +297,6 @@
   ],
   [
     "lib/expression-parser.js",
-    "[Survived] BooleanLiteral",
-    "-                 potentialNestingNeeded = true",
-    "+                 potentialNestingNeeded = false"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-               if (current[i] === '?' || current[i] === '|') {",
-    "+               if (true) {"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] BooleanLiteral",
-    "-                 potentialNestingNeeded = true",
-    "+                 potentialNestingNeeded = false"
-  ],
-  [
-    "lib/expression-parser.js",
     "[Survived] EqualityOperator",
     "-     if (i > len) i = len",
     "+     if (i >= len) i = len"
@@ -330,12 +312,6 @@
     "[Survived] ConditionalExpression",
     "-         if (Array.isArray(returnExpression[i + 1])) {",
     "+         if (true) {"
-  ],
-  [
-    "lib/expression-parser.js",
-    "[Survived] ConditionalExpression",
-    "-         returnExpression[i] !== EXISTS_OR &&",
-    "+         true &&"
   ],
   [
     "lib/expression-parser.js",
