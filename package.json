@@ -2,7 +2,18 @@
   "name": "jsonway",
   "version": "0.3.0",
   "description": "JSONway - object value getter & setter from path strings",
-  "keywords": ["json", "path", "getter", "setter", "flattener", "expander", "expressions"],
+  "keywords": [
+    "json",
+    "path",
+    "query",
+    "nested",
+    "getter",
+    "setter",
+    "flatten",
+    "unflatten",
+    "traversal",
+    "expression"
+  ],
   "license": "MIT",
   "author": "TeeAaTeeUu",
   "repository": {
