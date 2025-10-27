@@ -27,20 +27,20 @@
     "mutate-expected": "pnpm mutate-test | tee /dev/tty | node scripts/_stryker_expected.js"
   },
   "devDependencies": {
-    "@babel/parser": "^7.28.4",
-    "@eslint/js": "^9.35.0",
-    "@stryker-mutator/core": "^9.1.1",
-    "@stryker-mutator/mocha-runner": "^9.1.1",
+    "@babel/parser": "^7.28.5",
+    "@eslint/js": "^9.38.0",
+    "@stryker-mutator/core": "^9.2.0",
+    "@stryker-mutator/mocha-runner": "^9.2.0",
     "c8": "^10.1.3",
-    "chai": "^6.0.1",
-    "eslint": "^9.35.0",
+    "chai": "^6.2.0",
+    "eslint": "^9.38.0",
     "eslint-config-flat-gitignore": "^2.1.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-mocha": "^11.1.0",
+    "eslint-plugin-mocha": "^11.2.0",
     "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.4.0",
-    "mocha": "11.7.2",
+    "mocha": "11.7.4",
     "prettier": "^3.6.2"
   },
-  "packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef"
+  "packageManager": "pnpm@10.19.0+sha512.c9fc7236e92adf5c8af42fd5bf1612df99c2ceb62f27047032f4720b33f8eacdde311865e91c411f2774f618d82f320808ecb51718bfa82c060c4ba7c76a32b8"
 }
