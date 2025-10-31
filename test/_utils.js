@@ -5,10 +5,10 @@ export async function _getJsonAsync(filePath) {
 }
 
 export async function _readFile(filePath, encoding) {
-  const orchestratorRequestsJsonPath = new URL(filePath, import.meta.url)
-  if (encoding) return await fs.readFile(orchestratorRequestsJsonPath, encoding)
+  const fullFilePath = new URL(filePath, import.meta.url)
+  if (encoding) return await fs.readFile(fullFilePath, encoding)
 
-  return await fs.readFile(orchestratorRequestsJsonPath)
+  return await fs.readFile(fullFilePath)
 }
 
 export function _arrayOfObjects(arrayOfArrays) {
