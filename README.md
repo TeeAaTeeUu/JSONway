@@ -82,7 +82,7 @@ When a key name in a path needs to be escaped, it can be done like `a[b.c].d` or
 - `a[|> max].b` largest `b` value.
 - `a.b.c |> split._.7` split value `c` by underscore `_`, and return its 8th part.
 - `a[ |> sort.reverse[0] ]` sort in descending order and take the first value.
-- `min`, `floor`, `ceil`, `round`, `trunc`, `avg`, also supported.
+- `min`,, `sum`, `floor`, `ceil`, `round`, `trunc`, `avg`, also supported.
 
 ### Examples
 

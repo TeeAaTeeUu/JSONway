@@ -680,6 +680,7 @@ Following pipe modifiers are supported:
  - Aliases: `length`, `len`, `count`
 - `max` to return largest value
 - `min` to return smallest value
+- `sum` to do addition with all the numbers
 - `floor` to round a number down
 - `ceil` to round number up
 - `trunc` to remove decimal value from a number
