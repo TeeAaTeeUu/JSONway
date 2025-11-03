@@ -331,6 +331,11 @@ describe('parser', () => {
     assert.deepEqual(JSONway.parse(this.test.title), out)
   })
 
+  it('foo{}', function () {
+    const out = ['.', 'foo', '{}', []]
+    assert.deepEqual(JSONway.parse(this.test.title), out)
+  })
+
   it('foo[bar{baz}]', function () {
     const out = ['.', 'foo', '.', 'bar{baz}']
     assert.deepEqual(JSONway.parse(this.test.title), out)

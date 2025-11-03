@@ -491,24 +491,6 @@
   [
     "lib/flattener.js",
     "[Survived] ConditionalExpression",
-    "-       if (deepKeys.length === 0) flat[escapedKey + '{}'] = ''",
-    "+       if (false) flat[escapedKey + '{}'] = ''"
-  ],
-  [
-    "lib/flattener.js",
-    "[NoCoverage] StringLiteral",
-    "-       if (deepKeys.length === 0) flat[escapedKey + '{}'] = ''",
-    "+       if (deepKeys.length === 0) flat[escapedKey + \"\"] = ''"
-  ],
-  [
-    "lib/flattener.js",
-    "[NoCoverage] StringLiteral",
-    "-       if (deepKeys.length === 0) flat[escapedKey + '{}'] = ''",
-    "+       if (deepKeys.length === 0) flat[escapedKey + '{}'] = \"Stryker was here!\""
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] ConditionalExpression",
     "-       if (valueLength > 40) return false",
     "+       if (false) return false"
   ],
@@ -944,18 +926,6 @@
     "[Survived] ConditionalExpression",
     "-           value => value !== undefined,",
     "+           value => true,"
-  ],
-  [
-    "lib/object-parser.js",
-    "[Survived] ConditionalExpression",
-    "-     if (token === '}' || startIndex >= len) return [[], startIndex]",
-    "+     if (false || startIndex >= len) return [[], startIndex]"
-  ],
-  [
-    "lib/object-parser.js",
-    "[Survived] StringLiteral",
-    "-     if (token === '}' || startIndex >= len) return [[], startIndex]",
-    "+     if (token === \"\" || startIndex >= len) return [[], startIndex]"
   ],
   [
     "lib/object-parser.js",

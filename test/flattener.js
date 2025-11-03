@@ -125,12 +125,13 @@ describe('flattener', () => {
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
-  it('{"a":["bb","cc",[["dd",{"ee":"123"}],"ff"]]}', function () {
+  it('{"a":["bb","cc",[["dd",{"ee":"123","gg":{}}],"ff"]]}', function () {
     const out = {
       'a[0]': 'bb',
       'a[1]': 'cc',
       'a[2][0][0]': 'dd',
       'a[2][0][1].ee': '123',
+      'a[2][0][1].gg{}': '',
       'a[2][1]': 'ff',
     }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)

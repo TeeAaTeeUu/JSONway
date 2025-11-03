@@ -261,6 +261,11 @@ describe('setter', () => {
     )
   })
 
+  it('a{}', function () {
+    const out = { a: {} }
+    assert.deepEqual(JSONway.set({}, this.test.title, ''), out)
+  })
+
   it('a[].b', function () {
     let out = { a: [{ b: 'zo' }, { b: 'yo' }] }
     assert.deepEqual(JSONway.set({}, this.test.title, ['zo', 'yo']), out)

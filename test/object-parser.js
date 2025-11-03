@@ -19,12 +19,22 @@ describe('object-parser', () => {
   })
 
   it('foo{', function () {
-    const out = []
+    const out = ['{}', []]
     assert.deepEqual(parseObject(this.test.title, 4)[0], out)
   })
 
   it('{   ', function () {
-    const out = []
+    const out = ['{}', []]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{}', function () {
+    const out = ['{}', []]
+    assert.deepEqual(parseObject(this.test.title, 1)[0], out)
+  })
+
+  it('{}.foo', function () {
+    const out = ['{}', []]
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
