@@ -260,12 +260,6 @@
     "+       default:"
   ],
   [
-    "lib/expander.js",
-    "[Survived] StringLiteral",
-    "-   const ARRAY_BRACKETS = '[]'",
-    "+   const ARRAY_BRACKETS = \"\""
-  ],
-  [
     "lib/expression-parser.js",
     "[Survived] BooleanLiteral",
     "-     let potentialNestingNeeded = false",

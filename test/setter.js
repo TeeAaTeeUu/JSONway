@@ -110,6 +110,10 @@ describe('setter', () => {
     object = { b: 'x', a: ['g'] }
     out = { b: 'x', a: ['z'] }
     assert.deepEqual(JSONway.set(object, this.test.title, 'z'), out)
+
+    object = {}
+    out = { a: [''] }
+    assert.deepEqual(JSONway.set({}, this.test.title, ''), out)
   })
 
   it('[=]', function () {
@@ -166,6 +170,23 @@ describe('setter', () => {
     assert.deepEqual(JSONway.set([1, 2, 3], this.test.title, ['z', 'x']), out)
   })
 
+  it('a[]', function () {
+    let out = { a: [] }
+    assert.deepEqual(JSONway.set({}, this.test.title, ''), out)
+
+    out = { a: ['', ''] }
+    assert.deepEqual(JSONway.set({}, this.test.title, ['', '']), out)
+
+    out = { a: ['zo'] }
+    assert.deepEqual(JSONway.set({}, this.test.title, 'zo'), out)
+
+    out = { a: [5] }
+    assert.deepEqual(JSONway.set({}, this.test.title, 5), out)
+
+    out = { a: ['zo', 5] }
+    assert.deepEqual(JSONway.set({}, this.test.title, ['zo', 5]), out)
+  })
+
   it('a[=]', function () {
     const out = { a: ['z'] }
     assert.deepEqual(JSONway.set({}, this.test.title, 'z'), out)
@@ -189,6 +210,17 @@ describe('setter', () => {
   it('a[1].b', function () {
     const out = { a: [undefined, { b: 'z' }] }
     assert.deepEqual(JSONway.set({}, this.test.title, 'z'), out)
+  })
+
+  it('a[].b', function () {
+    let out = { a: [{ b: '' }] }
+    assert.deepEqual(JSONway.set({}, this.test.title, ''), out)
+
+    out = { a: [{ b: '' }, { b: '' }] }
+    assert.deepEqual(JSONway.set({}, this.test.title, ['', '']), out)
+
+    out = { a: [{ b: 'zo' }] }
+    assert.deepEqual(JSONway.set({}, this.test.title, 'zo'), out)
   })
 
   it('a[=].b', function () {
