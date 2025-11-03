@@ -172,6 +172,69 @@ describe('flattener', () => {
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
+  // TODO: grouping here doesn't seem right
+  it('multi-column is better (maybe?)', function () {
+    const input = {
+      aa: {
+        bb: { long_path: 'bb_value' },
+        cc: { long_path: 'cc_value' },
+        dd: { long_path: 'dd_value' },
+        ee: { long_path: 'ee_value' },
+      },
+    }
+
+    const out = {
+      'aa{bb.long_path,cc.long_path,dd.long_path,ee.long_path}': [
+        'bb_value',
+        'cc_value',
+        'dd_value',
+        'ee_value',
+      ],
+    }
+
+    assert.deepEqual(JSONway.flatten(input), out)
+  })
+
+  it('multi-column would have too long key', function () {
+    const input = {
+      aa: {
+        bb: { even_longer_path: 'bb_value' },
+        cc: { even_longer_path: 'cc_value' },
+        dd: { even_longer_path: 'dd_value' },
+        ee: { even_longer_path: 'ee_value' },
+      },
+    }
+
+    const out = {
+      'aa.bb.even_longer_path': 'bb_value',
+      'aa.cc.even_longer_path': 'cc_value',
+      'aa.dd.even_longer_path': 'dd_value',
+      'aa.ee.even_longer_path': 'ee_value',
+    }
+
+    assert.deepEqual(JSONway.flatten(input), out)
+  })
+
+  it('multi-column would have too long value', function () {
+    const input = {
+      aa: {
+        bb: { long_path: 'bb_longer_value' },
+        cc: { long_path: 'cc_longer_value' },
+        dd: { long_path: 'dd_longer_value' },
+        ee: { long_path: 'ee_longer_value' },
+      },
+    }
+
+    const out = {
+      'aa.bb.long_path': 'bb_longer_value',
+      'aa.cc.long_path': 'cc_longer_value',
+      'aa.dd.long_path': 'dd_longer_value',
+      'aa.ee.long_path': 'ee_longer_value',
+    }
+
+    assert.deepEqual(JSONway.flatten(input), out)
+  })
+
   it('basic flattening', () => {
     const input = {
       bar: {

@@ -490,6 +490,12 @@
   ],
   [
     "lib/flattener.js",
+    "[Survived] EqualityOperator",
+    "-       if (keysLength > 60) return false",
+    "+       if (keysLength >= 60) return false"
+  ],
+  [
+    "lib/flattener.js",
     "[Survived] ConditionalExpression",
     "-       if (valueLength > 40) return false",
     "+       if (false) return false"
@@ -499,42 +505,6 @@
     "[Survived] EqualityOperator",
     "-       if (valueLength > 40) return false",
     "+       if (valueLength >= 40) return false"
-  ],
-  [
-    "lib/flattener.js",
-    "[NoCoverage] BooleanLiteral",
-    "-       if (valueLength > 40) return false",
-    "+       if (valueLength > 40) return true"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] ConditionalExpression",
-    "-       if (keysLength > 70) return false",
-    "+       if (false) return false"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] EqualityOperator",
-    "-       if (keysLength > 70) return false",
-    "+       if (keysLength >= 70) return false"
-  ],
-  [
-    "lib/flattener.js",
-    "[NoCoverage] BooleanLiteral",
-    "-       if (keysLength > 70) return false",
-    "+       if (keysLength > 70) return true"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] ConditionalExpression",
-    "-         typeof object[key] === 'string'",
-    "+         false"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] StringLiteral",
-    "-         typeof object[key] === 'string'",
-    "+         typeof object[key] === \"\""
   ],
   [
     "lib/function-processor.js",
