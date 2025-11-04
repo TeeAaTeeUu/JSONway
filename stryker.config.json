@@ -7,6 +7,8 @@
   ],
   "testRunner": "mocha",
   "coverageAnalysis": "perTest",
+  "cleanTempDir": "always",
+  "timeoutMS": 500,
   "plugins": [
     "@stryker-mutator/mocha-runner"
   ]
