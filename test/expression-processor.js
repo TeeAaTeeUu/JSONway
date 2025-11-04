@@ -558,6 +558,23 @@ describe('expression-processor', () => {
     assert.isFalse(JSONway.calculateExpression(this.test.title))
   })
 
+  it('a?', function () {
+    let object = { a: 10 }
+    assert.isTrue(JSONway.calculateExpression(this.test.title, object))
+
+    object = { a: 0 }
+    assert.isTrue(JSONway.calculateExpression(this.test.title, object))
+
+    object = { a: 'false' }
+    assert.isTrue(JSONway.calculateExpression(this.test.title, object))
+
+    object = { a: false }
+    assert.isTrue(JSONway.calculateExpression(this.test.title, object))
+
+    object = { a: null }
+    assert.isFalse(JSONway.calculateExpression(this.test.title, object))
+  })
+
   it(`20 - [1,2,3,true,4]`, function () {
     assert.deepEqual(JSONway.calculateExpression(this.test.title), 10)
   })

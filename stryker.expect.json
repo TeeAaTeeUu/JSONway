@@ -670,104 +670,14 @@
   [
     "lib/getter.js",
     "[Survived] ConditionalExpression",
-    "-     if (path === undefined || path === '') return [object, undefined]",
-    "+     if (false || path === '') return [object, undefined]"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (path === undefined || path === '') return [object, undefined]",
-    "+     if (false) return [object, undefined]"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] LogicalOperator",
-    "-     if (path === undefined || path === '') return [object, undefined]",
-    "+     if (path === undefined && path === '') return [object, undefined]"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (path === undefined || path === '') return [object, undefined]",
-    "+     if (path === undefined || false) return [object, undefined]"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] StringLiteral",
-    "-     if (path === undefined || path === '') return [object, undefined]",
-    "+     if (path === undefined || path === \"Stryker was here!\") return [object, undefined]"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (!object) return",
-    "+     if (false) return"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (path === undefined || path === '') return object",
-    "+     if (false || path === '') return object"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (path === undefined || path === '') return object",
-    "+     if (false) return object"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] LogicalOperator",
-    "-     if (path === undefined || path === '') return object",
-    "+     if (path === undefined && path === '') return object"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (path === undefined || path === '') return object",
-    "+     if (path === undefined || false) return object"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] StringLiteral",
-    "-     if (path === undefined || path === '') return object",
-    "+     if (path === undefined || path === \"Stryker was here!\") return object"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
     "-     if (object === undefined) return",
     "+     if (false) return"
   ],
   [
     "lib/getter.js",
     "[Survived] ConditionalExpression",
-    "-           if (typeof current === 'object' && current !== null)",
-    "+           if (true && current !== null)"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-           if (current === undefined) return",
-    "+           if (false) return"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-           if (current === undefined) return",
-    "+           if (false) return"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-           if (current === undefined) return",
-    "+           if (false) return"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-           if (current === undefined) return",
-    "+           if (false) return"
+    "-       if (current === undefined || current === null) return",
+    "+       if (false || current === null) return"
   ],
   [
     "lib/getter.js",
@@ -783,113 +693,15 @@
   ],
   [
     "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (Array.isArray(parsedPath[i + 2]))",
-    "+     if (false)"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ArithmeticOperator",
-    "-     if (Array.isArray(parsedPath[i + 2]))",
-    "+     if (Array.isArray(parsedPath[i - 2]))"
-  ],
-  [
-    "lib/getter.js",
-    "[NoCoverage] ArithmeticOperator",
-    "-       return _getPiped(results, parsedPath[i + 2])",
-    "+       return _getPiped(results, parsedPath[i - 2])"
-  ],
-  [
-    "lib/getter.js",
     "[Survived] EqualityOperator",
     "-     const step = slice[2] > 1 ? slice[2] : 1",
     "+     const step = slice[2] >= 1 ? slice[2] : 1"
   ],
   [
     "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (start > end) return []",
-    "+     if (false) return []"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] EqualityOperator",
-    "-     if (start > end) return []",
-    "+     if (start >= end) return []"
-  ],
-  [
-    "lib/getter.js",
-    "[NoCoverage] ArrayDeclaration",
-    "-     if (start > end) return []",
-    "+     if (start > end) return [\"Stryker was here\"]"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-     if (start >= len) return []",
-    "+     if (false) return []"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] EqualityOperator",
-    "-     if (start >= len) return []",
-    "+     if (start > len) return []"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] EqualityOperator",
-    "-     else if (value >= 0) return value",
-    "+     else if (value > 0) return value"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-       parsedPath[i] === ARRAY_UN_FLAT || parsedPath[i] === ARRAY_UN_FLAT_UNIQUE",
-    "+       parsedPath[i] === ARRAY_UN_FLAT || false"
-  ],
-  [
-    "lib/getter.js",
     "[Survived] EqualityOperator",
     "-     for (let j = 0, len = current.length; j < len; j++) {",
     "+     for (let j = 0, len = current.length; j <= len; j++) {"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-       if (arrayIndexes) indexResults.push([j])",
-    "+       if (true) indexResults.push([j])"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-         if (keepStructure && typeof rest[0] !== 'object') {",
-    "+         if (keepStructure && true) {"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] StringLiteral",
-    "-         if (keepStructure && typeof rest[0] !== 'object') {",
-    "+         if (keepStructure && typeof rest[0] !== \"\") {"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-       if (parsedPath[i] === ARRAY_UNIQUE && !pathHasFlatArray(parsedPath[i + 1]))",
-    "+       if (true && !pathHasFlatArray(parsedPath[i + 1]))"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] MethodExpression",
-    "-         return _arrayUnique(results, indexResults, arrayIndexes).filter(",
-    "-           value => value !== undefined,",
-    "-         )",
-    "+         return _arrayUnique(results, indexResults, arrayIndexes)"
-  ],
-  [
-    "lib/getter.js",
-    "[Survived] ConditionalExpression",
-    "-           value => value !== undefined,",
-    "+           value => true,"
   ],
   [
     "lib/object-parser.js",
