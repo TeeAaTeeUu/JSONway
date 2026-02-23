@@ -33,25 +33,25 @@
   "scripts": {
     "test": "mocha",
     "lint": "eslint .",
-    "coverage": "c8 pnpm test",
+    "coverage": "c8 npm test",
     "mutate-test": "stryker run",
-    "mutate-expected": "pnpm mutate-test | tee /dev/tty | node scripts/_stryker_expected.js"
+    "mutate-expected": "npm run mutate-test | tee /dev/tty | node scripts/_stryker_expected.js"
   },
   "devDependencies": {
-    "@babel/parser": "^7.28.5",
-    "@eslint/js": "^9.38.0",
-    "@stryker-mutator/core": "^9.2.0",
-    "@stryker-mutator/mocha-runner": "^9.2.0",
+    "@babel/parser": "^7.29.0",
+    "@eslint/js": "^9.39.3",
+    "@stryker-mutator/core": "^9.5.1",
+    "@stryker-mutator/mocha-runner": "^9.5.1",
     "c8": "^10.1.3",
-    "chai": "^6.2.0",
-    "eslint": "^9.38.0",
-    "eslint-config-flat-gitignore": "^2.1.0",
+    "chai": "^6.2.2",
+    "eslint": "^9.39.3",
+    "eslint-config-flat-gitignore": "^2.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-mocha": "^11.2.0",
-    "eslint-plugin-prettier": "^5.5.4",
-    "globals": "^16.4.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^16.5.0",
     "mocha": "11.7.4",
-    "prettier": "^3.6.2"
+    "prettier": "^3.8.1"
   },
   "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
 }
