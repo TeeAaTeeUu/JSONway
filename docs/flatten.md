@@ -1,6 +1,6 @@
 # Flatten nested JSON to a single object
 
-If wanting to have each nested value within a JSON with their corresponding path, `JSONway.flatten` can be used. This does traversal of the JSON, and returns an object of key-value pairs, where the key is the path to the value within the nested JSON. Especially useful when done to each individual object within a JSON list, to reduce the nestedness and to return more readable list of objects.
+If wanting to have each nested value within a JSON with their corresponding path, `JSONway.flatten` can be used. This does traversal of the JSON, and returns an object of key-value pairs, where the key is the path to the value within the nested JSON. Especially useful when done to each individual simple object within a JSON list, to reduce the nestedness and to return more readable list of objects.
 
 The opposite transformation back to nested JSON is `JSONway.expand`.
 
@@ -15,13 +15,23 @@ const flatObject = JSONway.flatten(complexNested)
   'bb[0].dd': 'dd1',
   'bb[0].ee[0].cc': 'cc2',
   'bb[0].ee[0].dd': 'dd2',
-  'bb[0].ee[0].ff[].gg[]': [ [ '01', '11' ], [ '02', '12' ] ],
-  'bb[0].ee[0].hh[0]{cc,dd,ii.cc,ii.dd}': [ 'cc3', 'dd3', 'cc4', 'dd4' ],
-  'bb[0].ee[0].hh[1]{cc,dd,ii.cc,ii.dd}': [ 'cc5', 'dd5', 'cc6', 'dd6' ],
+  'bb[0].ee[0].ff[0].gg[]': ['01', '11'],
+  'bb[0].ee[0].ff[1].gg[]': ['02', '12'],
+  'bb[0].ee[0].hh[0].cc': 'cc3',
+  'bb[0].ee[0].hh[0].dd': 'dd3',
+  'bb[0].ee[0].hh[0].ii.cc': 'cc4',
+  'bb[0].ee[0].hh[0].ii.dd': 'dd4',
+  'bb[0].ee[0].hh[1].cc': 'cc5',
+  'bb[0].ee[0].hh[1].dd': 'dd5',
+  'bb[0].ee[0].hh[1].ii.cc': 'cc6',
+  'bb[0].ee[0].hh[1].ii.dd': 'dd6',
   'bb[0].ee[1].cc': 'cc7',
   'bb[0].ee[1].dd': 'dd7',
-  'bb[0].ee[1].ff[].gg[]': [ [ '03', '13' ] ],
-  'bb[0].ee[1].hh[0]{cc,dd,ii.cc,ii.dd}': [ 'cc8', 'dd8', 'cc9', 'dd9' ],
+  'bb[0].ee[1].ff[0].gg[]': ['03', '13'],
+  'bb[0].ee[1].hh[0].cc': 'cc8',
+  'bb[0].ee[1].hh[0].dd': 'dd8',
+  'bb[0].ee[1].hh[0].ii.cc': 'cc9',
+  'bb[0].ee[1].hh[0].ii.dd': 'dd9',
   'bb[0].ee[1].hh[1].cc': 'cc10',
   'bb[0].ee[1].hh[1].dd': 'dd10',
   'bb[0].ee[1].hh[1].ii.cc': 'cc11',
@@ -40,7 +50,7 @@ const flatObject = JSONway.flatten(complexNested)
   'bb[1].ee[0].hh[1].ii.dd': 'dd17',
   'bb[1].ee[1].cc': 'cc18',
   'bb[1].ee[1].dd': 'dd18',
-  'bb[1].ee[1].ff[].gg[]': [ [ '04', '14' ] ],
+  'bb[1].ee[1].ff[0].gg[]': ['04', '14'],
   'bb[1].ee[1].hh[0].cc': 'cc19',
   'bb[1].ee[1].hh[0].dd': 'dd19',
   'bb[1].ee[1].hh[0].ii.cc': 'cc20',
@@ -48,6 +58,6 @@ const flatObject = JSONway.flatten(complexNested)
   'bb[1].ee[1].hh[1].cc': 'cc21',
   'bb[1].ee[1].hh[1].dd': 'dd21',
   'bb[1].ee[1].hh[1].ii.cc': 'cc22',
-  'bb[1].ee[1].hh[1].ii.dd': 'dd22'
+  'bb[1].ee[1].hh[1].ii.dd': 'dd22',
 }
 ```
