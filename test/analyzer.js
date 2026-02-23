@@ -9,6 +9,11 @@ describe('analyzer', () => {
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
+  it('[]', function () {
+    const out = ['[]']
+    assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
+  })
+
   it('5', function () {
     const out = []
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
@@ -22,6 +27,14 @@ describe('analyzer', () => {
   it('{"aa":"bb","cc":{"dd":55},"ee":"ff"}', function () {
     const out = ['aa', 'cc.dd', 'ee']
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
+  })
+
+  it('{"ee":"ff","cc":{"dd":55},"aa":"bb"}', function () {
+    let out = ['aa', 'cc.dd', 'ee']
+    assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
+
+    out = ['ee', 'cc.dd', 'aa']
+    assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title), false), out)
   })
 
   it('{"aa":"bb","c.c":{"dd":55},"e.e":"ff","gg":{}}', function () {
@@ -39,8 +52,8 @@ describe('analyzer', () => {
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
-  it('{"a":"b","c":{"dd":["ee","ff"]},"e":5}', function () {
-    const out = ['a', 'c.dd[]', 'e']
+  it('[1,{"a":"b","c":{"dd":["ee","ff"]},"e":5},3]', function () {
+    const out = ['[]', '[].a', '[].c.dd[]', '[].e']
     assert.deepEqual(JSONway.analyze(JSON.parse(this.test.title)), out)
   })
 
