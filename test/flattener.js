@@ -26,21 +26,53 @@ describe('flattener', () => {
 
   it('{"aa":[["bb","cc"],["dd","ee"]]}', function () {
     const out = {
-      'aa[][]': [
-        ['bb', 'cc'],
-        ['dd', 'ee'],
-      ],
+      'aa[0][]': ['bb', 'cc'],
+      'aa[1][]': ['dd', 'ee'],
+    }
+    assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
+  })
+
+  it('["bb","cc","dd","ee"]', function () {
+    const out = { '[]': ['bb', 'cc', 'dd', 'ee'] }
+    assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
+  })
+
+  it('["bb",{"cc":"dd"},"ee",["ff","gg"]]', function () {
+    const out = {
+      '[0]': 'bb',
+      '[1].cc': 'dd',
+      '[2]': 'ee',
+      '[3][]': ['ff', 'gg'],
+    }
+    assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
+  })
+
+  it('{"aa":[["bb","cc"],["dd","ee"],["ff"]]}', function () {
+    const out = {
+      'aa[0][]': ['bb', 'cc'],
+      'aa[1][]': ['dd', 'ee'],
+      'aa[2][]': ['ff'],
     }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
   it('{"aa":["bb",["cc","dd"],"ee"]}', function () {
-    const out = { 'aa[][]': ['bb', ['cc', 'dd'], 'ee'] }
+    const out = {
+      'aa[0]': 'bb',
+      'aa[1][]': ['cc', 'dd'],
+      'aa[2]': 'ee',
+    }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
   it('{"aa":["bb",["cc","dd"],"ee",["hh"],"ii"]}', function () {
-    const out = { 'aa[][]': ['bb', ['cc', 'dd'], 'ee', ['hh'], 'ii'] }
+    const out = {
+      'aa[0]': 'bb',
+      'aa[1][]': ['cc', 'dd'],
+      'aa[2]': 'ee',
+      'aa[3][]': ['hh'],
+      'aa[4]': 'ii',
+    }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
@@ -78,6 +110,11 @@ describe('flattener', () => {
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
+  it('{"aa":[{"bb":{"cc":"dd"}},{"bb":{"cc":"ee"}}],"ff":{"gg":"hh"}}', function () {
+    const out = { 'aa[].bb.cc': ['dd', 'ee'], 'ff.gg': 'hh' }
+    assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
+  })
+
   it('{"aa":[{"bb":"cc"},{"dd":"ee"}],"ff":{"gg":"hh"}}', function () {
     const out = { 'aa[0].bb': 'cc', 'aa[1].dd': 'ee', 'ff.gg': 'hh' }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
@@ -85,20 +122,16 @@ describe('flattener', () => {
 
   it('{"aa":[{"bb":["cc","dd"]},{"bb":["ff","gg"]}]}', function () {
     const out = {
-      'aa[].bb[]': [
-        ['cc', 'dd'],
-        ['ff', 'gg'],
-      ],
+      'aa[0].bb[]': ['cc', 'dd'],
+      'aa[1].bb[]': ['ff', 'gg'],
     }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
   it('{"aa":[[{"bb":["cc","dd"]},{"bb":["ff","gg"]}]]}', function () {
     const out = {
-      'aa[0][].bb[]': [
-        ['cc', 'dd'],
-        ['ff', 'gg'],
-      ],
+      'aa[0][0].bb[]': ['cc', 'dd'],
+      'aa[0][1].bb[]': ['ff', 'gg'],
     }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
@@ -111,7 +144,8 @@ describe('flattener', () => {
   it('{"aa":[{"bb":"cc"},{"bb":"dd","ee":"ff"}],"gg":{"hh":"ii"}}', function () {
     const out = {
       'aa[0].bb': 'cc',
-      'aa[1]{bb,ee}': ['dd', 'ff'],
+      'aa[1].bb': 'dd',
+      'aa[1].ee': 'ff',
       'gg.hh': 'ii',
     }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
@@ -119,8 +153,10 @@ describe('flattener', () => {
 
   it('{"aa":[{"bb":"cc","dd":"ee"},{"bb":"ff","dd":"gg"}]}', function () {
     const out = {
-      'aa[0]{bb,dd}': ['cc', 'ee'],
-      'aa[1]{bb,dd}': ['ff', 'gg'],
+      'aa[0].bb': 'cc',
+      'aa[0].dd': 'ee',
+      'aa[1].bb': 'ff',
+      'aa[1].dd': 'gg',
     }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
@@ -154,7 +190,8 @@ describe('flattener', () => {
 
   it('{"aa":[{"bb":"cc","dd":"ff"}]}', function () {
     const out = {
-      'aa[0]{bb,dd}': ['cc', 'ff'],
+      'aa[0].bb': 'cc',
+      'aa[0].dd': 'ff',
     }
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
@@ -172,30 +209,7 @@ describe('flattener', () => {
     assert.deepEqual(JSONway.flatten(JSON.parse(this.test.title)), out)
   })
 
-  // TODO: grouping here doesn't seem right
-  it('multi-column is better (maybe?)', function () {
-    const input = {
-      aa: {
-        bb: { long_path: 'bb_value' },
-        cc: { long_path: 'cc_value' },
-        dd: { long_path: 'dd_value' },
-        ee: { long_path: 'ee_value' },
-      },
-    }
-
-    const out = {
-      'aa{bb.long_path,cc.long_path,dd.long_path,ee.long_path}': [
-        'bb_value',
-        'cc_value',
-        'dd_value',
-        'ee_value',
-      ],
-    }
-
-    assert.deepEqual(JSONway.flatten(input), out)
-  })
-
-  it('multi-column would have too long key', function () {
+  it('multi-column long paths', function () {
     const input = {
       aa: {
         bb: { even_longer_path: 'bb_value' },
@@ -215,7 +229,7 @@ describe('flattener', () => {
     assert.deepEqual(JSONway.flatten(input), out)
   })
 
-  it('multi-column would have too long value', function () {
+  it('multi-column long values', function () {
     const input = {
       aa: {
         bb: { long_path: 'bb_longer_value' },
@@ -300,12 +314,24 @@ describe('flattener', () => {
     //     'aa.bb[*].cc[*].ff': 'z'
     // }]
     let out = {
-      'aa.bb[0].cc[0]{dd,ee,ff}': ['11', 'a', 'z'],
-      'aa.bb[1].cc[0]{dd,ee,ff}': ['21', 'b', 'y'],
-      'aa.bb[1].cc[1]{ff,dd,ee}': ['x', '31', 'c'],
-      'aa.bb[2].cc[0]{dd,ee,ff}': [51, 'e', 'v'],
-      'aa.bb[3].cc[0]{dd,ee,ff}': ['61', 'g', 'u'],
-      'aa.bb[3].cc[1]{dd,ee,ff}': [71, 'h', 't'],
+      'aa.bb[0].cc[0].dd': '11',
+      'aa.bb[0].cc[0].ee': 'a',
+      'aa.bb[0].cc[0].ff': 'z',
+      'aa.bb[1].cc[0].dd': '21',
+      'aa.bb[1].cc[0].ee': 'b',
+      'aa.bb[1].cc[0].ff': 'y',
+      'aa.bb[1].cc[1].dd': '31',
+      'aa.bb[1].cc[1].ee': 'c',
+      'aa.bb[1].cc[1].ff': 'x',
+      'aa.bb[2].cc[0].dd': 51,
+      'aa.bb[2].cc[0].ee': 'e',
+      'aa.bb[2].cc[0].ff': 'v',
+      'aa.bb[3].cc[0].dd': '61',
+      'aa.bb[3].cc[0].ee': 'g',
+      'aa.bb[3].cc[0].ff': 'u',
+      'aa.bb[3].cc[1].dd': 71,
+      'aa.bb[3].cc[1].ee': 'h',
+      'aa.bb[3].cc[1].ff': 't',
     }
     assert.deepEqual(JSONway.flatten(object), out)
 
@@ -398,12 +424,18 @@ describe('flattener', () => {
       'dd.ff.hh[0].jj.kk[0].gg': 'gg2',
       'dd.ff.hh[0].jj.kk[0].ll': 'Z',
       'dd.ff.hh[0].jj.kk[0].mm': 'mm1',
-      'dd.ff.hh[0].jj.kk[1]{ll,gg,mm}': ['G', 'gg2', 'WW'],
+      'dd.ff.hh[0].jj.kk[1].ll': 'G',
+      'dd.ff.hh[0].jj.kk[1].gg': 'gg2',
+      'dd.ff.hh[0].jj.kk[1].mm': 'WW',
       'dd.ff.hh[1].ii[]': ['d3', 'd4'],
       'dd.ff.hh[1].ff': 4,
       'dd.ff.hh[1].jj.gg': 'AND',
-      'dd.ff.hh[1].jj.kk[0]{ll,gg,mm}': ['P', 'gg2', 'VV'],
-      'dd.ff.hh[1].jj.kk[1]{ll,gg,mm}': ['J', 'gg2', 'FF'],
+      'dd.ff.hh[1].jj.kk[0].ll': 'P',
+      'dd.ff.hh[1].jj.kk[0].gg': 'gg2',
+      'dd.ff.hh[1].jj.kk[0].mm': 'VV',
+      'dd.ff.hh[1].jj.kk[1].ll': 'J',
+      'dd.ff.hh[1].jj.kk[1].gg': 'gg2',
+      'dd.ff.hh[1].jj.kk[1].mm': 'FF',
     }
 
     assert.deepEqual(JSONway.flatten(input), out)
@@ -448,7 +480,6 @@ describe('flattener', () => {
       './fixtures/nested-list-response-flattened.json',
     )
 
-    // TODO: should be with `bb[1].ee[1].ff[0].gg[]`
     assert.deepEqual(JSONway.flatten(object), out)
   })
 })

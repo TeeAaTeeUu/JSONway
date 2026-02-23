@@ -35,10 +35,8 @@
   "af[0].aj.bb": "bb4",
   "af[0].aj.dd": "dd3",
   "af[0].aj.cc": "cc6",
-  "af[0].aj.ee{ak.al,ak.jj}": [
-    "al1",
-    "jj4"
-  ],
+  "af[0].aj.ee.ak.al": "al1",
+  "af[0].aj.ee.ak.jj": "jj4",
   "am": "am1",
   "an.cc": "cc7",
   "an.bb": "bb5",
@@ -105,10 +103,8 @@
   "av[0].aj.bb": "bb12",
   "av[0].aj.dd": "dd5",
   "av[0].aj.cc": "cc18",
-  "av[0].aj.ee{ak.al,ak.jj}": [
-    "al2",
-    "jj14"
-  ],
+  "av[0].aj.ee.ak.al": "al2",
+  "av[0].aj.ee.ak.jj": "jj14",
   "av[1].bb": "bb13",
   "av[1].ag.bb": "bb14",
   "av[1].ag.jj": "jj15",
@@ -117,10 +113,8 @@
   "av[1].aw.bb": "bb15",
   "av[1].aw.dd": "dd6",
   "av[1].aw.cc": "cc19",
-  "av[1].aw.ee{ak.al,ak.jj}": [
-    "al3",
-    "jj16"
-  ],
+  "av[1].aw.ee.ak.al": "al3",
+  "av[1].aw.ee.ak.jj": "jj16",
   "ax[0].cc": "cc20",
   "ax[0].oo.cc": "cc21",
   "ax[0].oo.jj": "jj17",
@@ -140,12 +134,10 @@
   "ax[0].bb": "bb16",
   "ax[0].bc": "bc1",
   "as": 5,
-  "bd{be,bf,az,bg,bh,ba}": [
-    "be1",
-    "bf1",
-    "az2",
-    1,
-    1,
-    2
-  ]
+  "bd.be": "be1",
+  "bd.bf": "bf1",
+  "bd.az": "az2",
+  "bd.bg": 1,
+  "bd.bh": 1,
+  "bd.ba": 2
 }

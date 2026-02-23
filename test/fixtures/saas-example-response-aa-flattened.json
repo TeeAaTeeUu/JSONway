@@ -39,10 +39,8 @@
   "ee.af[0].aj.bb": "bb4",
   "ee.af[0].aj.dd": "dd3",
   "ee.af[0].aj.cc": "cc6",
-  "ee.af[0].aj.ee{ak.al,ak.jj}": [
-    "al1",
-    "jj4"
-  ],
+  "ee.af[0].aj.ee.ak.al": "al1",
+  "ee.af[0].aj.ee.ak.jj": "jj4",
   "ee.am": "am1",
   "ee.an.cc": "cc7",
   "ee.an.bb": "bb5",
@@ -109,10 +107,8 @@
   "ee.av[0].aj.bb": "bb12",
   "ee.av[0].aj.dd": "dd5",
   "ee.av[0].aj.cc": "cc18",
-  "ee.av[0].aj.ee{ak.al,ak.jj}": [
-    "al2",
-    "jj14"
-  ],
+  "ee.av[0].aj.ee.ak.al": "al2",
+  "ee.av[0].aj.ee.ak.jj": "jj14",
   "ee.av[1].bb": "bb13",
   "ee.av[1].ag.bb": "bb14",
   "ee.av[1].ag.jj": "jj15",
@@ -121,10 +117,8 @@
   "ee.av[1].aw.bb": "bb15",
   "ee.av[1].aw.dd": "dd6",
   "ee.av[1].aw.cc": "cc19",
-  "ee.av[1].aw.ee{ak.al,ak.jj}": [
-    "al3",
-    "jj16"
-  ],
+  "ee.av[1].aw.ee.ak.al": "al3",
+  "ee.av[1].aw.ee.ak.jj": "jj16",
   "ee.ax[0].cc": "cc20",
   "ee.ax[0].oo.cc": "cc21",
   "ee.ax[0].oo.jj": "jj17",
@@ -144,14 +138,12 @@
   "ee.ax[0].bb": "bb16",
   "ee.ax[0].bc": "bc1",
   "ee.as": 5,
-  "ee.bd{be,bf,az,bg,bh,ba}": [
-    "be1",
-    "bf1",
-    "az2",
-    1,
-    1,
-    2
-  ],
+  "ee.bd.be": "be1",
+  "ee.bd.bf": "bf1",
+  "ee.bd.az": "az2",
+  "ee.bd.bg": 1,
+  "ee.bd.bh": 1,
+  "ee.bd.ba": 2,
   "bi.ff": "ff1",
   "bi.mm": "mm1",
   "bi.af": "af1",

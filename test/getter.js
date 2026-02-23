@@ -485,7 +485,7 @@ describe('getter', () => {
     assert.deepEqual(JSONway.get(object, this.test.title), out)
 
     object = { a: { b: { c: { d: 'z', e: 'y' } } } }
-    out = { 'b.c{d,e}': ['z', 'y'] }
+    out = { 'b.c.d': 'z', 'b.c.e': 'y' }
     assert.deepEqual(JSONway.get(object, this.test.title), out)
 
     object = { a: { b: { c: ['z', 3, { d: 'aa' }, true], e: null, f: 'y' } } }
