@@ -32,6 +32,7 @@ export default [
           arrowParens: 'avoid',
         },
       ],
+      'no-useless-assignment': 'off',
     },
   },
 ]
