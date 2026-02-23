@@ -466,39 +466,21 @@
   ],
   [
     "lib/flattener.js",
-    "[Survived] BooleanLiteral",
-    "-     return _flatten(object, true)",
-    "+     return _flatten(object, false)"
+    "[Survived] ConditionalExpression",
+    "-       if (isArray && keyIndex === 0) {",
+    "+       if (isArray && true) {"
+  ],
+  [
+    "lib/flattener.js",
+    "[Survived] ArrayDeclaration",
+    "-     let currentKeys = []",
+    "+     let currentKeys = [\"Stryker was here\"]"
   ],
   [
     "lib/flattener.js",
     "[Survived] ConditionalExpression",
-    "-       if (isArray && onlySameObjectArray) {",
-    "+       if (true) {"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] LogicalOperator",
-    "-       if (isArray && onlySameObjectArray) {",
-    "+       if (isArray || onlySameObjectArray) {"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] EqualityOperator",
-    "-       if (keysLength > 60) return false",
-    "+       if (keysLength >= 60) return false"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] ConditionalExpression",
-    "-       if (valueLength > 40) return false",
-    "+       if (false) return false"
-  ],
-  [
-    "lib/flattener.js",
-    "[Survived] EqualityOperator",
-    "-       if (valueLength > 40) return false",
-    "+       if (valueLength >= 40) return false"
+    "-         if (Array.isArray(current)) return false",
+    "+         if (false) return false"
   ],
   [
     "lib/function-processor.js",
