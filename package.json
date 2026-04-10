@@ -38,20 +38,20 @@
     "mutate-expected": "npm run mutate-test | tee /dev/tty | node scripts/_stryker_expected.js"
   },
   "devDependencies": {
-    "@babel/parser": "^7.29.0",
+    "@babel/parser": "^7.29.2",
     "@eslint/js": "^10.0.1",
-    "@stryker-mutator/core": "^9.5.1",
-    "@stryker-mutator/mocha-runner": "^9.5.1",
-    "c8": "^10.1.3",
+    "@stryker-mutator/core": "^9.6.1",
+    "@stryker-mutator/mocha-runner": "^9.6.1",
+    "c8": "^11.0.0",
     "chai": "^6.2.2",
-    "eslint": "^10.0.1",
-    "eslint-config-flat-gitignore": "^2.2.1",
+    "eslint": "^10.2.1",
+    "eslint-config-flat-gitignore": "^2.3.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-mocha": "^11.2.0",
     "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.3.0",
+    "globals": "^17.5.0",
     "mocha": "11.7.5",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.3"
   },
-  "packageManager": "pnpm@10.30.1"
+  "packageManager": "pnpm@10.33.0"
 }
