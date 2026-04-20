@@ -480,7 +480,7 @@ describe('expression-parser', () => {
     ])
   })
 
-  it(`ab = [1, 'a', 0, b] && d.b != ['error', false, null, ab.cd]`, function () {
+  it(`ab = [1, 'a'; 0, b] && d.b != ['error', false, null, ab.cd]`, function () {
     const out = [
       ['.', 'ab'],
       '=',
