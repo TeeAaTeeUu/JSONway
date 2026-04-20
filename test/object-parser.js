@@ -181,7 +181,7 @@ describe('object-parser', () => {
     assert.deepEqual(parseObject(this.test.title, 1)[0], out)
   })
 
-  it(`{ foo, baz: null , id }`, function () {
+  it(`{ foo, baz: null ; id }`, function () {
     const out = [
       '{}',
       [
