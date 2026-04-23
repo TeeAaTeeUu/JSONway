@@ -361,7 +361,7 @@ Sometimes multiple different paths are wanted to be queried within a single grou
 
 ### `[...]` - List of paths and values
 
-When an array is wanted to be returned, multiple paths can be listed as comma `,` separated list, surrounded within square brackets `[` `]`. Regular JSON values can also be used within the list, if needed.
+When an array is wanted to be returned, multiple paths can be listed as comma `,` or semicolon `;` separated list, surrounded within square brackets `[` `]`. Regular JSON values can also be used within the list, if needed.
 
 ```js
 [aa.bb.cc, dd.2.0, 'filler', gg[:5]]
@@ -431,7 +431,7 @@ JSONway.get(
 
 ### `{}` - Object of paths
 
-When an object is wanted to be returned, multiple paths can be listed as comma `,` separated list, surrounded within curly brackets `{` `}`. By default the name for the key within the object will be the path itself, but can be overwritten by prefixing with `myName:`. Similarly default value can be set, in case path doesn't exist or returns `undefined`, with postfixing `= 'myValue'`. Also, the following aliases for the default value are accepted: `=`, `=?`, `||`.
+When an object is wanted to be returned, multiple paths can be listed as comma `,` or semicolon `;` separated list, surrounded within curly brackets `{` `}`. By default the name for the key within the object will be the path itself, but can be overwritten by prefixing with `myName:`. Similarly default value can be set, in case path doesn't exist or returns `undefined`, with postfixing `= 'myValue'`. Also, the following aliases for the default value are accepted: `=`, `=?`, `||`.
 
 ```js
 {aa.bb.cc, dd.2.0, gg[:5]}

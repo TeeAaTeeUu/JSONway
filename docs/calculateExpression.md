@@ -12,7 +12,7 @@ JSONway.calculateExpression('(a >= 5)', { a: 10 })
 ## Available operators and syntax
 
 - `=` for equality *(also `===`, `==`, `:`)*
-- `&&` for AND operator *(also `&`, `,`)*
+- `&&` for AND operator *(also `&`, `,`, `;`)*
 - `||` for OR operator *(also `|`)*
 - `!=` for not equals *(also `!==`)*
 - `~=` for text contains

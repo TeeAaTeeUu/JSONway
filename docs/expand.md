@@ -2,7 +2,7 @@
 
 When given an object of paths as the keys and their corresponding values, `JSONway.expand` will create a nested JSON according to the given paths. Paths are assumed to be compatible with `JSONway.set`.
 
-The opposite transformation back to flattened object with paths is `JSONway.flatten`, although `JSONway.expand` also supports the full syntax capabilities of `JSONway.set` like array push `[+]` syntax, which isn't used at the moment within `JSONway.flatten` outputs.
+The opposite transformation back to flattened object with paths is `JSONway.flatten`, although `JSONway.expand` also supports the full syntax capabilities of `JSONway.set` like array 'for each' `[*]` syntax, which isn't used at the moment within `JSONway.flatten` outputs.
 
 ```js
 const flatten = {
