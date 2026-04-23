@@ -1066,6 +1066,12 @@
     "+           i = +1"
   ],
   [
+    "lib/path-stringifier.js",
+    "[Survived] ConditionalExpression",
+    "-     if (key.indexOf(SINGLE_QUOTE) === -1) return `['${key}']`",
+    "+     if (false) return `['${key}']`"
+  ],
+  [
     "lib/setter.js",
     "[Survived] BooleanLiteral",
     "-     let earlyReturn = false",

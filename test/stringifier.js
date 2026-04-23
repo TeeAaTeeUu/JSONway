@@ -9,12 +9,12 @@ describe('stringify', () => {
   })
 
   it('a;', function () {
-    const out = 'a;'
+    const out = "'a;'"
     assert.deepEqual(stringify(this.test.title), out)
   })
 
   it('a|', function () {
-    const out = 'a|'
+    const out = "'a|'"
     assert.deepEqual(stringify(this.test.title), out)
   })
 

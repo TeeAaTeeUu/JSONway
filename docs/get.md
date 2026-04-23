@@ -52,7 +52,7 @@ aa
   cc
 ```
 
-As long as the property name can't be misunderstood to be a syntax for something else, escaping with square brackets `[]` or with quoted square brackets `['']` isn't needed. If the name contains any of the following characters, it needs to be escaped: `[`, `]`, `,`, `"`, `'`, `.`, or any empty spaces or new line characters.
+As long as the property name can't be misunderstood to be a syntax for something else, escaping with square brackets `[]` or with quoted square brackets `['']` isn't needed. If the name contains any of the following characters, it needs to be escaped: `[`, `]`, `,`, `"`, `'`, `.`, `|`, `>`, `=`, or any empty spaces or new line characters.
 
 If some part of the path doesn't exist, then `undefined` is returned instead:
 
